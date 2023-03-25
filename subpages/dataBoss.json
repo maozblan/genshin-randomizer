@@ -1,0 +1,46 @@
+{
+  "Weekly": [
+    "Andrius", 
+    "Childe", "Azhdaha", 
+    "La Signora", "Mikoto",
+    "Shouki"
+  ],
+  
+  "Mondstadt": [
+    "Anemo Hypostasis", 
+    "Cryo Hypostasis",
+    "Cryo Regisvine",
+    "Electro Hypostasis",
+    "Oceanid",
+    "Pyro Regisvine"
+  ],
+  
+  "Liyue": [
+    "Geo Hypostasis",
+    "Primo Geovishap",
+    "Ruin Serpent"
+  ],
+  
+  "Inazuma": [
+    "Bathysmal Vishaps",
+    "Golden Wolflord",
+    "Hydro Hypostasis",
+    "Maguu Kenki",
+    "Pyro Hypostasis",
+    "Thunder Manifestation"
+  ],
+  
+  "Sumeru": [
+    "Aeonblight Drake",
+    "Algorithm of Semi-Intransient Matrix Of Overseer Network",
+    "Dendro Hypostasis",
+    "Electro Regisvine",
+    "Jadeplume Terrorshroom",
+    "Perpetual Mechanical Array",
+    "Setekh Wenut"
+  ],
+
+  "Fontaine": [
+    
+  ]
+}
