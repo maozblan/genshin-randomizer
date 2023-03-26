@@ -1,44 +1,35 @@
-async function yank(filter) {
-  console.log("Filter: " + filter);
+//we need to wait for fetch() to finish
+async function randomizeBoss(filter, num=1) {
+  let bossList = [];
+  let bossData;
 
-  let bosses = [];
-
-  // disable CORS because path does not contain http(s)
-  //fetch takes awhile, so we need async/await
+  //parses .json, applies filter, output = bossList
   await fetch("./dataBoss.json", { mode: "no-cors" })
     .then((response) => response.json())
     .then((data) => {
-      //iterating through list
       for (let i = 0; i < filter.length; i++) {
         let key = filter[i];
-        //console.log("key: " + key);
-        //console.log("data: " + data[key]);
-        bosses.push(data[key]);
-        //console.log("bosses in: " + bosses);
+        bossData = Object.values(data[key])
+        bossList = bossList.concat(String(bossData).split(","));
       }
     });
-  //console.log("bosses out: " + bosses);
-  return bosses;
-}
-
-
-//randomizer functions
-function randomizeBoss(filter, num=1) {
-  let bossList = yank(filter);
-  console.log("boss list: "+bossList);
-  let randomized = [];
-  let chosenIndex = 0;
-  randomzed.push(bossList[chosenIndex]);
   
-/*
-  while (randomized.length < num) {
-    let chosenIndex = Math.floor(Math.random() * bossList.size);
-    let chosenItem = Array.from(bossList)[chosenIndex];
-    if (!randomized.includes(chosenItem)) {
-      randomized.push(chosenItem); 
-    }
+  //console.log("boss list: "+bossList);
+  let randomized = [];
+
+  //to avoid overflow
+  if (num > bossList.length) {
+    num = bossList.length
   }
-  */
+  
+  while (randomized.length < num) {
+    let chosenIndex = Math.floor(Math.random() * bossList.length);
+    //console.log("chosen index: "+chosenIndex);
+    //console.log("length: "+bossList.length);
+    randomized.push(bossList[chosenIndex]);
+    bossList.splice(chosenIndex, 1);
+  }
+
   document.getElementById("rBoss").innerHTML = "Selected Bosses: " + randomized.join(", ");
 }
 
