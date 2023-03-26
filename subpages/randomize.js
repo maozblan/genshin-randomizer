@@ -1,47 +1,44 @@
-function yank(filter) {
-  //console.log(filter);
-  
-  var bosses = [];
-  
-  // disable CORS because path does not contain http(s)
-  fetch("./dataBoss.json", { mode: "no-cors" })
-    .then((response) => response.json())
-    .then((data) => console.log(data));
-      /*
-      //iterating through list
-      for (var i = 0; i < filter.length; i++) {
-        var key = filter[i];
-        console.log("kay: " + key);
-        console.log("data: " + data[key]);
-        bosses.push(data[key]);
-        console.log("bosses: " + bosses);
-      }
-      return bosses;
-    });*/
-  console.log("bosses: " + bosses);
-  
-  console.log("exited fetch");
+async function yank(filter) {
+  console.log("Filter: " + filter);
 
-  return ['azhdaha'];
+  let bosses = [];
+
+  // disable CORS because path does not contain http(s)
+  //fetch takes awhile, so we need async/await
+  await fetch("./dataBoss.json", { mode: "no-cors" })
+    .then((response) => response.json())
+    .then((data) => {
+      //iterating through list
+      for (let i = 0; i < filter.length; i++) {
+        let key = filter[i];
+        //console.log("key: " + key);
+        //console.log("data: " + data[key]);
+        bosses.push(data[key]);
+        //console.log("bosses in: " + bosses);
+      }
+    });
+  //console.log("bosses out: " + bosses);
+  return bosses;
 }
 
 
 //randomizer functions
-
 function randomizeBoss(filter, num=1) {
-  var filteredBosses = yank(filter);
-  //searching times in set is better than in list
-  var bossList = new Set(filteredBosses);
-  var randomized = [];
+  let bossList = yank(filter);
+  console.log("boss list: "+bossList);
+  let randomized = [];
+  let chosenIndex = 0;
+  randomzed.push(bossList[chosenIndex]);
   
+/*
   while (randomized.length < num) {
-    var chosenIndex = Math.floor(Math.random() * bossList.size);
-    var chosenItem = Array.from(bossList)[chosenIndex];
-    if (!randomized.includes(chosenItem)){
+    let chosenIndex = Math.floor(Math.random() * bossList.size);
+    let chosenItem = Array.from(bossList)[chosenIndex];
+    if (!randomized.includes(chosenItem)) {
       randomized.push(chosenItem); 
     }
   }
-  
+  */
   document.getElementById("rBoss").innerHTML = "Selected Bosses: " + randomized.join(", ");
 }
 
