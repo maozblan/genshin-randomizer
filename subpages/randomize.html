@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>replit</title>
-    <link href="profiles.css" rel="stylesheet" type="text/css" />
+    <title>genshin randomizer</title>
+    <link href="randomize.css" rel="stylesheet" type="text/css" />
+    <script src="./randomize.js"></script>
   </head>
   
   <body>
-    this is main randomizer page
+    <p>this is main randomizer page</p>
     
 
     <a href='../index.html'>
@@ -18,11 +19,15 @@
     <br>
     
     <div class='randomizer'>
-      <button onlick="randomizeBoss(['Weekly'])">randomize weekly bosses</button>
-      <button onlick="randomizeBoss(['Mondstadt', 'Liyue', 'Inazuma', 'Sumeru'])">randomize normal bosses</button>
+      
+      <button onclick="randomizeBoss(['Weekly'])">randomize weekly bosses</button>
+      <button onclick="randomizeBoss(['Mondstadt', 'Liyue', 'Inazuma', 'Sumeru'])">randomize normal bosses</button>
+
+      <!-- where the randomized results go, called by ID-->
+      <p id='rBoss'></p>
+      
     </div>
     
-    <script src="./randomize.js"></script>
   </body>
   
 </html>
