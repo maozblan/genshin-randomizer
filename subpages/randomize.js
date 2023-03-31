@@ -1,3 +1,24 @@
+const bossKeys = ['Weekly', 'Mondstadt', 'Liyue', 'Inazuma', 'Sumeru', 'Fontaine'];
+
+//writing up the html
+let html = document.getElementById("bossFilter");
+html.innerHTML = "";
+for (let i = 0; i < bossKeys.length; i++) {
+  html.innerHTML += `<button class="filter" id=${bossKeys[i]}>${bossKeys[i]}</button>`;
+}
+
+/*
+async function fetchFile() {
+  let response = await fetch("./dataBoss.json", { mode: "no-cors" });
+  var jsonFile = await response.json();
+}
+
+fetchFile();
+console.log(jsonFile);
+console.log(typeof jsonFile);
+console.log("values: "+jsonFile['Weekly'].values);
+*/
+
 //we need to wait for fetch() to finish
 async function randomizeBoss(filter, num=1) {
   let bossList = [];
