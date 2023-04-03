@@ -18,21 +18,15 @@
 
     <br>
     
-    <div class='randomizer'>
-      
-      <button onclick="randomizeBoss(['Weekly'])">randomize weekly bosses</button>
-      <button onclick="randomizeBoss(['Mondstadt', 'Liyue', 'Inazuma', 'Sumeru'])">randomize normal bosses</button>
-      
-      <!-- filter choices, buttons written in js -->
-      <div id="bossFilter">
-        <button class="filter">sample button</button>
-      </div>
+    <button id="rButton">randomize</button>
 
-      <!-- where the randomized results go, called by ID -->
-      <p id='rBoss'></p>
-      
-    </div>
-    
+    <!-- filter choices, buttons written in js -->
+    <div id="bossFilter"></div>
+
+    <!-- where the randomized results go, called by ID -->
+    <p id="rFilter"></p>
+    <p id='rBoss'></p>
+  
   </body>
   
 </html>

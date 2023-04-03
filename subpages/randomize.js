@@ -1,62 +1,83 @@
-const bossKeys = ['Weekly', 'Mondstadt', 'Liyue', 'Inazuma', 'Sumeru', 'Fontaine'];
+let jsonData;
 
-//writing up the html
-let html = document.getElementById("bossFilter");
-html.innerHTML = "";
-for (let i = 0; i < bossKeys.length; i++) {
-  html.innerHTML += `<button class="filter" id=${bossKeys[i]}>${bossKeys[i]}</button>`;
+let bossFilter = [];
+let randomizeNum = 1;
+
+
+//toggle filters on and off
+function toggleButton(button) {
+  if (bossFilter.includes(button)) {
+    bossFilter.splice(bossFilter.indexOf(button), 1);
+  }
+  else {
+    bossFilter.push(button);
+  }
+  document.getElementById('rFilter').innerHTML = "Current Filter: " + bossFilter.join(", ");
 }
 
-/*
-async function fetchFile() {
-  let response = await fetch("./dataBoss.json", { mode: "no-cors" });
-  var jsonFile = await response.json();
-}
 
-fetchFile();
-console.log(jsonFile);
-console.log(typeof jsonFile);
-console.log("values: "+jsonFile['Weekly'].values);
-*/
+function filterButtons() {
+  const div = document.getElementById("bossFilter");
+  
+  console.log('jsonData: ', jsonData);
+  jsonData.Keys.forEach(item => {
+    const button = document.createElement('button');
+    button.textContent = item.name;
 
-//we need to wait for fetch() to finish
-async function randomizeBoss(filter, num=1) {
-  let bossList = [];
-  let bossData;
-
-  //parses .json, applies filter, output = bossList
-  await fetch("./dataBoss.json", { mode: "no-cors" })
-    .then((response) => response.json())
-    .then((data) => {
-      for (let i = 0; i < filter.length; i++) {
-        let key = filter[i];
-        bossData = Object.values(data[key])
-        bossList = bossList.concat(String(bossData).split(","));
-      }
+    button.addEventListener("click", () => {
+      console.log(item.name);
+      toggleButton(item.name);
     });
   
-  //console.log("boss list: "+bossList);
+
+    div.appendChild(button);
+  });
+}
+
+
+//need to wait for fetch to finish
+async function initializePage() {
+  const response = await fetch("./dataBoss.json");
+
+  //jsonData is a global variable
+  jsonData = await response.json();
+  console.log("fetched json data: ", jsonData);
+
+  //page setup
+  filterButtons();
+}
+
+
+function randomizeBoss() {
+  let bossData = [];
   let randomized = [];
+  
+  jsonData.Bosses.forEach(item => {
+    if(bossFilter.includes(item.key)) {
+      bossData.concat(item.bosses);
+    }
+  });
+  
+  console.log(bossData);
 
   //to avoid overflow
-  if (num > bossList.length) {
-    num = bossList.length
+  if (randomizeNum > bossData.length) {
+    randomizeNum = bossData.length;
   }
   
-  while (randomized.length < num) {
-    let chosenIndex = Math.floor(Math.random() * bossList.length);
-    //console.log("chosen index: "+chosenIndex);
-    //console.log("length: "+bossList.length);
-    randomized.push(bossList[chosenIndex]);
-    bossList.splice(chosenIndex, 1);
+  while (randomized.length < randomizeNum) {
+    let chosenIndex = Math.floor(Math.random() * bossData.length);
+    randomized.push(bossData[chosenIndex]);
+    bossData.splice(chosenIndex, 1);
   }
 
   document.getElementById("rBoss").innerHTML = "Selected Bosses: " + randomized.join(", ");
 }
 
-//randomize characters
-function randomizeCharacters(profiles, main) {
-  if (profiles.length == 3) {
-    
-  }
-}
+
+const rButton = document.getElementById("rButton");
+rButton.addEventListener("click", () => {
+  randomizeBoss();
+});
+
+initializePage();
