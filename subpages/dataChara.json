@@ -1,0 +1,327 @@
+[
+  {
+    "name": "yoimiya",
+    "img": "./images/character/yoimiya.webp",
+    "pfp": "./images/pfp/yoimiya.webp"
+  },
+  {
+    "name": "thoma",
+    "img": "./images/character/thoma.webp",
+    "pfp": "./images/pfp/thoma.webp"
+  },
+  {
+    "name": "klee",
+    "img": "./images/character/klee.webp",
+    "pfp": "./images/pfp/klee.webp"
+  },
+  {
+    "name": "gorou",
+    "img": "./images/character/gorou.webp",
+    "pfp": "./images/pfp/gorou.webp"
+  },
+  {
+    "name": "yae",
+    "img": "./images/character/yae.webp",
+    "pfp": "./images/pfp/yae.webp"
+  },
+  {
+    "name": "ayato",
+    "img": "./images/character/ayato.webp",
+    "pfp": "./images/pfp/ayato.webp"
+  },
+  {
+    "name": "beidou",
+    "img": "./images/character/beidou.webp",
+    "pfp": "./images/pfp/beidou.webp"
+  },
+  {
+    "name": "eula",
+    "img": "./images/character/eula.webp",
+    "pfp": "./images/pfp/eula.webp"
+  },
+  {
+    "name": "mona",
+    "img": "./images/character/mona.webp",
+    "pfp": "./images/pfp/mona.webp"
+  },
+  {
+    "name": "scara",
+    "img": "./images/character/scara.webp",
+    "pfp": "./images/pfp/scara.webp"
+  },
+  {
+    "name": "yelan",
+    "img": "./images/character/yelan.webp",
+    "pfp": "./images/pfp/yelan.webp"
+  },
+  {
+    "name": "tighnari",
+    "img": "./images/character/tighnari.webp",
+    "pfp": "./images/pfp/tighnari.webp"
+  },
+  {
+    "name": "xingqiu",
+    "img": "./images/character/xingqiu.webp",
+    "pfp": "./images/pfp/xingqiu.webp"
+  },
+  {
+    "name": "aloy",
+    "img": "./images/character/aloy.webp",
+    "pfp": "./images/pfp/aloy.webp"
+  },
+  {
+    "name": "mika",
+    "img": "./images/character/mika.webp",
+    "pfp": "./images/pfp/mika.webp"
+  },
+  {
+    "name": "sara",
+    "img": "./images/character/sara.webp",
+    "pfp": "./images/pfp/sara.webp"
+  },
+  {
+    "name": "xiao",
+    "img": "./images/character/xiao.webp",
+    "pfp": "./images/pfp/xiao.webp"
+  },
+  {
+    "name": "faruzan",
+    "img": "./images/character/faruzan.webp",
+    "pfp": "./images/pfp/faruzan.webp"
+  },
+  {
+    "name": "raiden",
+    "img": "./images/character/raiden.webp",
+    "pfp": "./images/pfp/raiden.webp"
+  },
+  {
+    "name": ".DS_",
+    "img": "./images/character/.DS_Store",
+    "pfp": "./images/pfp/.DS_Store"
+  },
+  {
+    "name": "layla",
+    "img": "./images/character/layla.webp",
+    "pfp": "./images/pfp/layla.webp"
+  },
+  {
+    "name": "hutao",
+    "img": "./images/character/hutao.webp",
+    "pfp": "./images/pfp/hutao.webp"
+  },
+  {
+    "name": "ningguang",
+    "img": "./images/character/ningguang.webp",
+    "pfp": "./images/pfp/ningguang.webp"
+  },
+  {
+    "name": "noelle",
+    "img": "./images/character/noelle.webp",
+    "pfp": "./images/pfp/noelle.webp"
+  },
+  {
+    "name": "heizou",
+    "img": "./images/character/heizou.webp",
+    "pfp": "./images/pfp/heizou.webp"
+  },
+  {
+    "name": "ganyu",
+    "img": "./images/character/ganyu.webp",
+    "pfp": "./images/pfp/ganyu.webp"
+  },
+  {
+    "name": "yaoyao",
+    "img": "./images/character/yaoyao.webp",
+    "pfp": "./images/pfp/yaoyao.webp"
+  },
+  {
+    "name": "barbara",
+    "img": "./images/character/barbara.webp",
+    "pfp": "./images/pfp/barbara.webp"
+  },
+  {
+    "name": "dehya",
+    "img": "./images/character/dehya.webp",
+    "pfp": "./images/pfp/dehya.webp"
+  },
+  {
+    "name": "lisa",
+    "img": "./images/character/lisa.webp",
+    "pfp": "./images/pfp/lisa.webp"
+  },
+  {
+    "name": "nilou",
+    "img": "./images/character/nilou.webp",
+    "pfp": "./images/pfp/nilou.webp"
+  },
+  {
+    "name": "yunjin",
+    "img": "./images/character/yunjin.webp",
+    "pfp": "./images/pfp/yunjin.webp"
+  },
+  {
+    "name": "kuki",
+    "img": "./images/character/kuki.webp",
+    "pfp": "./images/pfp/kuki.webp"
+  },
+  {
+    "name": "venti",
+    "img": "./images/character/venti.webp",
+    "pfp": "./images/pfp/venti.webp"
+  },
+  {
+    "name": "kazuha",
+    "img": "./images/character/kazuha.webp",
+    "pfp": "./images/pfp/kazuha.webp"
+  },
+  {
+    "name": "cyno",
+    "img": "./images/character/cyno.webp",
+    "pfp": "./images/pfp/cyno.webp"
+  },
+  {
+    "name": "jean",
+    "img": "./images/character/jean.webp",
+    "pfp": "./images/pfp/jean.webp"
+  },
+  {
+    "name": "alhaitham",
+    "img": "./images/character/alhaitham.webp",
+    "pfp": "./images/pfp/alhaitham.webp"
+  },
+  {
+    "name": "nahida",
+    "img": "./images/character/nahida.webp",
+    "pfp": "./images/pfp/nahida.webp"
+  },
+  {
+    "name": "diona",
+    "img": "./images/character/diona.webp",
+    "pfp": "./images/pfp/diona.webp"
+  },
+  {
+    "name": "chongyun",
+    "img": "./images/character/chongyun.webp",
+    "pfp": "./images/pfp/chongyun.webp"
+  },
+  {
+    "name": "candace",
+    "img": "./images/character/candace.webp",
+    "pfp": "./images/pfp/candace.webp"
+  },
+  {
+    "name": "sayu",
+    "img": "./images/character/sayu.webp",
+    "pfp": "./images/pfp/sayu.webp"
+  },
+  {
+    "name": "xinyan",
+    "img": "./images/character/xinyan.webp",
+    "pfp": "./images/pfp/xinyan.webp"
+  },
+  {
+    "name": "shenhe",
+    "img": "./images/character/shenhe.webp",
+    "pfp": "./images/pfp/shenhe.webp"
+  },
+  {
+    "name": "razor",
+    "img": "./images/character/razor.webp",
+    "pfp": "./images/pfp/razor.webp"
+  },
+  {
+    "name": "tart",
+    "img": "./images/character/tart.webp",
+    "pfp": "./images/pfp/tart.webp"
+  },
+  {
+    "name": "sucrose",
+    "img": "./images/character/sucrose.webp",
+    "pfp": "./images/pfp/sucrose.webp"
+  },
+  {
+    "name": "collei",
+    "img": "./images/character/collei.webp",
+    "pfp": "./images/pfp/collei.webp"
+  },
+  {
+    "name": "kokomi",
+    "img": "./images/character/kokomi.webp",
+    "pfp": "./images/pfp/kokomi.webp"
+  },
+  {
+    "name": "kaeya",
+    "img": "./images/character/kaeya.webp",
+    "pfp": "./images/pfp/kaeya.webp"
+  },
+  {
+    "name": "bennett",
+    "img": "./images/character/bennett.webp",
+    "pfp": "./images/pfp/bennett.webp"
+  },
+  {
+    "name": "amber",
+    "img": "./images/character/amber.webp",
+    "pfp": "./images/pfp/amber.webp"
+  },
+  {
+    "name": "keqing",
+    "img": "./images/character/keqing.webp",
+    "pfp": "./images/pfp/keqing.webp"
+  },
+  {
+    "name": "fischl",
+    "img": "./images/character/fischl.webp",
+    "pfp": "./images/pfp/fischl.webp"
+  },
+  {
+    "name": "yanfei",
+    "img": "./images/character/yanfei.webp",
+    "pfp": "./images/pfp/yanfei.webp"
+  },
+  {
+    "name": "xiangling",
+    "img": "./images/character/xiangling.webp",
+    "pfp": "./images/pfp/xiangling.webp"
+  },
+  {
+    "name": "rosaria",
+    "img": "./images/character/rosaria.webp",
+    "pfp": "./images/pfp/rosaria.webp"
+  },
+  {
+    "name": "diluc",
+    "img": "./images/character/diluc.webp",
+    "pfp": "./images/pfp/diluc.webp"
+  },
+  {
+    "name": "qiqi",
+    "img": "./images/character/qiqi.webp",
+    "pfp": "./images/pfp/qiqi.webp"
+  },
+  {
+    "name": "zhongli",
+    "img": "./images/character/zhongli.webp",
+    "pfp": "./images/pfp/zhongli.webp"
+  },
+  {
+    "name": "albedo",
+    "img": "./images/character/albedo.webp",
+    "pfp": "./images/pfp/albedo.webp"
+  },
+  {
+    "name": "itto",
+    "img": "./images/character/itto.webp",
+    "pfp": "./images/pfp/itto.webp"
+  },
+  {
+    "name": "ayaka",
+    "img": "./images/character/ayaka.webp",
+    "pfp": "./images/pfp/ayaka.webp"
+  },
+  {
+    "name": "dori",
+    "img": "./images/character/dori.webp",
+    "pfp": "./images/pfp/dori.webp"
+  }
+]
