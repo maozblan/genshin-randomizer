@@ -1,6 +1,6 @@
 let jsonData;
-const output = document.getElementById('content');
 const choices = document.getElementById('choices');
+const output = document.getElementById('content');
 //output page type: main, add, edit
 
 //couple of other elements
