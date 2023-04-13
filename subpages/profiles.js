@@ -1,5 +1,4 @@
 let jsonData;
-const choices = document.getElementById('choices');
 const output = document.getElementById('content');
 //output page type: main, add, edit
 
@@ -66,28 +65,21 @@ function content(name) {
         }
 
     }
-    else if (name == 'add') {
-        //add version
-    }
-    else if (name == 'edit') {
-        //load in the data of profile
-    }
     else if (name == 'testing') {
         console.log('creating content, code: testing');
 
         jsonData.chara.forEach(item => {
-            let button = document.createElement('button');
+            let button = document.createElement('span');
             let pfp = document.createElement('img');
-            let chara = document.createElement('span');
-            pfp.src = chara.pfp;
+            let chara = document.createElement('p');
+            pfp.src = item.pfp;
             chara = item.display;
-            button.textContent = item.display;
 
             button.appendChild(pfp);
-            //button.appendChild(chara);
+            //chara.appendChild(chara);
 
             button.addEventListener("click", () => {
-                alert(chara + ' has been selected');
+                alert(chara + ' has been selected\n item pfp: ' + item.pfp);
             });
 
             profileList.appendChild(button);
@@ -101,16 +93,6 @@ async function initializePage() {
 
     const response = await fetch("./dataChara.json");
     jsonData = await response.json();
-    
-    const pageLoadUps = ['main', 'add', 'edit']
-    for (let x = 0; x < pageLoadUps.length; x++) {
-        const button = document.createElement('button');
-        button.textContent = pageLoadUps[x];
-        button.addEventListener("click", () => {
-            content(pageLoadUps[x]);
-        });
-        choices.appendChild(button);
-    }
 
     //using localStorage to store character profiles
     //setting up base item
