@@ -33,6 +33,7 @@ function content(name) {
     let data = JSON.parse(window.localStorage.getItem('genshinRandomizer'));
 
     let profileList = document.createElement('div');
+    profileList.className = 'list';
     output.appendChild(profileList);
 
     if (name == 'main') {
@@ -69,17 +70,22 @@ function content(name) {
         console.log('creating content, code: testing');
 
         jsonData.chara.forEach(item => {
-            let button = document.createElement('span');
+            let button = document.createElement('div');
+            button.className = 'button';
             let pfp = document.createElement('img');
-            let chara = document.createElement('p');
             pfp.src = item.pfp;
-            chara = item.display;
+            pfp.className = 'pfp';
+            pfp.width = 200;
+            pfp.height = 200;
+            let chara = document.createElement('p');
+            chara.textContent = item.display;
+            chara.className = 'name';
 
             button.appendChild(pfp);
-            //chara.appendChild(chara);
+            button.appendChild(chara);
 
             button.addEventListener("click", () => {
-                alert(chara + ' has been selected\n item pfp: ' + item.pfp);
+                alert(item.display + ' has been selected');
             });
 
             profileList.appendChild(button);
