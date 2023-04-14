@@ -1,24 +1,9 @@
+/* font found from online */
+@font-face {
+  font-family: 'genshinFont';
+  src: url(./images/zh-cn.ttf) format('truetype');
+}
+
 html {
-  height: 100%;
-  width: 100%;
-  font-family: 'Quicksand';
-}
-
-/* style the title */
-.header {
-  text-align: center;
-  color: darkcyan;
-  font-size: 30px;
-}
-
-/* style the buttons */
-.choices {
-  display: flex;
-  color: darkcyan;
-  font-size: 20px;
-}
-
-/* making it into two columns*/
-.column {
-  flex: 50%;
+  font-family: 'genshinFont';
 }
