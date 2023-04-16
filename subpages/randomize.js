@@ -94,7 +94,21 @@ function randomizeBoss() {
     //console.log("bossData: ", bossData);
   }
 
-  document.getElementById("rBoss").innerHTML = "Selected Bosses: " + randomized.join(", ");
+  document.getElementById("rBoss").textContent = "Selected Bosses: " + randomized.join(", ");
+  
+  let pictureFrame = document.getElementById("picture");
+
+  if (pictureFrame.firstChild) {
+    pictureFrame.removeChild(pictureFrame.firstChild);
+  }
+
+  for (i = 0; i < randomized.length; i++){
+    let picture = document.createElement('img');
+    let imgName = randomized[i].replace(/ /g,"_");
+    picture.src = String("../images/bosses/" + imgName + ".webp");
+    //console.log('image: ' + picture.src);
+    pictureFrame.appendChild(picture);
+  }  
 }
 
 
