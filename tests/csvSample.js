@@ -2,6 +2,7 @@ let jsonData;
 
 let msg = document.getElementById("msg");
 let content = document.getElementById("data");
+let visuals = document.getElementById("profile");
 
 
 function pullProfiles() {
@@ -40,7 +41,8 @@ function pullProfiles() {
 		profileList.appendChild(button);
 
 		button.addEventListener("click", () => {
-			JSONtoCSV(data)
+			JSONtoCSV(data);
+			visualizeProfile(data);
 		});
     });
 
@@ -90,6 +92,71 @@ function JSONtoCSV(profile) {
 	text.textContent = profileInfo;
 	content.appendChild(text);
 }
+
+
+function visualizeProfile(profile) {
+
+	/* all things appended to viauals
+	* div - main data -> name and pfp
+	* div - character data -> characters owned, characters banned
+	*/
+
+	let mainData = document.createElement('div');
+	let profileName = document.createElement('p');
+	let profilePfp = document.createElement('img');
+	mainData.appendChild(profileName);
+	mainData.appendChild(profilePfp);
+
+	let characterData = document.createElement('div');
+	let charactersOwned = document.createElement('div');
+	let charactersBanned = document.createElement('div');
+	charactersOwned.className = 'characterData';
+	characterData.className = 'characterData';
+	characterData.appendChild(charactersOwned);
+	characterData.appendChild(charactersBanned);
+
+	visuals.appendChild(mainData);
+	visuals.appendChild(characterData);
+
+	profileName.textContent = profile.name;
+	profilePfp.src = '../images/pfp/' + profile.pfp + '.webp';
+	profilePfp.width = 200;
+	profilePfp.height = 200;
+
+	profile.characters.forEach(item => {
+            let chara = document.createElement('div');
+            let pfp = document.createElement('img');
+            pfp.src = '../images/pfp/' + item + '.webp';
+            pfp.width = 200;
+            pfp.height = 200;
+            let name = document.createElement('p');
+            name.textContent = item;
+
+            chara.appendChild(pfp);
+            chara.appendChild(name);
+
+            charactersOwned.appendChild(chara);
+	});
+
+	profile.bans.forEach(item => {
+            let chara = document.createElement('div');
+            let pfp = document.createElement('img');
+            pfp.src = '../images/pfp/' + item + '.webp';
+            pfp.width = 200;
+            pfp.height = 200;
+            let name = document.createElement('p');
+            name.textContent = item;
+
+            chara.appendChild(pfp);
+            chara.appendChild(name);
+
+            charactersBanned.appendChild(chara);
+	});
+
+}
+
+
+
 
 
 async function initializePage() {
