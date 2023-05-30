@@ -21,6 +21,18 @@
 
     <br>
     
+    
+    <!-- player randomization -->
+    <div id="playerFilter"></div>
+
+    <!-- buttons for world owner and enabling bans -->
+    <div id="selectionButtons"></div>
+
+    <!-- the graphics -->
+    <div id="pVisuals"></div>
+
+
+    <!-- boss randomization -->
     <button id="rButton">randomize</button>
 
     <!-- filter choices, buttons written in js -->
@@ -31,7 +43,12 @@
     <p id='rBoss'></p>
 
     <!-- the graphics -->
-    <div id="picture"></div>
+    <div id="bVisuals">
+      <div id="prevButton" class="bVSlider"></div>
+      <div id="nextButton" class="bVSlider"></div>
+      <p id="bossName" class="bName"></p>
+      <img id="bossPic" class="bPic"></img>
+    </div>
 
     <script src="./randomize.js"></script>
   </body>

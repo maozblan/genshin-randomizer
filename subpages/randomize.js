@@ -1,7 +1,54 @@
-let jsonData;
+// character randomization
+let playerData;
+
+// pVisuals div includes 4 characters, layout as follows:
+//      <div id="p1" class="player">
+//        <p id="p1Name" class="playerText"></p>
+//        <p id="p1CharaName" class="playerText"></p>
+//        <img id="p1CharaPic" class="playerPic">
+//      </div>
+// where the player numbers iterate from 1 to 4 (inclusive)
+function setupPlayerDivs() {
+  let allPlayerDiv = document.getElementById('pVisuals');
+  for (let i = 1; i <= 4; i++) {
+    let playerDiv = document.createElement('div');
+      playerDiv.id = 'p' + String(i);
+      playerDiv.className = 'player';
+
+    let playerName = document.createElement('p');
+      playerName.id = 'p' + String(i) + 'Name';
+      playerName.className = 'playerText';
+    let charaName = document.createElement('p');
+      charaName.id = 'p' + String(i) + 'CharaName';
+      charaName.className = 'playerText';
+    let charaPic = document.createElement('img');
+      charaPic.id = 'p' + String(i) + 'CharaPic';
+      charaPic.className = 'playerPic';
+    
+    playerDiv.appendChild(playerName);
+    playerDiv.appendChild(charaName);
+    playerDiv.appendChild(charaPic);
+
+    allPlayerDiv.appendChild(playerDiv);
+  }
+}
+
+
+
+
+
+// boss randomization 
+let bossData;
 
 let bossFilter = [];
 let randomizeNum = 1;
+
+// bVisuals is essentially an image slider
+
+// set up image slider buttons ONLY if randomized boss count > 1
+function setupSliderButtons() {
+
+}
 
 
 //toggle filters on and off
@@ -14,7 +61,7 @@ function toggleButton(button) {
   }
   
   let regions;
-  jsonData.Keys.forEach(item => {
+  bossData.Keys.forEach(item => {
     if (item.name == button) {
       regions = item.key;
     }
@@ -37,8 +84,8 @@ function toggleButton(button) {
 function filterButtons() {
   const div = document.getElementById("bossFilter");
   
-  //console.log('jsonData: ', jsonData);
-  jsonData.Keys.forEach(item => {
+  //console.log('bossData: ', bossData);
+  bossData.Keys.forEach(item => {
     const button = document.createElement('button');
     button.textContent = item.name;
 
@@ -53,32 +100,16 @@ function filterButtons() {
 }
 
 
-//need to wait for fetch to finish
-async function initializePage() {
-  const response = await fetch("./dataBoss.json");
-
-  //jsonData is a global variable
-  jsonData = await response.json();
-  console.log("fetched json data: ", jsonData);
-
-  //page setup
-  filterButtons();
-}
-
 
 function randomizeBoss() {
   let bossData = [];
   let randomized = [];
   
-  jsonData.Bosses.forEach(item => {
-    //console.log("current filter: ", bossFilter);
-    //console.log("current key: ", item.key);
-    //console.log(bossFilter.includes(item.key));
+  bossData.Bosses.forEach(item => {
     if(bossFilter.includes(item.key)) {
       bossData = bossData.concat(item.bosses);
     }
   });
-  //console.log(bossData);
 
   //to avoid overflow
   if (randomizeNum > bossData.length) {
@@ -89,14 +120,11 @@ function randomizeBoss() {
     let chosenIndex = Math.floor(Math.random() * bossData.length);
     randomized.push(bossData[chosenIndex]);
     bossData.splice(chosenIndex, 1);
-    //console.log("index: ", chosenIndex);
-    //console.log("randomized: ", randomized);
-    //console.log("bossData: ", bossData);
   }
 
   document.getElementById("rBoss").textContent = "Selected Bosses: " + randomized.join(", ");
   
-  let pictureFrame = document.getElementById("picture");
+  let pictureFrame = document.getElementById("bVisuals");
 
   if (pictureFrame.firstChild) {
     pictureFrame.removeChild(pictureFrame.firstChild);
@@ -116,5 +144,31 @@ const rButton = document.getElementById("rButton");
 rButton.addEventListener("click", () => {
   randomizeBoss();
 });
+
+
+
+
+// on start
+
+//need to wait for fetch to finish
+async function initializePage() {
+  // set up player data
+  // player data should be stored in json format
+  if (!localStorage.getItem("profiles")) {
+    console.log("no player data found");
+  } else {
+    playerData = JSON.parse(localStorage.getItem("profiles"));
+    console.log("fetched player data: ", playerData);
+  }
+
+  // set up bossData
+  const response = await fetch("./dataBoss.json");
+  bossData = await response.json();
+  console.log("fetched json data: ", bossData);
+
+  //page setup
+  setupPlayerDivs();
+  filterButtons();
+}
 
 initializePage();
