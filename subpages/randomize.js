@@ -1,13 +1,17 @@
 // character randomization
 let playerData;
 
-// pVisuals div includes 4 characters, layout as follows:
-//      <div id="p1" class="player">
-//        <p id="p1Name" class="playerText"></p>
-//        <p id="p1CharaName" class="playerText"></p>
-//        <img id="p1CharaPic" class="playerPic">
-//      </div>
-// where the player numbers iterate from 1 to 4 (inclusive)
+
+/*
+pVisuals div includes 4 characters, layout as follows:
+      <div id="p1" class="player">
+        <p id="p1Name" class="playerText"></p>
+        <p id="p1CharaName" class="playerText"></p>
+        <img id="p1CharaPic" class="playerPic">
+      </div>
+where the player numbers iterate from 1 to 4 (inclusive)
+*/
+
 function setupPlayerDivs() {
   let allPlayerDiv = document.getElementById('pVisuals');
   for (let i = 1; i <= 4; i++) {
@@ -41,13 +45,53 @@ function setupPlayerDivs() {
 let bossData;
 
 let bossFilter = [];
-let randomizeNum = 1;
+let randomizeNum = 5;
+let randomizedBosses = [];
 
-// bVisuals is essentially an image slider
+/*
+bVisuals = image slider
+  <div id="bVisuals">
+    <div id="prevButton" class="bVSlider">prev button</div>
+    <div id="nextButton" class="bVSlider">next button</div>
+    <p id="bossName" class="bName"></p>
+    <img id="bossPic" class="bPic"></img>
+  </div>
+*/
+let bVisuals = document.getElementById('bVisuals');
+let prevButton = document.createElement('div');
+let nextButton = document.createElement('div');
+prevButton.className = nextButton.className = 'bVSlider';
+prevButton.textContent = '<';
+nextButton.textContent = '>';
+let currBossPic_name = document.createElement('p');
+let currBossPic_pic = document.createElement('img');
+let currBossPic_index = 0;
 
-// set up image slider buttons ONLY if randomized boss count > 1
-function setupSliderButtons() {
+function setupBossSlider() {
+  console.log("setting up boss slider");
+  //bVisuals.appendChild(prevButton, nextButton, currBossPic_name, currBossPic_pic);
+  bVisuals.appendChild(prevButton);
+  bVisuals.appendChild(nextButton);
+  bVisuals.appendChild(currBossPic_pic);
+  nextButton.addEventListener("click", () => {
+    if (currBossPic_index < randomizedBosses.length - 1) {
+      currBossPic_index++;
+      updateBossVisuals();
+    }
+  });
+  prevButton.addEventListener("click", () => {
+    if (currBossPic_index > 0) {
+      currBossPic_index--;
+      updateBossVisuals();
+    }
+  });
+}
 
+function updateBossVisuals() {
+    let imgName = randomizedBosses[currBossPic_index].replace(/ /g,"_");
+    currBossPic_pic.src = String("../images/bosses/" + imgName + ".webp");
+    console.log("updating boss visuals: ", imgName);
+    console.log("list: ", randomizedBosses, ", index: ", currBossPic_index);
 }
 
 
@@ -93,7 +137,6 @@ function filterButtons() {
       //console.log(item.name);
       toggleButton(item.name);
     });
-  
 
     div.appendChild(button);
   });
@@ -102,47 +145,35 @@ function filterButtons() {
 
 
 function randomizeBoss() {
-  let bossData = [];
-  let randomized = [];
+  let bossList = [];
   
+  console.log(bossData);
   bossData.Bosses.forEach(item => {
     if(bossFilter.includes(item.key)) {
-      bossData = bossData.concat(item.bosses);
+      bossList = bossList.concat(item.bosses);
     }
   });
 
   //to avoid overflow
-  if (randomizeNum > bossData.length) {
-    randomizeNum = bossData.length;
+  if (randomizeNum > bossList.length) {
+    randomizeNum = bossList.length;
   }
   
-  while (randomized.length < randomizeNum) {
-    let chosenIndex = Math.floor(Math.random() * bossData.length);
-    randomized.push(bossData[chosenIndex]);
-    bossData.splice(chosenIndex, 1);
+  while (randomizedBosses.length < randomizeNum) {
+    let chosenIndex = Math.floor(Math.random() * bossList.length);
+    randomizedBosses.push(bossList[chosenIndex]);
+    bossList.splice(chosenIndex, 1);
   }
-
-  document.getElementById("rBoss").textContent = "Selected Bosses: " + randomized.join(", ");
-  
-  let pictureFrame = document.getElementById("bVisuals");
-
-  if (pictureFrame.firstChild) {
-    pictureFrame.removeChild(pictureFrame.firstChild);
-  }
-
-  for (i = 0; i < randomized.length; i++){
-    let picture = document.createElement('img');
-    let imgName = randomized[i].replace(/ /g,"_");
-    picture.src = String("../images/bosses/" + imgName + ".webp");
-    //console.log('image: ' + picture.src);
-    pictureFrame.appendChild(picture);
-  }  
 }
 
 
 const rButton = document.getElementById("rButton");
 rButton.addEventListener("click", () => {
   randomizeBoss();
+  updateBossVisuals();
+  if (bVisuals.childElementCount === 0) {
+    setupBossSlider();
+  }
 });
 
 
