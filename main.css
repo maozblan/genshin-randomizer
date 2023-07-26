@@ -7,3 +7,56 @@
 html {
   font-family: 'genshinFont';
 }
+
+body {
+  margin: 0;
+  background-image: url('../images/bg.jpeg');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Set the height of the div to fill the viewport */
+  background-size: cover;
+  background-position: center;
+}
+
+.header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+}
+
+p.title {
+  font-size: 36px;
+  color: whitesmoke;
+}
+
+.header p:not(.title) {
+  font-size: 18px;
+  color: rgba(245, 245, 245, 0.5);
+}
+
+.row {
+  padding: 1px 0;
+}
+
+.row:hover {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.row:hover p {
+  color: rgba(245, 245, 245, 0.9);
+}
+
+.credits {
+  font-size: 18px;
+  color: rgba(251, 251, 251, 0.6);
+  position: fixed;
+  bottom: 10px;
+  left: 20px;
+  text-align: center;
+}
