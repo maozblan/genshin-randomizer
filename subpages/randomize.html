@@ -4,47 +4,39 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>genshin randomizer</title>
-    <link href="randomize.css" rel="stylesheet" type="text/css" />
   </head>
   
   <body>
-    <p>this is main randomizer page</p>
-    
-    <div class="nav">
-      <a href='../index.html'>home</a>
-      <a href="./randomize.html">bosses</a>
-      <a href="./character.html">characters</a>
-      <a href="./profiles.html">profiles</a>
-      <a href="./about.html">about</a>
-      <a href="https://github.com/maozblan/genshin-randomizer">git</a>
+    <div class="randomizer">
+      <!-- player randomization -->
+      <div class="column">
+        <p>Characters</p>
+        <div id="playerFilter"></div>
+
+        <!-- buttons for world owner and enabling bans -->
+        <div id="selectionButtons"></div>
+
+        <!-- the graphics -->
+        <div id="pVisuals"></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- boss randomization -->
+      <div class="column">
+        <p>Bosses</p>
+        <div id="rButton">randomize</div>
+
+        <!-- filter choices, buttons written in js -->
+        <div id="bossFilter"></div>
+
+        <!-- the graphics -->
+        <div id="bVisuals"></div>
+      </div>
     </div>
 
-    <br>
-    
-    
-    <!-- player randomization -->
-    <div id="playerFilter"></div>
-
-    <!-- buttons for world owner and enabling bans -->
-    <div id="selectionButtons"></div>
-
-    <!-- the graphics -->
-    <div id="pVisuals"></div>
-
-
-    <!-- boss randomization -->
-    <button id="rButton">randomize</button>
-
-    <!-- filter choices, buttons written in js -->
-    <div id="bossFilter"></div>
-
-    <!-- where the randomized results go, called by ID -->
-    <p id="rFilter"></p>
-
-    <!-- the graphics -->
-    <div id="bVisuals"></div>
-
     <script src="./randomize.js"></script>
+    <link href="randomize.css" rel="stylesheet" type="text/css" />
   </body>
   
 </html>

@@ -100,6 +100,7 @@ function toggleButton(button) {
   if (button == 'All') {
     if (!bossFilter.includes('Weekly')) {
       bossFilter.push('Weekly');
+      document.getElementById('Weekly').className = 'buttonON';
     }
     toggleButton('World');
   }
@@ -115,30 +116,42 @@ function toggleButton(button) {
     if (bossFilter.includes(regions[i])) {
       if (button != 'World') {
         bossFilter.splice(bossFilter.indexOf(regions[i]), 1);
+        document.getElementById(regions[i]).className = 'buttonOFF';
       }
     }
     else {
       bossFilter.push(regions[i]);
+      document.getElementById(regions[i]).className = 'buttonON';
     }
   }
-  document.getElementById('rFilter').innerHTML = "Current Filter: " + bossFilter.join(", ");
 }
 
 
 function filterButtons() {
   const div = document.getElementById("bossFilter");
   
-  //console.log('bossData: ', bossData);
   bossData.Keys.forEach(item => {
-    const button = document.createElement('button');
-    button.textContent = item.name;
+    if (item.name != "World") {
+      const button = document.createElement('div');
+      button.textContent = button.id = item.name;
+      button.className = 'buttonOFF';
 
-    button.addEventListener("click", () => {
-      //console.log(item.name);
-      toggleButton(item.name);
-    });
+      button.addEventListener("click", () => {
+        toggleButton(item.name);
+      });
 
-    div.appendChild(button);
+      div.appendChild(button);
+    }
+  });
+
+  const rButton = document.getElementById("rButton");
+  rButton.className = 'buttonOFF';
+  rButton.addEventListener("click", () => {
+    randomizeBoss();
+    updateBossVisuals();
+    if (bVisuals.childElementCount === 0) {
+      setupBossSlider();
+    }
   });
 }
 
@@ -146,6 +159,8 @@ function filterButtons() {
 
 function randomizeBoss() {
   let bossList = [];
+  randomizedBosses = [];  // clear old data
+  currBossPic_index = 0;  // reset picture slider to start
   
   console.log(bossData);
   bossData.Bosses.forEach(item => {
@@ -164,17 +179,9 @@ function randomizeBoss() {
     randomizedBosses.push(bossList[chosenIndex]);
     bossList.splice(chosenIndex, 1);
   }
+  console.log('randomized list: ', randomizedBosses);
 }
 
-
-const rButton = document.getElementById("rButton");
-rButton.addEventListener("click", () => {
-  randomizeBoss();
-  updateBossVisuals();
-  if (bVisuals.childElementCount === 0) {
-    setupBossSlider();
-  }
-});
 
 
 
