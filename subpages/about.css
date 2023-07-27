@@ -1,0 +1,43 @@
+/* font found from online */
+@font-face {
+  font-family: 'genshinFont';
+  src: url(../images/zh-cn.ttf) format('truetype');
+}
+
+html {
+  font-family: 'genshinFont';
+}
+
+body {
+  margin: 0;
+  background-image: url('../images/bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+ 
+.container {
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 100vh;
+  width: 100vw;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 36px;
+  color: whitesmoke;
+  margin: 10px;
+}
+
+h2 {
+  font-size: 24px;
+  color: rgba(245, 245, 245, 0.8);
+  margin: 20px;
+}
+
+p {
+  font-size: 20px;
+  color: rgba(245, 245, 245, 0.8);
+  margin: 30px;
+}
+
