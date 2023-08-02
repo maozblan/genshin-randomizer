@@ -1,402 +1,333 @@
 {
-  "traveler": [
-    {
-      "name": "aether",
-      "display": "Aether",
-      "img": "../images/character/aether.webp",
-      "pfp": "../images/pfp/aether.webp"
-    },
-    {
-      "name": "lumine",
-      "display": "Lumine",
-      "img": "../images/character/lumine.webp",
-      "pfp": "../images/pfp/lumine.webp"
-    }
-  ],
-  "chara": [
-    {
-      "name": "albedo",
-      "display": "Albedo",
-      "img": "../images/character/albedo.webp",
-      "pfp": "../images/pfp/albedo.webp"
-    },
-    {
-      "name": "alhaitham",
-      "display": "Alhaitham",
-      "img": "../images/character/alhaitham.webp",
-      "pfp": "../images/pfp/alhaitham.webp"
-    },
-    {
-      "name": "aloy",
-      "display": "Aloy",
-      "img": "../images/character/aloy.webp",
-      "pfp": "../images/pfp/aloy.webp"
-    },
-    {
-      "name": "amber",
-      "display": "Amber",
-      "img": "../images/character/amber.webp",
-      "pfp": "../images/pfp/amber.webp"
-    },
-    {
-      "name": "ayaka",
-      "display": "Ayaka",
-      "img": "../images/character/ayaka.webp",
-      "pfp": "../images/pfp/ayaka.webp"
-    },
-    {
-      "name": "ayato",
-      "display": "Ayato",
-      "img": "../images/character/ayato.webp",
-      "pfp": "../images/pfp/ayato.webp"
-    },
-    {
-      "name": "barbara",
-      "display": "Barbara",
-      "img": "../images/character/barbara.webp",
-      "pfp": "../images/pfp/barbara.webp"
-    },
-    {
-      "name": "beidou",
-      "display": "Beidou",
-      "img": "../images/character/beidou.webp",
-      "pfp": "../images/pfp/beidou.webp"
-    },
-    {
-      "name": "bennett",
-      "display": "Bennett",
-      "img": "../images/character/bennett.webp",
-      "pfp": "../images/pfp/bennett.webp"
-    },
-    {
-      "name": "candace",
-      "display": "Candace",
-      "img": "../images/character/candace.webp",
-      "pfp": "../images/pfp/candace.webp"
-    },
-    {
-      "name": "chongyun",
-      "display": "Chongyun",
-      "img": "../images/character/chongyun.webp",
-      "pfp": "../images/pfp/chongyun.webp"
-    },
-    {
-      "name": "collei",
-      "display": "Collei",
-      "img": "../images/character/collei.webp",
-      "pfp": "../images/pfp/collei.webp"
-    },
-    {
-      "name": "cyno",
-      "display": "Cyno",
-      "img": "../images/character/cyno.webp",
-      "pfp": "../images/pfp/cyno.webp"
-    },
-    {
-      "name": "dehya",
-      "display": "Dehya",
-      "img": "../images/character/dehya.webp",
-      "pfp": "../images/pfp/dehya.webp"
-    },
-    {
-      "name": "diluc",
-      "display": "Diluc",
-      "img": "../images/character/diluc.webp",
-      "pfp": "../images/pfp/diluc.webp"
-    },
-    {
-      "name": "diona",
-      "display": "Diona",
-      "img": "../images/character/diona.webp",
-      "pfp": "../images/pfp/diona.webp"
-    },
-    {
-      "name": "dori",
-      "display": "Dori",
-      "img": "../images/character/dori.webp",
-      "pfp": "../images/pfp/dori.webp"
-    },
-    {
-      "name": "eula",
-      "display": "Eula",
-      "img": "../images/character/eula.webp",
-      "pfp": "../images/pfp/eula.webp"
-    },
-    {
-      "name": "faruzan",
-      "display": "Faruzan",
-      "img": "../images/character/faruzan.webp",
-      "pfp": "../images/pfp/faruzan.webp"
-    },
-    {
-      "name": "fischl",
-      "display": "Fischl",
-      "img": "../images/character/fischl.webp",
-      "pfp": "../images/pfp/fischl.webp"
-    },
-    {
-      "name": "ganyu",
-      "display": "Ganyu",
-      "img": "../images/character/ganyu.webp",
-      "pfp": "../images/pfp/ganyu.webp"
-    },
-    {
-      "name": "gorou",
-      "display": "Gorou",
-      "img": "../images/character/gorou.webp",
-      "pfp": "../images/pfp/gorou.webp"
-    },
-    {
-      "name": "heizou",
-      "display": "Heizou",
-      "img": "../images/character/heizou.webp",
-      "pfp": "../images/pfp/heizou.webp"
-    },
-    {
-      "name": "hutao",
-      "display": "Hu Tao",
-      "img": "../images/character/hutao.webp",
-      "pfp": "../images/pfp/hutao.webp"
-    },
-    {
-      "name": "itto",
-      "display": "Itto",
-      "img": "../images/character/itto.webp",
-      "pfp": "../images/pfp/itto.webp"
-    },
-    {
-      "name": "jean",
-      "display": "Jean",
-      "img": "../images/character/jean.webp",
-      "pfp": "../images/pfp/jean.webp"
-    },
-    {
-      "name": "kaeya",
-      "display": "Kaeya",
-      "img": "../images/character/kaeya.webp",
-      "pfp": "../images/pfp/kaeya.webp"
-    },
-    {
-      "name": "kazuha",
-      "display": "Kazuha",
-      "img": "../images/character/kazuha.webp",
-      "pfp": "../images/pfp/kazuha.webp"
-    },
-    {
-      "name": "keqing",
-      "display": "Keqing",
-      "img": "../images/character/keqing.webp",
-      "pfp": "../images/pfp/keqing.webp"
-    },
-    {
-      "name": "klee",
-      "display": "Klee",
-      "img": "../images/character/klee.webp",
-      "pfp": "../images/pfp/klee.webp"
-    },
-    {
-      "name": "kokomi",
-      "display": "Kokomi",
-      "img": "../images/character/kokomi.webp",
-      "pfp": "../images/pfp/kokomi.webp"
-    },
-    {
-      "name": "kuki",
-      "display": "Kuki Shinobu",
-      "img": "../images/character/kuki.webp",
-      "pfp": "../images/pfp/kuki.webp"
-    },
-    {
-      "name": "layla",
-      "display": "Layla",
-      "img": "../images/character/layla.webp",
-      "pfp": "../images/pfp/layla.webp"
-    },
-    {
-      "name": "lisa",
-      "display": "Lisa",
-      "img": "../images/character/lisa.webp",
-      "pfp": "../images/pfp/lisa.webp"
-    },
-    {
-      "name": "mika",
-      "display": "Mika",
-      "img": "../images/character/mika.webp",
-      "pfp": "../images/pfp/mika.webp"
-    },
-    {
-      "name": "mona",
-      "display": "Mona",
-      "img": "../images/character/mona.webp",
-      "pfp": "../images/pfp/mona.webp"
-    },
-    {
-      "name": "nahida",
-      "display": "Nahida",
-      "img": "../images/character/nahida.webp",
-      "pfp": "../images/pfp/nahida.webp"
-    },
-    {
-      "name": "nilou",
-      "display": "Nilou",
-      "img": "../images/character/nilou.webp",
-      "pfp": "../images/pfp/nilou.webp"
-    },
-    {
-      "name": "ningguang",
-      "display": "Ningguang",
-      "img": "../images/character/ningguang.webp",
-      "pfp": "../images/pfp/ningguang.webp"
-    },
-    {
-      "name": "noelle",
-      "display": "Noelle",
-      "img": "../images/character/noelle.webp",
-      "pfp": "../images/pfp/noelle.webp"
-    },
-    {
-      "name": "qiqi",
-      "display": "Qiqi",
-      "img": "../images/character/qiqi.webp",
-      "pfp": "../images/pfp/qiqi.webp"
-    },
-    {
-      "name": "raiden",
-      "display": "Raiden",
-      "img": "../images/character/raiden.webp",
-      "pfp": "../images/pfp/raiden.webp"
-    },
-    {
-      "name": "razor",
-      "display": "Razor",
-      "img": "../images/character/razor.webp",
-      "pfp": "../images/pfp/razor.webp"
-    },
-    {
-      "name": "rosaria",
-      "display": "Rosaria",
-      "img": "../images/character/rosaria.webp",
-      "pfp": "../images/pfp/rosaria.webp"
-    },
-    {
-      "name": "sara",
-      "display": "Sara",
-      "img": "../images/character/sara.webp",
-      "pfp": "../images/pfp/sara.webp"
-    }, 
-    {
-      "name": "sayu",
-      "display": "Sayu",
-      "img": "../images/character/sayu.webp",
-      "pfp": "../images/pfp/sayu.webp"
-    },
-    {
-      "name": "shenhe",
-      "display": "Shenhe",
-      "img": "../images/character/shenhe.webp",
-      "pfp": "../images/pfp/shenhe.webp"
-    },
-    {
-      "name": "sucrose",
-      "display": "Sucrose",
-      "img": "../images/character/sucrose.webp",
-      "pfp": "../images/pfp/sucrose.webp"
-    },
-    {
-      "name": "tart",
-      "display": "Tartaglia",
-      "img": "../images/character/tart.webp",
-      "pfp": "../images/pfp/tart.webp"
-    },
-    {
-      "name": "thoma",
-      "display": "Thoma",
-      "img": "../images/character/thoma.webp",
-      "pfp": "../images/pfp/thoma.webp"
-    },
-    {
-      "name": "tighnari",
-      "display": "Tighnari",
-      "img": "../images/character/tighnari.webp",
-      "pfp": "../images/pfp/tighnari.webp"
-    },
-    {
-      "name": "venti",
-      "display": "Venti",
-      "img": "../images/character/venti.webp",
-      "pfp": "../images/pfp/venti.webp"
-    },
-    {
-      "name": "scara",
-      "display": "Wanderer",
-      "img": "../images/character/scara.webp",
-      "pfp": "../images/pfp/scara.webp"
-    },
-    {
-      "name": "xiangling",
-      "display": "Xiangling",
-      "img": "../images/character/xiangling.webp",
-      "pfp": "../images/pfp/xiangling.webp"
-    },
-    {
-      "name": "xiao",
-      "display": "Xiao",
-      "img": "../images/character/xiao.webp",
-      "pfp": "../images/pfp/xiao.webp"
-    },
-    {
-      "name": "xingqiu",
-      "display": "Xingqiu",
-      "img": "../images/character/xingqiu.webp",
-      "pfp": "../images/pfp/xingqiu.webp"
-    },
-    {
-      "name": "xinyan",
-      "display": "Xinyan",
-      "img": "../images/character/xinyan.webp",
-      "pfp": "../images/pfp/xinyan.webp"
-    },
-    {
-      "name": "yae",
-      "display": "Yae Miko",
-      "img": "../images/character/yae.webp",
-      "pfp": "../images/pfp/yae.webp"
-    },
-    {
-      "name": "yanfei",
-      "display": "Yanfei",
-      "img": "../images/character/yanfei.webp",
-      "pfp": "../images/pfp/yanfei.webp"
-    },
-    {
-      "name": "yaoyao",
-      "display": "Yaoyao",
-      "img": "../images/character/yaoyao.webp",
-      "pfp": "../images/pfp/yaoyao.webp"
-    },
-    {
-      "name": "yelan",
-      "display": "Yelan",
-      "img": "../images/character/yelan.webp",
-      "pfp": "../images/pfp/yelan.webp"
-    },
-    {
-      "name": "yoimiya",
-      "display": "Yoimiya",
-      "img": "../images/character/yoimiya.webp",
-      "pfp": "../images/pfp/yoimiya.webp"
-    },
-    {
-      "name": "yunjin",
-      "display": "Yun Jin",
-      "img": "../images/character/yunjin.webp",
-      "pfp": "../images/pfp/yunjin.webp"
-    },
-    {
-      "name": "zhongli",
-      "display": "Zhongli",
-      "img": "../images/character/zhongli.webp",
-      "pfp": "../images/pfp/zhongli.webp"
-    }
-  ]
+  "aether" : {
+    "name": "Aether",
+    "element": ["anemo", "geo", "electro", "dendro"],
+    "star": 5
+  },
+  "lumine" : {
+    "name": "Lumine",
+    "element": ["anemo", "geo", "electro", "dendro"],
+    "star": 5
+  },
+  "albedo" : {
+    "name": "Albedo",
+    "element": "geo",
+    "star": 5
+  },
+  "alhaitham": {
+    "name": "Alhaitham",
+    "element": "dendro",
+    "star": 5
+  },
+  "aloy" : {
+    "name": "Aloy",
+    "element": "cryo",
+    "star": 5
+  },
+  "amber" : {
+    "name": "Amber",
+    "element": "pyro",
+    "star": 4
+  },
+  "ayaka" : {
+    "name": "Ayaka",
+    "element": "cryo",
+    "star": 5
+  },
+  "ayato" : {
+    "name": "Ayato",
+    "element": "hydro",
+    "star": 5
+  },
+  "barbara" : {
+    "name": "Barbara",
+    "element": "hydro",
+    "star": 4
+  },
+  "beidou" : {
+    "name": "Beidou",
+    "element": "electro",
+    "star": 4
+  },
+  "bennett" : {
+    "name": "Bennett",
+    "element": "pyro",
+    "star": 4
+  },
+  "candace" : {
+    "name": "Candace",
+    "element": "hydro",
+    "star": 4
+  },
+  "chongyun" : {
+    "name": "Chongyun",
+    "element": "cryo",
+    "star": 4
+  },
+  "collei" : {
+    "name": "Collei",
+    "element": "dendro",
+    "star": 4
+  },
+  "cyno" : {
+    "name": "Cyno",
+    "element": "electro",
+    "star": 5
+  },
+  "dehya" : {
+    "name": "Dehya",
+    "element": "pyro",
+    "star": 5
+  },
+  "diluc" : {
+    "name": "Diluc",
+    "element": "pyro",
+    "star": 5
+  },
+  "diona" : {
+    "name": "Diona",
+    "element": "cryo",
+    "star": 4
+  },
+  "dori" : {
+    "name": "Dori",
+    "element": "electro",
+    "star": 4
+  },
+  "eula" : {
+    "name": "Eula",
+    "element": "cryo",
+    "star": 5
+  },
+  "faruzan" : {
+    "name": "Faruzan",
+    "element": "anemo",
+    "star": 4
+  },
+  "fischl" : {
+    "name": "Fischl",
+    "element": "electro",
+    "star": 4
+  },
+  "ganyu" : {
+    "name": "Ganyu",
+    "element": "cryo",
+    "star": 5
+  },
+  "gorou" : {
+    "name": "Gorou",
+    "element": "geo",
+    "star": 4
+  },
+  "heizou" : {
+    "name": "Heizou",
+    "element": "anemo",
+    "star": 4
+  },
+  "hutao" : {
+    "name": "Hu Tao",
+    "element": "pyro",
+    "star": 5
+  },
+  "itto" : {
+    "name": "Itto",
+    "element": "geo",
+    "star": 5
+  },
+  "jean" : {
+    "name": "Jean",
+    "element": "anemo",
+    "star": 5
+  },
+  "kaeya" : {
+    "name": "Kaeya",
+    "element": "cryo",
+    "star": 4
+  },
+  "kazuha" : {
+    "name": "Kazuha",
+    "element": "anemo",
+    "star": 5
+  },
+  "keqing" : {
+    "name": "Keqing",
+    "element": "electro",
+    "star": 5
+  },
+  "klee" : {
+    "name": "Klee",
+    "element": "pyro",
+    "star": 5
+  },
+  "kokomi": {
+    "name": "Kokomi",
+    "element": "hydro",
+    "star": 5
+  },
+  "kuki" : {
+    "name": "Kuki Shinobu",
+    "element": "electro",
+    "star": 4
+  },
+  "layla" : {
+    "name": "Layla",
+    "element": "cryo",
+    "star": 4
+  },
+  "lisa" : {
+    "name": "Lisa",
+    "element": "electro",
+    "star": 4
+  },
+  "mika" : {
+    "name": "Mika",
+    "element": "cryo",
+    "star": 4
+  },
+  "mona" : {
+    "name": "Mona",
+    "element": "hydro",
+    "star": 5
+  },
+  "nahida" : {
+    "name": "Nahida",
+    "element": "dendro",
+    "star": 5
+  },
+  "nilou" : {
+    "name": "Nilou",
+    "element": "hydro",
+    "star": 5
+  },
+  "ningguang" : {
+    "name": "Ningguang",
+    "element": "geo",
+    "star": 4
+  },
+  "noelle" : {
+    "name": "Noelle",
+    "element": "geo",
+    "star": 4
+  },
+  "qiqi" : {
+    "name": "Qiqi",
+    "element": "cryo",
+    "star": 5
+  },
+  "raiden" : {
+    "name": "Raiden",
+    "element": "electro",
+    "star": 5
+  },
+  "razor" : {
+    "name": "Razor",
+    "element": "electro",
+    "star": 4
+  },
+  "rosaria" : {
+    "name": "Rosaria",
+    "element": "cryo",
+    "star": 4
+  },
+  "sara" : {
+    "name": "Sara",
+    "element": "electro",
+    "star": 4
+  }, 
+  "sayu" : {
+    "name": "Sayu",
+    "element": "anemo",
+    "star": 4
+  },
+  "shenhe" : {
+    "name": "Shenhe",
+    "element": "cryo",
+    "star": 5
+  },
+  "sucrose" : {
+    "name": "Sucrose",
+    "element": "anemo",
+    "star": 4
+  },
+  "tart" : {
+    "name": "Tartaglia",
+    "element": "hydro",
+    "star": 5
+  },
+  "thoma" : {
+    "name": "Thoma",
+    "element": "pyro",
+    "star": 4
+  },
+  "tighnari" : {
+    "name": "Tighnari",
+    "element": "dendro",
+    "star": 5
+  },
+  "venti" : {
+    "name": "Venti",
+    "element": "anemo",
+    "star": 5
+  },
+  "scara" : {
+    "name": "Wanderer",
+    "element": "anemo",
+    "star": 5
+  },
+  "xiangling" : {
+    "name": "Xiangling",
+    "element": "pyro",
+    "star": 4
+  },
+  "xiao" : {
+    "name": "Xiao",
+    "element": "anemo",
+    "star": 5
+  },
+  "xingqiu" : {
+    "name": "Xingqiu",
+    "element": "hydro",
+    "star": 4
+  },
+  "xinyan" : {
+    "name": "Xinyan",
+    "element": "pyro",
+    "star": 4
+  },
+  "yae" : {
+    "name": "Yae Miko",
+    "element": "electro",
+    "star": 5
+  },
+  "yanfei" : {
+    "name": "Yanfei",
+    "element": "pyro",
+    "star": 4
+  },
+  "yaoyao" : {
+    "name": "Yaoyao",
+    "element": "dendro",
+    "star": 4
+  },
+  "yelan" : {
+    "name": "Yelan",
+    "element": "hydro",
+    "star": 5
+  },
+  "yoimiya" : {
+    "name": "Yoimiya",
+    "element": "pyro",
+    "star": 4
+
+  },
+  "yunjin" : {
+    "name": "Yun Jin",
+    "element": "geo",
+    "star": 4
+  },
+  "zhongli" : {
+    "name": "Zhongli",
+    "element": "geo",
+    "star": 5
+  }
 }

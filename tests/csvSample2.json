@@ -1,0 +1,8 @@
+{
+    "collei" : {
+        "name" : "collei",
+        "pfp" : "collei",
+        "characters" : ["collei", "eula"],
+        "bans": ["amber"]
+    }
+}

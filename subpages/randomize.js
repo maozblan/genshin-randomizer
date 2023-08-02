@@ -88,10 +88,12 @@ function setupBossSlider() {
 }
 
 function updateBossVisuals() {
-    let imgName = randomizedBosses[currBossPic_index].replace(/ /g,"_");
-    currBossPic_pic.src = String("../images/bosses/" + imgName + ".webp");
-    console.log("updating boss visuals: ", imgName);
-    console.log("list: ", randomizedBosses, ", index: ", currBossPic_index);
+    if (bossFilter.length > 0) {
+      let imgName = randomizedBosses[currBossPic_index].replace(/ /g,"_");
+      currBossPic_pic.src = String("../images/bosses/" + imgName + ".webp");
+      console.log("updating boss visuals: ", imgName);
+      console.log("list: ", randomizedBosses, ", index: ", currBossPic_index);
+    }
 }
 
 
@@ -100,7 +102,7 @@ function toggleButton(button) {
   if (button == 'All') {
     if (!bossFilter.includes('Weekly')) {
       bossFilter.push('Weekly');
-      document.getElementById('Weekly').className = 'buttonON';
+      document.getElementById('Weekly').classList.add('buttonON');
     }
     toggleButton('World');
   }
@@ -116,12 +118,14 @@ function toggleButton(button) {
     if (bossFilter.includes(regions[i])) {
       if (button != 'World') {
         bossFilter.splice(bossFilter.indexOf(regions[i]), 1);
-        document.getElementById(regions[i]).className = 'buttonOFF';
+        document.getElementById(regions[i]).classList.add('buttonOFF');
+        document.getElementById(regions[i]).classList.remove('buttonON');
       }
     }
     else {
       bossFilter.push(regions[i]);
-      document.getElementById(regions[i]).className = 'buttonON';
+      document.getElementById(regions[i]).classList.add('buttonON');
+      document.getElementById(regions[i]).classList.remove('buttonOFF');
     }
   }
 }
@@ -134,7 +138,7 @@ function filterButtons() {
     if (item.name != "World") {
       const button = document.createElement('div');
       button.textContent = button.id = item.name;
-      button.className = 'buttonOFF';
+      button.className = 'button buttonOFF';
 
       button.addEventListener("click", () => {
         toggleButton(item.name);
@@ -145,7 +149,7 @@ function filterButtons() {
   });
 
   const rButton = document.getElementById("rButton");
-  rButton.className = 'buttonOFF';
+  rButton.className = 'button buttonOFF';
   rButton.addEventListener("click", () => {
     randomizeBoss();
     updateBossVisuals();

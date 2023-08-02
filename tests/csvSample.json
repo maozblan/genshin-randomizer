@@ -1,10 +1,8 @@
 {
-    "profiles": ["tighnari", "cyno"],
-		
 	"tighnari": {
 			"name": "tighnari",
 			"pfp": "tighnari",
-			"characters": ["collei", "nahida", "tighnari"],
+			"characters": ["nahida"],
 			"bans": ["collei", "tighnari"]
 	},
 

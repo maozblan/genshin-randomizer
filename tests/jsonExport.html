@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Viewer/Exporter</title>
+  <style>
+    pre {
+      background-color: #f0f0f0;
+      padding: 10px;
+      max-height: 300px;
+      overflow-y: scroll;
+    }
+    button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>JSON Viewer/Exporter</h1>
+
+  <!-- Input field to upload JSON file -->
+  <input type="file" id="fileInput">
+
+  <!-- List of uploaded profiles -->
+  <div id="profileList"></div>
+  
+  <!-- Display the JSON data -->
+  <pre id="jsonData"></pre>
+
+  <div id="selectedProfiles"></div>
+  
+  <!-- Button to export JSON file -->
+  <button id="exportButton">Export JSON</button>
+
+  <script src="jsonHandling.js"></script>
+</body>
+</html>

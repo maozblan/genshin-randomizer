@@ -1,77 +1,90 @@
 /* font found from online */
 @font-face {
     font-family: 'genshinFont';
-    src: url(./images/zh-cn.ttf) format('truetype');
+    src: url(../images/zh-cn.ttf) format('truetype');
 }
   
 html {
-    font-family: 'genshinFont';
+  font-family: 'genshinFont';
+}
+
+body {
+  margin: 0;
+  background-image: url('../images/bg.jpeg');
+  display: flex;
+  height: 100vh; /* Set the height of the div to fill the viewport */
+  background-size: cover;
+  background-position: center;
+  padding: 10px;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+}
+
+h1 {
+  color: whitesmoke;
+  font-size: 36px;
+}
+
+#message {
+  color: rgba(245, 245, 245, 0.9);
 }
 
 
-/* the navigation bar */
-.nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+
+/* profile lists */
+.characterContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  flex-wrap: wrap;
+  height: 100%;
+  overflow-y: auto;
 }
 
-.nav li {
-    float: left;
+.profile {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
 }
 
-.nav a {
-    display: block;
-    padding: 10px 13px;
-    text-decoration: none;
-    font-family: 'genshinFont';
+.profile img {
+  width: 200px;
+  height: 200px;
 }
 
-.nav li a:hover {
-    background-color: aliceblue;
+.donthave img {
+  filter: opacity(30%);
 }
 
-/*
-.nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-  }
-  
-  li {
-    float: left;
-  }
-  
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-
-  li a:hover {
-    background-color: #111;
-  }
-
-
-
-/* class names as defined in profiles.js:
-    main pictures list : list
-    picture + name button : button
-    picture : pfp
-    profile name / character name : name
-*/
-
-.list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+.ban img {
+  filter: grayscale(100%);
 }
 
-.name {
-    text-align: center;
+
+
+
+/* profile information */
+#info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#pfp {
+  width: 200px;
+  height: 200px;
+}
+
+.infoButtons {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }

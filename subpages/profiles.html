@@ -4,32 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>genshinRandomizer</title>
-    <link href="profiles.css" rel="stylesheet" type="text/css">
   </head>
   
-  <body>
-    this is profiles, work in progress
+  <body data-page="profileList">
+    <div class="container">
+      <h1>Current Profiles</h1>
 
-    <div class="nav">
-      <ul>
-        <li><a href='../index.html'>home</a></li>
-        <li><a href="./randomize.html">bosses</a></li>
-        <li><a href="./character.html">characters</a></li>
-        <li><a href="./profiles.html">profiles</a></li>
-        <li><a href="./about.html">about</a></li>
-        <li><a href="https://github.com/maozblan/genshin-randomizer">git</a></li>
-      </ul>
+      <div id="choices" class="buttonContainer">
+        <input type="file" id="import"></input>
+        <div id="new">new</div>
+        <div id="delete">delete</div>
+        <div id="export">export</div>
+        <div class="button" onclick="localStorage.clear();">clear local storage</div>
+      </div>
+      <p id="message"></p>
+
+      <div class="characterContainer" id="content"></div>
+      
+      <script src="./profiles.js"></script>
+      <link href="profiles.css" rel="stylesheet" type="text/css">
+      <link href="basics.css" rel="stylesheet" type="text/css">
     </div>
-
-    <br>
-
-    <!-- buttons to add, ed:wit, export profiles -->
-    <div id="choices"></div>
-
-    <!-- the above button affects this -->
-    <div id="content"></div>
-    
-    <script src="./profiles.js"></script>
   </body>
   
 </html>
