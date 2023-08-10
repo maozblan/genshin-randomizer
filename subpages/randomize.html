@@ -7,37 +7,87 @@
   </head>
   
   <body>
+    <div onclick="window.location.href = '../index.html'" class="button buttonOFF">home</div>
+
     <div class="randomizer">
       <!-- player randomization -->
       <div class="column">
-        <p>Characters</p>
+        <h1>Characters</h1>
         <div id="playerFilter"></div>
 
         <!-- buttons for world owner and enabling bans -->
-        <div id="selectionButtons"></div>
+        <div id="playerCount" class="dropdown row">
+          
+          <div id="rButton_p" class="button buttonOFF">randomize</div>
+
+          <div id="p1Div">
+            <label for="p1">P1 :</label>
+            <select id="p1">
+              <option id="none" value="">--</option>
+            </select>
+          </div>
+
+          <div id="p2Div">
+            <label for="p2">P2 :</label>
+            <select id="p2">
+              <option id="none" value="">--</option>
+            </select>
+          </div>
+
+          <div id="p3Div">
+            <label for="p3">P3 :</label>
+            <select id="p3">
+              <option id="none" value="">--</option>
+            </select>
+          </div>
+
+          <div id="p4Div">
+            <label for="p4">P4 :</label>
+            <select id="p4">
+              <option id="none" value="">--</option>
+            </select>
+          </div>
+
+        </div>
+
+        <p id="message_p" class="message"></p>
 
         <!-- the graphics -->
         <div id="pVisuals"></div>
+
       </div>
 
-      <div class="divider"></div>
+      <!-- <div class="divider"></div> -->
 
       <!-- boss randomization -->
       <div class="column">
-        <p>Bosses</p>
-        <div id="rButton">randomize</div>
+        <h1>Bosses</h1>
+        <div class="row">
+          <div id="rButton_b" class="button buttonOFF">randomize</div>
+          <label for="bossCount">Boss Count : </label>
+          <input id="bossCount" type="number" min="1" step="1">
+        </div>
+
 
         <!-- filter choices, buttons written in js -->
         <div id="bossFilter" class="buttonContainer"></div>
 
+        <p id="message_b" class="message"></p>
+
         <!-- the graphics -->
-        <div id="bVisuals"></div>
+        <div id="bVisuals" class="bVSlider">
+          <div id="prevButton" class="button buttonOFF bVSlider">prev</div>
+          <div id="nextButton" class="button buttonOFF bVSlider">next</div>
+          <p id="bossName" class="bName bVSlider"></p>
+          <img id="bossPic" class="bPic bVSlider"></img>
+        </div>
       </div>
+
     </div>
 
     <script src="./randomize.js"></script>
-    <link href="randomize.css" rel="stylesheet" type="text/css" />
-    <link href="basics.css" rel="stylesheet" type="text/css" />
+    <link href="randomize.css" rel="stylesheet" type="text/css">
+    <link href="basics.css" rel="stylesheet" type="text/css">
   </body>
   
 </html>

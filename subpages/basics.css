@@ -35,3 +35,18 @@
 label {
   color: whitesmoke;
 }
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.message {
+  color: rgba(245, 245, 245, 0.9);
+}
+
+h1{
+  color: whitesmoke;
+  font-size: 36px;
+}

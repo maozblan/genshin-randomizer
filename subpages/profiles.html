@@ -7,6 +7,7 @@
   </head>
   
   <body data-page="profileList">
+    <div onclick="window.location.href = '../index.html'" class="button buttonOFF">home</div>
     <div class="container">
       <h1>Current Profiles</h1>
 
@@ -17,7 +18,7 @@
         <div id="export">export</div>
         <div class="button" onclick="localStorage.clear(); location.reload();">clear local storage</div>
       </div>
-      <p id="message"></p>
+      <p id="message" class="message"></p>
 
       <div class="characterContainer" id="content"></div>
       
