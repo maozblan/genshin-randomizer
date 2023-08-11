@@ -352,9 +352,14 @@ function exitEdit(cmd) {
 
         // new profile creation
         if (profileID === null) {
+            // if no profileID is found, make one and save it
             makeProfileID();
-            // save profile ID
+
             profileList = JSON.parse(localStorage.getItem("profileList"));
+            if (profileList === null) {  // there are no saved profiles
+                profileList = [];
+            }
+
             profileList.push(profileID);
             localStorage.setItem("profileList", JSON.stringify(profileList));
         }
