@@ -282,7 +282,7 @@ function editProfile() {
         profile = {
             "name" : "new profile",
             "pfp" : "albedo",
-            "characters" : [],
+            "characters" : ["kaeya", "amber", "barbara", "lisa"],
             "bans" : []
         };
     }
@@ -416,6 +416,8 @@ async function initializePage() {
     // fetching character data
     const response = await fetch("./dataChara.json");
     jsonData = await response.json();
+
+    editProfile();
 };
 
 function pageSetup() {
@@ -470,7 +472,6 @@ function pageSetup() {
 
         profileID = new URLSearchParams(window.location.search).get('profile');
         console.log(profileID);
-        editProfile();
     }
 }
 

@@ -41,7 +41,7 @@
         "Andrius", 
         "Childe", "Azhdaha", 
         "La Signora", "Mikoto",
-        "Shouki"
+        "Shouki", "Warden"
       ]
     },
     {
@@ -78,12 +78,13 @@
       "key": "Sumeru",
       "bosses": [
         "Aeonblight Drake",
-      "Algorithm of Semi-Intransient Matrix Of Overseer Network",
-      "Dendro Hypostasis",
-      "Electro Regisvine",
-      "Jadeplume Terrorshroom",
-      "Perpetual Mechanical Array",
-      "Setekh Wenut"
+        "Algorithm of Semi-Intransient Matrix Of Overseer Network",
+        "Dendro Hypostasis",
+        "Electro Regisvine",
+        "Jadeplume Terrorshroom",
+        "Perpetual Mechanical Array",
+        "Setekh Wenut",
+        "Iniquitous Baptist"
       ]
     },
     {
