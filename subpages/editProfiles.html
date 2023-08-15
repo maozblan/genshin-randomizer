@@ -4,16 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>genshinRandomizer</title>
+    <link href="basics.css" rel="stylesheet" type="text/css">
   </head>
   
   <body data-page="profileEditing">
     <div class="container">
       <div id="info">
         <img id="pfp"></img>
+
         <div class="nameContainer">
           <div>
-            <label for="name">Name : </label>
-            <input type="text" id="name"></input>
+            <label for="name">name : </label>
+            <input type="text" id="name" class="inputbox"></input>
           </div>
           <div class="infoButtons">
             <div id="save">save</div>
@@ -21,6 +23,27 @@
             <div id="changePfp">change pfp</div>
           </div>
         </div>
+
+        <div class="swapInfo">
+          <p>click to swap >> </p>
+          <div class="swapInfoPictures">
+            <div class="swapInfoImg dontHave">
+              <img src="../images/pfp/albedo.webp">
+              <p>character not owned</p>
+            </div>
+            <p> > </p>
+            <div class="swapInfoImg have">
+              <img src="../images/pfp/albedo.webp">
+              <p>character owned</p>
+            </div>
+            <p> > </p>
+            <div class="swapInfoImg ban">
+              <img src="../images/pfp/albedo.webp">
+              <p>character banned</p>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div id="filters" class="buttonContainer">
         Filter Characters :   
@@ -34,7 +57,6 @@
 
     <script src="./profiles.js"></script>
     <link href="profiles.css" rel="stylesheet" type="text/css">
-    <link href="basics.css" rel="stylesheet" type="text/css">
   </body>
   
 </html>

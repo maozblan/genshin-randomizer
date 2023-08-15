@@ -103,7 +103,15 @@ function createCharacter(json, have, ban) {
 
 // handling file i/o
 function setupIO() {
-    document.getElementById("import").addEventListener("change", function(event) {
+    // import broken into two parts to make sure 
+    const input = document.getElementById("importInput");
+
+    document.getElementById('import').addEventListener("click", () => {
+        input.click();
+        toggleMode('import');  // turn button off
+    });
+
+    input.addEventListener("change", function(event) {
         const file = event.target.files[0];
         const reader = new FileReader();
         
@@ -405,12 +413,12 @@ function fetchLocalStorage() {
 
 
 async function initializePage() {
-    console.log('initializing profiles page');
-
     // fetching character data
     const response = await fetch("./dataChara.json");
     jsonData = await response.json();
+};
 
+function pageSetup() {
     // set up main page
     if (document.body.dataset.page === 'profileList') {
         setupIO();
@@ -464,8 +472,7 @@ async function initializePage() {
         console.log(profileID);
         editProfile();
     }
-
-    console.log('finished initialization');
-};
+}
 
 initializePage();
+pageSetup();

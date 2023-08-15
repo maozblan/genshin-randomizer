@@ -1,8 +1,73 @@
+/* font found from online */
+@font-face {
+  font-family: 'genshinFont';
+  src: url(../images/zh-cn.ttf) format('truetype');
+}
+
+html {
+  font-family: 'genshinFont';
+}
+
+body {
+  margin: 0;
+  padding: 10px;
+  background-image: url('../images/bg.jpeg');
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Set the height of the div to fill the viewport */
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+h1{
+  color: whitesmoke;
+  font-size: 36px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box; /* Include padding in the width calculation */
+  overflow-y: auto;  /* make container content scrollable */
+}
+
+
+/* nav bar */
+.navBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  padding: 5px 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.navBar img {
+  height: 50px;
+  width: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+
+/* buttons */
 .buttonContainer {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 
   /* in case of text in div */
   align-items: center;
@@ -40,13 +105,44 @@ label {
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .message {
   color: rgba(245, 245, 245, 0.9);
 }
 
-h1{
+
+/* dropdown */
+
+.dropdown {
+  font-family: genshinFont;
+  margin: 0 5px;
+  border: 1px solid rgba(245, 245, 245, 0.5);
+  border-radius: 5px;
+  background-color: transparent;
   color: whitesmoke;
-  font-size: 36px;
+  height: auto;
+  width: auto;
+  padding: 5px;
 }
+
+.dropdown::after { /* the triangle */
+  content: '\25BC'; /* Unicode character for down triangle */
+  color: rgba(245, 245, 245, 0.5);
+  margin-left: 5px;
+}
+
+/* inputbox */
+.inputbox {
+  font-family: genshinFont;
+  margin: 0 5px;
+  border: 1px solid rgba(245, 245, 245, 0.5);
+  border-radius: 5px;
+  background-color: transparent;
+  color: whitesmoke;
+  height: auto;
+  width: auto;
+  padding: 5px;
+}
+

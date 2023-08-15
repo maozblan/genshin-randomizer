@@ -9,6 +9,7 @@ let message_b = document.getElementById('message_b');
 
 let playerList = {'p1': '', 'p2': '', 'p3': '', 'p4': ''};
 let characterList = {'p1': [], 'p2': [], 'p3': [], 'p4': []};
+let bannedCharacterList = {'p1': [], 'p2': [], 'p3': [], 'p4': []};
 let p1 = document.getElementById('p1');
 let p2 = document.getElementById('p2');
 let p3 = document.getElementById('p3');
@@ -16,6 +17,22 @@ let p4 = document.getElementById('p4');
 
 let players = [p1, p2, p3, p4];
 
+function toggleBans() {
+  const message = document.getElementById('banMessage');
+  if (message.className == 'BAN') {
+    message.className = 'noBAN';
+    message.textContent = 'Bans Currently Lifted';
+    Object.keys(characterList).forEach(item => {
+      characterList[item] = [...characterList[item], ...bannedCharacterList[item]];
+    });
+   } else {
+    message.className = 'BAN';
+    message.textContent = 'Bans Currently Enforced';
+    Object.keys(characterList).forEach(item => {
+      characterList[item] = characterList[item].filter(character => !bannedCharacterList[item].includes(character));
+    });
+  }
+}
 
 /*
 pVisuals div includes 4 characters, layout as follows:
@@ -88,7 +105,7 @@ function setupDropdown() {
       item.addEventListener("change", () => {
         playerList[item.id] = item.value;
 
-        // someday i'll add a way to list bans :')
+        bannedCharacterList[item.id] = JSON.parse(localStorage.getItem(item.value)).bans;
         characterList[item.id] = JSON.parse(localStorage.getItem(item.value)).characters;
       });
     });
@@ -100,16 +117,18 @@ function getSelectedPlayers() {
 }
 
 function getSelectedCharacters() {
-  return Object.values(characterList).filter(value => value != []);
+  return Object.values(characterList).filter(value => !value.length == 0);
 }
 
 function randomizeCharacters(pList, cList) {
-  console.log(playerData);
+  console.log(characterList);
+  console.log(pList, cList);
   // pList contains profile IDs, use playerData[ID].name to get the profile name
   // cList contains character names, can be used normally
 
   if (pList.length > 0) {
     pVisuals.style.display = '';
+    message_p.textContent = '';
 
     let selected = [];
     let players;
@@ -139,7 +158,7 @@ function randomizeCharacters(pList, cList) {
   } else {
     message_p.textContent = 'please select at least one player profile';
     if (Object.keys(playerData).length == 0) {  //TODO check
-      message_p.textContent = 'please use "character profiles" on the home page to create profile(s) before randomization'
+      message_p.textContent = 'please use CHARACTER PROFILES on the home page or PROFILES in the side bar to create profile(s) before randomization'
     }
     pVisuals.style.display = 'none';
   }
@@ -347,26 +366,35 @@ async function initializeBosses() {
   bossData = await response.json();
   console.log("fetched json data: ", bossData);
 
-  // hide boss visuals 
+  //page setup that rely on bossData
+  setupFilterButtons();
+}
+
+async function initializeCharacters() {
+  const response = await fetch("./dataChara.json");
+  characterData = await response.json();
+
+}
+
+function pageSetup() {
+  // bosses
   bVisuals.style.display = 'none';
 
-  // track boss count
   let bossCount = document.getElementById('bossCount')
   bossCount.addEventListener("change", () => {
     randomizeNum = parseInt(bossCount.value);
     console.log(randomizeNum, typeof(randomizeNum));
   });
 
-  //page setup
   setupBossSlider();
-  setupFilterButtons();
   setupRandomizeButtons();
-}
 
-async function initializeCharacters() {
+
+  // characters
   let playerList = localStorage.getItem("profileList");
   if (playerList == null && playerList.length != 0) {
     console.log("no player data found");
+    message_p.textContent = 'you currently have no player profiles! go to PROFILES in the side bar to make someyou currently have no player profiles! go to PROFILES in the side bar to make some.'
   } else {
     playerList = JSON.parse(playerList);
     playerList.forEach(item => {
@@ -376,12 +404,11 @@ async function initializeCharacters() {
     console.log("fetched player data: ", playerData);
   }
 
-  const response = await fetch("./dataChara.json");
-  characterData = await response.json();
-
   setupPlayerDivs();
   setupDropdown();
 }
 
+
 initializeBosses();
 initializeCharacters();
+pageSetup();

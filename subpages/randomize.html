@@ -4,50 +4,62 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>genshin randomizer</title>
+    <link href="basics.css" rel="stylesheet" type="text/css">
   </head>
   
   <body>
-    <div onclick="window.location.href = '../index.html'" class="button buttonOFF">home</div>
+    <div class="navBar">
+      <img src="../images/primogem.webp">
+      <div onclick="window.location.href = '../index.html'" class="button buttonOFF">HOME</div>
+      <div class="button buttonON">RANDOMIZE</div>
+      <div onclick="window.location.href = 'profiles.html'" class="button buttonOFF">PROFILES</div>
+      <div onclick="window.location.href = 'about.html'" class="button buttonOFF">ABOUT</div>
+    </div>
 
-    <div class="randomizer">
+    <div class="container">
       <!-- player randomization -->
       <div class="column">
         <h1>Characters</h1>
         <div id="playerFilter"></div>
 
         <!-- buttons for world owner and enabling bans -->
-        <div id="playerCount" class="dropdown row">
+        <div id="playerCount" class="row">
           
           <div id="rButton_p" class="button buttonOFF">randomize</div>
 
           <div id="p1Div">
             <label for="p1">P1 :</label>
-            <select id="p1">
+            <select id="p1" class="dropdown">
               <option id="none" value="">--</option>
             </select>
           </div>
 
           <div id="p2Div">
             <label for="p2">P2 :</label>
-            <select id="p2">
+            <select id="p2" class="dropdown">
               <option id="none" value="">--</option>
             </select>
           </div>
 
           <div id="p3Div">
             <label for="p3">P3 :</label>
-            <select id="p3">
+            <select id="p3" class="dropdown">
               <option id="none" value="">--</option>
             </select>
           </div>
 
           <div id="p4Div">
             <label for="p4">P4 :</label>
-            <select id="p4">
+            <select id="p4" class="dropdown">
               <option id="none" value="">--</option>
             </select>
           </div>
 
+        </div>
+
+        <div class="row">
+          <div id="liftBan" class="button buttonOFF" onclick="toggleBans();">Toggle Bans</div>
+          <p id="banMessage" style="color: whitesmoke; margin-left: 10px;" class="BAN">Bans Currently Enforced</p>
         </div>
 
         <p id="message_p" class="message"></p>
@@ -65,7 +77,7 @@
         <div class="row">
           <div id="rButton_b" class="button buttonOFF">randomize</div>
           <label for="bossCount">Boss Count : </label>
-          <input id="bossCount" type="number" min="1" step="1">
+          <input id="bossCount" type="number" min="1" step="1" class="inputbox" style="width: 40px;">
         </div>
 
 
@@ -87,7 +99,6 @@
 
     <script src="./randomize.js"></script>
     <link href="randomize.css" rel="stylesheet" type="text/css">
-    <link href="basics.css" rel="stylesheet" type="text/css">
   </body>
   
 </html>

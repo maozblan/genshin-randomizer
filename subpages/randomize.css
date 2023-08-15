@@ -1,28 +1,5 @@
-/* font found from online */
-@font-face {
-  font-family: 'genshinFont';
-  src: url(../images/zh-cn.ttf) format('truetype');
-}
-
-html {
-  font-family: 'genshinFont';
-}
-
-body {
-  margin: 0;
-  padding: 10px;
-  background-image: url('../images/bg.jpeg');
-  display: flex;
-  height: 100vh; /* Set the height of the div to fill the viewport */
-  background-size: cover;
-  background-position: center;
-}
-
-.randomizer {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+.container {
+  flex-direction: row;
 }
 
 .column {
@@ -30,54 +7,56 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px;
+  padding: 0 10px 10px 10px;
   margin: 10px 5px;
   width: 50%;
-  /* background-color: cornflowerblue; */
 }
 
 /* player randomization */
 #pVisuals {
-  height: auto;
-  width: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
 .player {
-  width: 200px;
   position: relative;
   display: flex;
   justify-content: center;
+  width: 25%;
+  max-width: 200px;
 }
 
 .playerPic {
-  width: 200px;
-  height: 640px;
+  width: 100%;
+  height: auto;
   /* position: absolute; */
 }
 
 .playerTag {
   background-color: rgba(245, 245, 245, 0.9);
-  font-size: 24px;
   border-radius: 5px;
-  text-align: center;
   padding: 5px 10px;
   margin: 5px 2.5px;
-  width: auto;
+  width: fit-content;
   position: absolute;
   bottom: 10%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .playerName {
   color: rgba(0, 0, 0, 0.5);
   margin: 0;
+  font-size: 1vw;
+  white-space: nowr;
+  width: fit-content;
 }
 
 .charaElement {
-  width: 50px;
-  height: 50px;
+  width: 2.5vw;
+  height: auto;
   padding: 2.5px 5px;
 }
 
