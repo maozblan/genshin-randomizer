@@ -179,6 +179,16 @@
     "element": "electro",
     "star": 4
   },
+  "lyney" : {
+    "name": "Lyney",
+    "element": "pyro",
+    "star": 5
+  },
+  "lynette" : {
+    "name": "Lynette",
+    "element": "anemo",
+    "star": 4
+  },
   "mika" : {
     "name": "Mika",
     "element": "cryo",

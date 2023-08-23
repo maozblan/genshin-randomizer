@@ -1,5 +1,6 @@
 .container {
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .column {
@@ -7,9 +8,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 10px 10px 10px;
-  margin: 10px 5px;
+  margin: 0.3vw 0.15vw;
   width: 50%;
+  min-width: 700px;
+  box-sizing: border-box;
 }
 
 /* player randomization */
@@ -25,6 +27,7 @@
   justify-content: center;
   width: 25%;
   max-width: 200px;
+  min-width: 100px;
 }
 
 .playerPic {
@@ -72,6 +75,12 @@
 
 
 /* boss randomization */
-.bVSlider {
+.bVisuals {
   width: 100%;
+  height: same-as-width;
+}
+
+.bPic {  /* work on better cropping*/
+  height: 100%;
+  width: auto;
 }
