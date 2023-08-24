@@ -154,6 +154,11 @@
     "element": "electro",
     "star": 5
   },
+  "kirara" : { 
+    "name": "Kirara",
+    "element": "dendro",
+    "star": 4
+  },
   "klee" : {
     "name": "Klee",
     "element": "pyro",
@@ -328,7 +333,6 @@
     "name": "Yoimiya",
     "element": "pyro",
     "star": 4
-
   },
   "yunjin" : {
     "name": "Yun Jin",
