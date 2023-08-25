@@ -28,7 +28,7 @@ function pfp(chara) {
 
 function makeProfileID() {
     profileCount = JSON.parse(localStorage.getItem("genshinRandomizer_profileCount"));
-    profileID = "profile" + profileCount.toString();
+    profileID = profileCount.toString();
     profileCount++;
     localStorage.setItem("genshinRandomizer_profileCount", JSON.stringify(profileCount));
 }
@@ -253,7 +253,7 @@ function updateProfileList(json) {
         makeProfileID();
         createProfile(profileID, json[id]);
         profileList.push(profileID);
-        localStorage.setItem("genshinRandomizer" + profileID, JSON.stringify(json[id]));
+        localStorage.setItem("genshinRandomizer_" + profileID, JSON.stringify(json[id]));
     });
     localStorage.setItem('genshinRandomizer_profileList', JSON.stringify(profileList));
     console.log("updated profile list", profileList);
