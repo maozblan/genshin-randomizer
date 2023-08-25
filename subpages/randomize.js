@@ -105,8 +105,8 @@ function setupDropdown() {
       item.addEventListener("change", () => {
         playerList[item.id] = item.value;
 
-        bannedCharacterList[item.id] = JSON.parse(localStorage.getItem(item.value)).bans;
-        characterList[item.id] = JSON.parse(localStorage.getItem(item.value)).characters;
+        bannedCharacterList[item.id] = JSON.parse(localStorage.getItem("genshinRandomizer_" + item.value)).bans;
+        characterList[item.id] = JSON.parse(localStorage.getItem("genshinRandomizer_" + item.value)).characters;
       });
     });
   });
@@ -391,14 +391,14 @@ function pageSetup() {
 
 
   // characters
-  let playerList = localStorage.getItem("profileList");
-  if (playerList == null && playerList.length != 0) {
+  let playerList = localStorage.getItem("genshinRandomizer_profileList");
+  if (playerList == null || playerList.length != 0) {
     console.log("no player data found");
-    message_p.textContent = 'you currently have no player profiles! go to PROFILES in the side bar to make someyou currently have no player profiles! go to PROFILES in the side bar to make some.'
+    message_p.textContent = 'you currently have no player profiles! go to PROFILES in the side bar to make some.';
   } else {
     playerList = JSON.parse(playerList);
     playerList.forEach(item => {
-      playerData[item] = JSON.parse(localStorage.getItem(item));
+      playerData[item] = JSON.parse(localStorage.getItem("genshinRandomizer_" + item));
     });
 
     console.log("fetched player data: ", playerData);

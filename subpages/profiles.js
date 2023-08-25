@@ -27,10 +27,10 @@ function pfp(chara) {
 }
 
 function makeProfileID() {
-    profileCount = JSON.parse(localStorage.getItem("profileCount"));
+    profileCount = JSON.parse(localStorage.getItem("genshinRandomizer_profileCount"));
     profileID = "profile" + profileCount.toString();
     profileCount++;
-    localStorage.setItem("profileCount", JSON.stringify(profileCount));
+    localStorage.setItem("genshinRandomizer_profileCount", JSON.stringify(profileCount));
 }
 
 function createProfile(id, json) {
@@ -135,7 +135,7 @@ function writeExportJSON(loc) {
     let profilesToExport = document.querySelectorAll(loc);
     if (profilesToExport.length > 0) {
         profilesToExport.forEach(item => {
-            let fetched = JSON.parse(localStorage.getItem(item.id));
+            let fetched = JSON.parse(localStorage.getItem("genshinRandomize_" + item.id));
             json[item.id] = fetched;
         });
     }
@@ -217,10 +217,10 @@ function toggleMode(m) {
             if (profilesToDelete.length > 0) {
                 profilesToDelete.forEach(item => {
                     profileList.splice(profileList.indexOf(item.id), 1);
-                    localStorage.removeItem(item.id);
+                    localStorage.removeItem("genshinRandomizer_" + item.id);
                     item.remove();
                 });
-                localStorage.setItem("profileList", JSON.stringify(profileList));
+                localStorage.setItem("genshinRandomizer_profileList", JSON.stringify(profileList));
                 toggleMode('delete');  // exit delete mode
             }
         });
@@ -253,9 +253,9 @@ function updateProfileList(json) {
         makeProfileID();
         createProfile(profileID, json[id]);
         profileList.push(profileID);
-        localStorage.setItem(profileID, JSON.stringify(json[id]));
+        localStorage.setItem("genshinRandomizer" + profileID, JSON.stringify(json[id]));
     });
-    localStorage.setItem('profileList', JSON.stringify(profileList));
+    localStorage.setItem('genshinRandomizer_profileList', JSON.stringify(profileList));
     console.log("updated profile list", profileList);
 }
 
@@ -277,7 +277,7 @@ let profileCount;
 
 function editProfile() {
     if (profileID !== null) {
-        profile = JSON.parse(localStorage.getItem(profileID));
+        profile = JSON.parse(localStorage.getItem("genshinRandomizer_" + profileID));
     } else {
         profile = {
             "name" : "new profile",
@@ -363,16 +363,16 @@ function exitEdit(cmd) {
             // if no profileID is found, make one and save it
             makeProfileID();
 
-            profileList = JSON.parse(localStorage.getItem("profileList"));
+            profileList = JSON.parse(localStorage.getItem("genshinRandomizer_profileList"));
             if (profileList === null) {  // there are no saved profiles
                 profileList = [];
             }
 
             profileList.push(profileID);
-            localStorage.setItem("profileList", JSON.stringify(profileList));
+            localStorage.setItem("genshinRandomizer_profileList", JSON.stringify(profileList));
         }
 
-        localStorage.setItem(profileID, JSON.stringify(profile)); 
+        localStorage.setItem("genshinRandomizer_" + profileID, JSON.stringify(profile)); 
     }
     window.location.href = 'profiles.html';
 }
@@ -388,7 +388,7 @@ function changePfp(character) {
 
 
 function fetchLocalStorage() {
-    profileList = localStorage.getItem("profileList");
+    profileList = localStorage.getItem("genshinRandomizer_profileList");
     console.log('fetched local profiles: ', profileList);
     if (profileList === null || profileList.length == 0) {
         message.textContent = 'you have no profiles! click new to create one or import a file';
@@ -399,15 +399,15 @@ function fetchLocalStorage() {
         // output data into contetnt
         profileList.forEach(item => {
             console.log("parsing", item);
-            const json = JSON.parse(localStorage.getItem(item));
+            const json = JSON.parse(localStorage.getItem("genshinRandomizer_" + item));
             createProfile(item, json);
         });
     }
 
     // profileID for new profiles
-    profileCount = localStorage.getItem("profileCount");
+    profileCount = localStorage.getItem("genshinRandomizer_profileCount");
     if (profileCount === null) {
-        localStorage.setItem("profileCount", JSON.stringify(1));
+        localStorage.setItem("genshinRandomizer_profileCount", JSON.stringify(1));
     }
 }
 
