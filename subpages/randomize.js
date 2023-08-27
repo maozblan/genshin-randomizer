@@ -7,7 +7,7 @@ let bVisuals = document.getElementById('bVisuals');
 let message_p = document.getElementById('message_p');
 let message_b = document.getElementById('message_b');
 
-let playerList = {'p1': '', 'p2': '', 'p3': '', 'p4': ''};
+let playerList = {'p1': '0', 'p2': '0', 'p3': '0', 'p4': '0'};
 let characterList = {'p1': [], 'p2': [], 'p3': [], 'p4': []};
 let bannedCharacterList = {'p1': [], 'p2': [], 'p3': [], 'p4': []};
 let p1 = document.getElementById('p1');
@@ -33,16 +33,6 @@ function toggleBans() {
     });
   }
 }
-
-/*
-pVisuals div includes 4 characters, layout as follows:
-      <div id="p1" class="player">
-        <p id="p1Name" class="playerText"></p>
-        <p id="p1CharaName" class="playerText"></p>
-        <img id="p1CharaPic" class="playerPic">
-      </div>
-where the player numbers iterate from 1 to 4 (inclusive)
-*/
 
 function setupRandomizeButtons () {
   const rButton_b = document.getElementById("rButton_b");
@@ -89,14 +79,11 @@ function setupPlayerDivs() {
 }
 
 function setupDropdown() {
-  /* someday i'll make it so the next divs appear as you choose profiles...
   document.getElementById('p2Div').style.display = 'none';
   document.getElementById('p3Div').style.display = 'none';
   document.getElementById('p4Div').style.display = 'none';
-  */
 
   Object.keys(playerData).forEach(p => {
-
     players.forEach(item => {
       let option = document.createElement('option');
       option.id = option.value = p;
@@ -104,20 +91,65 @@ function setupDropdown() {
       item.appendChild(option);
       item.addEventListener("change", () => {
         playerList[item.id] = item.value;
-
-        bannedCharacterList[item.id] = JSON.parse(localStorage.getItem("genshinRandomizer_" + item.value)).bans;
-        characterList[item.id] = JSON.parse(localStorage.getItem("genshinRandomizer_" + item.value)).characters;
+        if (item.value != '0') {
+          bannedCharacterList[item.id] = JSON.parse(localStorage.getItem("genshinRandomizer_" + item.value)).bans;
+          characterList[item.id] = JSON.parse(localStorage.getItem("genshinRandomizer_" + item.value)).characters;
+        } else {
+          bannedCharacterList[item.id] = [];
+          characterList[item.id] = [];
+        }
+        updateDropdownCount(item.id[1], item.value);
       });
     });
   });
 }
 
+function updateDropdownCount(id, val) {
+  // add next player
+  if (id != '4' && val != '0') {
+    document.getElementById('p' + (parseInt(id) + 1) + 'Div').style.display = '';
+    let dp = document.getElementById('p' + id);
+    dp.querySelector("option[value='0']").style.display = '';
+  }
+  
+  // remove extra player
+  /* something i tried but doesn't work and messed up playerList
+  let player = getSelectedPlayers();
+  if (val == '0' && player.length > 1) {
+    let character = getSelectedCharacters();
+    let bans = getSelectedBans();
+    let i = 0;
+    Object.keys(playerList).forEach(item => {
+      if (i < player.length) {
+        console.log(item, 'stay');
+        playerList[item] = player[i];
+        characterList[item] = character[i];
+        bannedCharacterList[item] = bans[i];
+      } else {
+        playerList[item] = '0';
+        characterList[item] = [];
+        bannedCharacterList[item] = [];
+      }
+      if (i > player.length) {
+        document.getElementById('p' + (i+1) + 'Div').style.display = 'none';  // player divs 1-4
+      }
+      i++;
+    });
+    console.log(playerList, player, character, bans);
+  }
+  */
+}
+
 function getSelectedPlayers() {
-  return Object.values(playerList).filter(value => value != '');
+  return Object.values(playerList).filter(value => value != '0');
 }
 
 function getSelectedCharacters() {
   return Object.values(characterList).filter(value => !value.length == 0);
+}
+
+function getSelectedBans() {
+  return Object.values(bannedCharacterList).filter(value => !value.length == 0);
 }
 
 function randomizeCharacters(pList, cList) {
@@ -392,7 +424,8 @@ function pageSetup() {
 
   // characters
   let playerList = localStorage.getItem("genshinRandomizer_profileList");
-  if (playerList == null || playerList.length != 0) {
+  console.log("fetched profiles: ", playerList);
+  if (playerList == null || playerList.length == 0) {
     console.log("no player data found");
     message_p.textContent = 'you currently have no player profiles! go to PROFILES in the side bar to make some.';
   } else {

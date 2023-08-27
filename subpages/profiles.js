@@ -241,6 +241,15 @@ function toggleMode(m) {
             
             // Clean up the URL and the element after the download
             URL.revokeObjectURL(url);
+            
+            // Clear profile selecting
+            let selectedProfiles = document.querySelectorAll('#content .buttonON');
+            if (selectedProfiles.length > 0) {
+                selectedProfiles.forEach(item => {
+                    turnButtonOFF(item);
+                });
+            }
+            toggleMode(mode);
 
             toggleMode('export');  // exit export mode
         });
