@@ -135,7 +135,7 @@ function writeExportJSON(loc) {
     let profilesToExport = document.querySelectorAll(loc);
     if (profilesToExport.length > 0) {
         profilesToExport.forEach(item => {
-            let fetched = JSON.parse(localStorage.getItem("genshinRandomize_" + item.id));
+            let fetched = JSON.parse(localStorage.getItem("genshinRandomizer_" + item.id));
             json[item.id] = fetched;
         });
     }
