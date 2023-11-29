@@ -41,7 +41,8 @@
         "Andrius", 
         "Childe", "Azhdaha", 
         "La Signora", "Mikoto",
-        "Shouki", "Warden"
+        "Shouki", "Warden",
+        "Narwhal"
       ]
     },
     {
@@ -91,7 +92,10 @@
       "key": "Fontaine",
       "bosses": [
         "Icewind Suite",
-        "Emperor of Fire and Iron"
+        "Emperor of Fire and Iron",
+        "Hydro Tulpa",
+        "Millennial Pearl Seahorse",
+        "Prototype Cal. Breguet"
       ]
     }
   ]
