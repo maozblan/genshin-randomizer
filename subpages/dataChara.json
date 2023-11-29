@@ -59,6 +59,11 @@
     "element": "hydro",
     "star": 4
   },
+  "charlotte" : {
+    "name": "Charlotte",
+    "element": "cryo",
+    "star": 4
+  },
   "chongyun" : {
     "name": "Chongyun",
     "element": "cryo",
@@ -108,6 +113,16 @@
     "name": "Fischl",
     "element": "electro",
     "star": 4
+  },
+  "freminet": {
+    "name": "Freminet",
+    "element": "cryo",
+    "star": 4
+  },
+  "furina" : {
+    "name": "Furina",
+    "element": "hydro",
+    "star": 5
   },
   "ganyu" : {
     "name": "Ganyu",
@@ -209,6 +224,11 @@
     "element": "dendro",
     "star": 5
   },
+  "neuvillette": {
+    "name": "Neuvillette",
+    "element": "hydro",
+    "star": 5
+  },
   "nilou" : {
     "name": "Nilou",
     "element": "hydro",
@@ -287,6 +307,11 @@
   "scara" : {
     "name": "Wanderer",
     "element": "anemo",
+    "star": 5
+  },
+  "wriothesley" : {
+    "name": "Wriothesley",
+    "element": "cryo",
     "star": 5
   },
   "xiangling" : {
