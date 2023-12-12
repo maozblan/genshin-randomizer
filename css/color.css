@@ -1,0 +1,18 @@
+p {
+    color: rgba(245, 245, 245, 0.8);
+}
+
+/* nav bar */
+#nav-bar {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* buttons */
+.button {
+    color: rgba(245, 245, 245, 0.8);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.button:hover {
+    background-color: rgba(245, 245, 245, 0.2);
+}
