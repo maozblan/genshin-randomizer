@@ -1,0 +1,78 @@
+/* font found from online */
+@font-face {
+    font-family: 'genshinFont';
+    src: url('../images/zh-cn.ttf') format('truetype');
+}
+
+html {
+    font-family: 'genshinFont';
+}
+
+p {
+    font-size: 18px;
+}
+
+body {
+    margin: 0;
+    background-image: url('../images/bg.jpeg');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Set the height of the div to fill the viewport */
+    background-size: cover;
+    background-position: center;
+}
+
+.row-div {
+    display: flex;
+    flex-direction: row;
+}
+
+.col-div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* screens */
+
+.screen {
+    display: none;
+}
+
+.current-screen {
+    display: flex;
+}
+
+/* nav bar */
+#nav-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.nb-primo {
+    width: 60px;
+    height: auto;
+}
+
+.nb-title {
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+/* buttons */
+
+.button {
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    font-family: inherit;
+    font-size: 18px;
+}

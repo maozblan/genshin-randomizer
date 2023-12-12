@@ -1,0 +1,18 @@
+{
+    "1.0.0" : [
+        "2023.08.25",
+        "Uploaded working framework and made the site live. I wonder where it goes from here... Definitely a lot of work left to do but it's useable at this state. Mobile use is still kind of sketchy... I need to fix that :(  Finally got a version updated to Fontaine 4.0 tho :)"
+    ],
+    "1.0.1" : [
+        "2023.08.07",
+        "Patched bugs: created profiles do not appear on the randomizer page, profile export not clearing \"selected\" status, rewriting local storage keys to avoid overwritting, exports null. Profile selection error was such a major bug :')"
+    ],
+    "1.0.2" : [
+        "2023.11.28",
+        "Added characters: Freminet, Neuvillette, Furina, Charlotte, Wriothesley. Added Fontaine bosses."
+    ], 
+    "1.1.0" : [
+        "",
+        "Redid the whole website with jquery and fixed up janky styling"
+    ]
+}
