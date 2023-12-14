@@ -1,0 +1,29 @@
+#home-screen {
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: var(--transparent);
+}
+
+#home-screen button {
+    display: block;
+    width: 100%;
+    border-radius: 0;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+#home-screen .home-header {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--light-background);
+}
+
+#home-screen .credits {
+    align-self: flex-start;
+    margin-top: auto;
+    color: var(--translucent-text);
+}

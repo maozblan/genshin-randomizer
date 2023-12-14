@@ -1,18 +1,38 @@
-p {
-    color: rgba(245, 245, 245, 0.8);
+body {
+    --text : rgba(245, 245, 245, 0.75);
+    --translucent-text : rgba(245, 245, 245, 0.5);
+    --transparent : rgba(0, 0, 0, 0);
+    --light-background : rgba(0, 0, 0, 0.7);
+    --dark-background : rgba(0, 0, 0, 0.9);
+    --dim-highlight : rgba(245, 245, 245, 0.2);
+    --bright-highlight : rgba(245, 245, 245, 0.5);
+}
+
+p,h1,h2,h3 {
+    color: var(--text);
 }
 
 /* nav bar */
 #nav-bar {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: var(--dark-background);
+}
+
+.nb-title {
+    color: var(--translucent-text);
 }
 
 /* buttons */
 .button {
-    color: rgba(245, 245, 245, 0.8);
-    background-color: rgba(0, 0, 0, 0);
+    color: var(--translucent-text);
+    background-color: var(--transparent);
 }
 
 .button:hover {
-    background-color: rgba(245, 245, 245, 0.2);
+    color: var(--text);
+    background-color: var(--dim-highlight);
+}
+
+/* screens */
+.screen {
+    background-color: var(--light-background);
 }
