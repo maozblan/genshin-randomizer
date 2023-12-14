@@ -12,6 +12,10 @@ p {
     font-size: 18px;
 }
 
+h1 {
+    font-size: 36px;
+}
+
 body {
     margin: 0;
     background-image: url('../images/bg.jpeg');
@@ -19,8 +23,10 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh; /* Set the height of the div to fill the viewport */
+    width: 100vw;
     background-size: cover;
     background-position: center;
+    box-sizing: border-box;
 }
 
 .row-div {
@@ -37,6 +43,13 @@ body {
 
 .screen {
     display: none;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    /* to avoid nav bar */
+    padding: 20px;
+    overflow-y: scroll;
+    padding-top: 80px;
 }
 
 .current-screen {
