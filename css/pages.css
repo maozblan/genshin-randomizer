@@ -1,3 +1,4 @@
+/* home screen */
 #home-screen {
     align-items: center;
     box-sizing: border-box;
@@ -26,4 +27,16 @@
     align-self: flex-start;
     margin-top: auto;
     color: var(--translucent-text);
+}
+
+/* randomizer screen */
+#randomize-screen > div {
+    width: 50%;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+#randomize-profiles {
+    display: flex;
+    align-items: center;
 }
