@@ -22,13 +22,13 @@ p,h1,h2,h3,label {
 }
 
 /* buttons */
-button {
+button,.button {
     color: var(--translucent-text);
     background-color: var(--transparent);
     border: 1px solid var(--dim-highlight);
 }
 
-button:hover {
+button:hover,.button:hover {
     color: var(--text);
     background-color: var(--dim-highlight);
     border: 1px solid var(--transparent);
