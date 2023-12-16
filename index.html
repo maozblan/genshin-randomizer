@@ -6,7 +6,8 @@
   <title>genshin randomizer</title>
   <link href="css/color.css" rel="stylesheet" type="text/css"> 
   <link href="css/style.css" rel="stylesheet" type="text/css"> 
-  <link href="css/main.css" rel="stylesheet" type="text/css"> 
+  <link href="css/home.css" rel="stylesheet" type="text/css"> 
+  <link href="css/randomize.css" rel="stylesheet" type="text/css"> 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/main.js" DEFER></script>
 </head>
@@ -18,10 +19,10 @@
   <!-- navigation bar -->
   <div id="nav-bar" class="row-div">
     <img class="nb-primo" src="images/primogem.webp" />
-    <button class="button nb-button" data-screen="home">HOME</button>
-    <button class="button nb-button" data-screen="randomize">RANDOMIZE</button>
-    <button class="button nb-button" data-screen="profile">PROFILE</button>
-    <button class="button nb-button" data-screen="about">ABOUT</button>
+    <button class="nb-button" data-screen="home">HOME</button>
+    <button class="nb-button" data-screen="randomize">RANDOMIZE</button>
+    <button class="nb-button" data-screen="profile">PROFILE</button>
+    <button class="nb-button" data-screen="about">ABOUT</button>
     <p class="nb-title">GENSHIN RANDOMIZER</p>
   </div>
 
@@ -29,17 +30,33 @@
   <div class="screen current-screen col-div" id="home-screen">
   <div class="home-header">
     <h1 class="title">Genshin Randomizer</h1>
-
-    <button class="button nb-button" data-screen="randomize">randomize</button>
-    <button class="button nb-button" data-screen="profile">character profile</button>
-    <button class="button nb-button" data-screen="about">about this site</button>
+    <button class="nb-button" data-screen="randomize">randomize</button>
+    <button class="nb-button" data-screen="profile">character profile</button>
+    <button class="nb-button" data-screen="about">about this site</button>
   </div>
-
   <p class="credits">All images belong to Hoyoverse.</p>
   </div>
 
   <!-- randomizer screen -->
-  <div class="screen" id="randomize-screen">
+  <div class="screen row-div" id="randomize-screen">
+  <div class="col-div">
+    <h1>Characters</h1>
+    <div class="row-div button-container" id="randomize-profiles">
+      <label for="r-p1">P1 :</label>
+      <select id="r-p1"></select>
+      <label for="r-p2" class="hidden">P2 :</label>
+      <label for="r-p3" class="hidden">P3 :</label>
+      <label for="r-p4" class="hidden">P4 :</label>
+    </div>
+    <div class="row-div button-container" id="randomize-buttons">
+      <button id="r-characters">randomize</button>
+      <button id="toggle-character-bans">Bans ON</button>
+    </div>
+    <div class="row-div" id="pVisuals"></div>
+  </div>
+  <div class="col-div">
+    <h1>Bosses</h1>
+  </div>
   </div>
 
   <!-- profiles screen -->
