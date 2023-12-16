@@ -8,7 +8,7 @@ body {
     --bright-highlight : rgba(245, 245, 245, 0.5);
 }
 
-p,h1,h2,h3 {
+p,h1,h2,h3,label {
     color: var(--text);
 }
 
@@ -22,17 +22,25 @@ p,h1,h2,h3 {
 }
 
 /* buttons */
-.button {
+button {
     color: var(--translucent-text);
     background-color: var(--transparent);
+    border: 1px solid var(--dim-highlight);
 }
 
-.button:hover {
+button:hover {
     color: var(--text);
     background-color: var(--dim-highlight);
+    border: 1px solid var(--transparent);
 }
 
 /* screens */
 .screen {
     background-color: var(--light-background);
+}
+
+/* input boxes */
+select {
+    color: var(--text);
+    background-color: var(--transparent);
 }
