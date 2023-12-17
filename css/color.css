@@ -28,7 +28,7 @@ button,.button {
     border: 1px solid var(--dim-highlight);
 }
 
-button:hover,.button:hover {
+button:hover,.button:hover,.selected {
     color: var(--text);
     background-color: var(--dim-highlight);
     border: 1px solid var(--transparent);
