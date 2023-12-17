@@ -1,13 +1,12 @@
 // some global variables ////////////////////////////////////////////////////////
 // tag for local storage so things don't overwrite eachother
 const lsTag = "genshinRandomizer";
-// list of profiles saved (string version)
+// list of profiles saved in ids (string version)
 let profileList = localStorage.getItem(`${lsTag}_profileList`);
 
 // initialize page /////////////////////////////////////////////////////////////
 $(document).ready(function() {
     $("#nav-bar").hide();
-    
     // page swapping
     $(".nb-button").click(function() {
         console.log("screen swap");
@@ -23,7 +22,12 @@ $(document).ready(function() {
             }
         }
     });
-
+    // hide buttons
+    $("#profile-save").hide();
+    $("#profile-cancel").hide();
+    // set up profile screen
+    setupCharacterButtons();
+    setupProfiles();
     // hide the loading page
     setTimeout(() => {
         $("#loading-page").fadeOut(250);
@@ -43,8 +47,7 @@ async function fetchBossData() {
     return json;
 }
 
-// profile page ////////////////////////////////////////////////////////////////
-// for main profiles page
+// setup functions /////////////////////////////////////////////////////////////
 function setupProfiles() {
     if (profileList == null || profileList.length == 1) {
         updateMessage("profile", "you have no profiles! use new to create a new one or import one from a file.");
@@ -53,75 +56,133 @@ function setupProfiles() {
         let container = $(".character-container");
         profileList.forEach(profile => {
             const json = JSON.parse(localStorage.getItem(`${lsTag}_${profile}`));
-            createCharacterButtons(container,
-                profile,
-                json.name,
-                getPFP(json.pfp));
+            createCharacterButton(container, profile, json.name, getPFP(json.pfp), "profile").click(function() {
+                profileEditMode(profile);
+                console.log("click");
+            });
         });
     }
 }
-setupProfiles();
-
-// for editing page
-async function setupCharacterButtons(profile) {
+async function setupCharacterButtons() {
     const json = await fetchCharaterData();
     console.log(json);
     let container = $(".character-container");
     Object.keys(json).forEach(character => {
-        createCharacterButtons(container,
+        createCharacterButton(container,
             json[character].name,   // id
             json[character].name,   // name
             getPFP(character),
-            element=json[character].element,
-            ownership=profile[character]);
+            `${json[character].element} ${json[character].star}star character`);
     });
+    $(".character").hide();
 }
-// setupCharacterButtons();
+
+// profile page ////////////////////////////////////////////////////////////////
+// profile page buttons
+$("#import").click(function() {
+    console.log("click");
+    $("#import-helper").click();
+});
+$("#import-helper").on("change", function(event) {  // handls json import files
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        let json = event.target.result;
+        try {
+            json = JSON.parse(json);
+            if (Object.keys(json).length > 0) {
+                clearMessage("profile");
+                // write in new profile
+                Object.keys(json).forEach(profile => {
+                    const id = makeID();
+                    console.log(profile, json[profile], id);
+                    localStorage.setItem(`${lsTag}_${id}`, JSON.stringify(json[profile]));
+                    profileList.push(id);
+                    localStorage.setItem(`${lsTag}_profileList`, JSON.stringify(profileList));
+                    createCharacterButton($(".character-container"), id, json[profile].name, getPFP(json[profile].pfp), "profile");
+                });
+            } else {
+                updateMessage("profile", "oh no! no profiles found in file :(");
+            }
+        } catch (error) {
+            updateMessage("profile", "oh no! invalid import file :(");
+            console.error(`caught error: ${error}`);
+        }
+    }
+    reader.readAsText(file);
+});
+$("#new").click(function() {
+    console.log("click");
+    $("#profile-screen").data("mode", "new");
+});
+$("#delete").click(function() {
+    console.log("click");
+    // set up
+    $("#profile-save").show();
+    $("#profile-cancel").show();
+    updateMessage("profile", "select profiles to delete");
+    $("#profile-screen").data("mode", "delete");
+});
+$("#export").click(function() {
+    console.log("click");
+    // set up
+    $("#profile-save").show();
+    $("#profile-cancel").show();
+    updateMessage("profile", "select profiles to delete");
+    $("#profile-screen").data("mode", "export");
+});
+$("#profile-save").click(function() {
+    clearMessage("profile");
+    $(this).hide();
+    $("#profile-cancel").hide();
+    if ($("#profile-screen").data("mode") == "delete") {
+        console.log("delete");
+    }
+    if ($("#profile-screen").data("mode") == "export") {
+        console.log("export");
+    }
+});
+$("#profile-cancel").click(function() {
+    clearMessage("profile");
+    $(this).hide();
+    $("#profile-save").hide();
+});
+// editing page
+function profileEditMode(profile) {
+    updateCharacterOwnership(profile);
+}
+function updateCharacterOwnership(profile) {
+    console.log(profile)
+}
 
 // helper functions ////////////////////////////////////////////////////////////
 function getPFP(name) {
-    return '../images/pfp/' + name + '.webp';
+    return `../images/pfp/${name}.webp`;
 }
-
 function makeID() {
-    profileCount = JSON.parse(localStorage.getItem("genshinRandomizer_profileCount"));
-    profileID = profileCount.toString();
-    profileCount++;
-    localStorage.setItem("genshinRandomizer_profileCount", JSON.stringify(profileCount));
+    let profileCount = JSON.parse(localStorage.getItem(`${lsTag}_profileCount`));
+    localStorage.setItem(`${lsTag}_profileCount`, JSON.stringify(++profileCount));
+    let profileID = profileCount.toString();
+    return profileID;
 }
-
 // create character buttons
-function createCharacterButtons(source, id, name, pfp, element="", weapon="", ownership="") {
+function createCharacterButton(source, id, name, pfp, classes="") {
     let div = $("<div>", {
         text : name,
         id : id,
-        class : `profile col-div button ${element} ${weapon} ${ownership}`
+        class : `card col-div button ${classes}`
     });
     let pic = $(`<img>`, {
         src : pfp
     });
     div.append(pic);
     source.append(div);
-    /*
-    div.addEventListener("click", () => {
-        console.log('current mode ', mode);
-        if (['delete', 'export'].includes(mode)) {
-            if (div.classList.contains('buttonON')) {
-                turnButtonOFF(div);
-            } else {
-                turnButtonON(div);
-            }
-        } else { 
-            window.location.href = `editProfiles.html?profile=${encodeURIComponent(id)}`;
-        }
-    });
-    */
+   return div;
 }
-
 function updateMessage(screen, message) {
+    console.log("update message");
     $(`#${screen}-screen-msg`).html(message);
 }
-
 function clearMessage(screen) {
     $(`#${screen}-screen-msg`).html('');
 }
