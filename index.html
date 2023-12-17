@@ -59,7 +59,21 @@
   </div>
 
   <!-- profiles screen -->
-  <div class="screen" id="profile-screen">
+  <div class="screen col-div" id="profile-screen">
+    <div id="all-profiles">
+      <h1>Your Profiles</h1>
+      <div class="button-container">
+        <!-- hidden import tag to get the file -->
+        <input type="file" id="importInput" style="display: none;"></input>
+        <button id="import">import</button>
+        <button id="new">new</button>
+        <button id="delete">delete</button>
+        <button id="export">export</button>
+        <button onclick="localStorage.clear(); $('.character-container').empty();">clear all</button>
+      </div>
+    </div>
+    <div id="editing profiles"></div>
+    <p id="profile-screen-msg" class="message"></p>
     <div class="character-container row-div"></div>
   </div>
 
