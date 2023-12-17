@@ -46,6 +46,11 @@
     width: 150px;
 }
 
+.profile {
+    height: fit-content;
+    border: 1px solid var(--transparent);
+}
+
 .character-container {
     flex-wrap: wrap;
     height: 100%;

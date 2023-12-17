@@ -13,6 +13,6 @@
     ], 
     "1.1.0" : [
         "",
-        "Redid the whole website with jquery and fixed up janky styling"
+        "Redid the whole website with jquery and fixed up janky page refreshing when hopping between subpages"
     ]
 }

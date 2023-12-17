@@ -3,7 +3,7 @@ body {
     --translucent-text : rgba(245, 245, 245, 0.5);
     --transparent : rgba(0, 0, 0, 0);
     --light-background : rgba(0, 0, 0, 0.7);
-    --dark-background : rgba(0, 0, 0, 0.9);
+    --dark-background : rgba(0, 0, 0, 0.8);
     --dim-highlight : rgba(245, 245, 245, 0.2);
     --bright-highlight : rgba(245, 245, 245, 0.5);
 }
@@ -43,4 +43,5 @@ button:hover,.button:hover {
 select {
     color: var(--text);
     background-color: var(--transparent);
+    border: 1px solid var(--text);
 }
