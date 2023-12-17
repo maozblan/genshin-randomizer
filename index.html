@@ -64,12 +64,15 @@
       <h1>Your Profiles</h1>
       <div class="button-container">
         <!-- hidden import tag to get the file -->
-        <input type="file" id="importInput" style="display: none;"></input>
+        <input type="file" id="import-helper" style="display: none;"></input>
         <button id="import">import</button>
         <button id="new">new</button>
         <button id="delete">delete</button>
         <button id="export">export</button>
         <button onclick="localStorage.clear(); $('.character-container').empty();">clear all</button>
+        <br />
+        <button id="profile-save">save</button>
+        <button id="profile-cancel">cancel</button>
       </div>
     </div>
     <div id="editing profiles"></div>

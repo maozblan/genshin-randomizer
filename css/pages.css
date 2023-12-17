@@ -42,13 +42,14 @@
 }
 
 /* profile screen */
-.profile img {
+.card img {
     width: 150px;
 }
 
-.profile {
+.card {
     height: fit-content;
     border: 1px solid var(--transparent);
+    flex-direction: column-reverse;
 }
 
 .character-container {
