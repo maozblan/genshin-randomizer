@@ -56,16 +56,19 @@ function setupProfiles() {
         let container = $(".character-container");
         profileList.forEach(profile => {
             const json = JSON.parse(localStorage.getItem(`${lsTag}_${profile}`));
-            createCharacterButton(container, profile, json.name, getPFP(json.pfp), "profile").click(function() {
-                profileEditMode(profile);
-                console.log("click");
-            });
+            createCharacterButton(container, profile, json.name, getPFP(json.pfp), "profile")
+                .click(function() {
+                    if (["delete", "export"].includes($("#profile-screen").data("mode"))) {
+                        $(this).toggleClass("selected");
+                    } else {
+                        profileEditMode(profile);
+                    }
+                });
         });
     }
 }
 async function setupCharacterButtons() {
     const json = await fetchCharaterData();
-    console.log(json);
     let container = $(".character-container");
     Object.keys(json).forEach(character => {
         createCharacterButton(container,
@@ -99,7 +102,14 @@ $("#import-helper").on("change", function(event) {  // handls json import files
                     localStorage.setItem(`${lsTag}_${id}`, JSON.stringify(json[profile]));
                     profileList.push(id);
                     localStorage.setItem(`${lsTag}_profileList`, JSON.stringify(profileList));
-                    createCharacterButton($(".character-container"), id, json[profile].name, getPFP(json[profile].pfp), "profile");
+                    createCharacterButton($(".character-container"), id, json[profile].name, getPFP(json[profile].pfp), "profile")
+                        .click(function() {
+                            if (["delete", "export"].includes($("#profile-screen").data("mode"))) {
+                                $(this).toggleClass("selected");
+                            } else {
+                                profileEditMode(profile);
+                            }
+                        });
                 });
             } else {
                 updateMessage("profile", "oh no! no profiles found in file :(");
@@ -112,11 +122,9 @@ $("#import-helper").on("change", function(event) {  // handls json import files
     reader.readAsText(file);
 });
 $("#new").click(function() {
-    console.log("click");
     $("#profile-screen").data("mode", "new");
 });
 $("#delete").click(function() {
-    console.log("click");
     // set up
     $("#profile-save").show();
     $("#profile-cancel").show();
@@ -124,7 +132,6 @@ $("#delete").click(function() {
     $("#profile-screen").data("mode", "delete");
 });
 $("#export").click(function() {
-    console.log("click");
     // set up
     $("#profile-save").show();
     $("#profile-cancel").show();
@@ -137,6 +144,15 @@ $("#profile-save").click(function() {
     $("#profile-cancel").hide();
     if ($("#profile-screen").data("mode") == "delete") {
         console.log("delete");
+        $(".profile.selected").each(function() {
+            console.log($(this), $(this).attr("id"));
+            // profileList is parsed in setUpProfiles()
+            profileList.splice(profileList.indexOf($(this).attr("id")), 1);
+            console.log(profileList);
+            localStorage.setItem(`${lsTag}_profileList`, JSON.stringify(profileList));
+            localStorage.removeItem(`${lsTag}_${$(this).attr("id")}`);
+            $(this).hide();
+        });
     }
     if ($("#profile-screen").data("mode") == "export") {
         console.log("export");
@@ -146,6 +162,8 @@ $("#profile-cancel").click(function() {
     clearMessage("profile");
     $(this).hide();
     $("#profile-save").hide();
+    $(".selected").toggleClass("selected");
+    $("#profile-screen").data("mode", "");
 });
 // editing page
 function profileEditMode(profile) {
