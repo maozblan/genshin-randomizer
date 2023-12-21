@@ -22,6 +22,17 @@ $(document).ready(function() {
             }
         }
     });
+    // set up clear all button
+    $("#clear-all-profiles").click(function() {
+        profileList.forEach(profile => {
+            localStorage.removeItem(`${lsTag}_${profile}`);
+        });
+        profileList = [];
+        profileCount = 0;
+        localStorage.setItem(`${lsTag}_profileList`, JSON.stringify(profileList));
+        localStorage.setItem(`${lsTag}_profileCount`, JSON.stringify(profileCount));
+        $(".character-container .profile").remove();
+    });
     // hide buttons
     $("#profile-save").hide();
     $("#profile-cancel").hide();
@@ -49,8 +60,11 @@ async function fetchBossData() {
 
 // setup functions /////////////////////////////////////////////////////////////
 function setupProfiles() {
-    if (profileList == null || profileList.length == 1) {
+    if (profileList == null || profileList == "[]") {
         updateMessage("profile", "you have no profiles! use new to create a new one or import one from a file.");
+        if (profileList === null) {
+            profileList = [];
+        }
     } else {
         profileList = JSON.parse(profileList);
         let container = $(".character-container");
@@ -135,7 +149,7 @@ $("#export").click(function() {
     // set up
     $("#profile-save").show();
     $("#profile-cancel").show();
-    updateMessage("profile", "select profiles to delete");
+    updateMessage("profile", "select profiles to export");
     $("#profile-screen").data("mode", "export");
 });
 $("#profile-save").click(function() {
