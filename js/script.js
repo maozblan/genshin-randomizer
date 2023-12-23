@@ -9,10 +9,10 @@ $(document).ready(function() {
     $("#nav-bar").hide();
     // page swapping
     $(".nb-button").click(function() {
-        console.log("screen swap");
+        // console.log("screen swap");
         let screen = $(this).data("screen");
         if (!$(`#${screen}-screen`).hasClass("current-screen")) {
-            console.log("swapping screen");
+            // console.log("swapping screen");
             $(".current-screen").toggleClass("current-screen");
             $(`#${screen}-screen`).toggleClass("current-screen");
             if (screen != "home") {
@@ -62,9 +62,7 @@ async function fetchBossData() {
 function setupProfiles() {
     if (profileList == null || profileList == "[]") {
         updateMessage("profile", "you have no profiles! use new to create a new one or import one from a file.");
-        if (profileList === null) {
-            profileList = [];
-        }
+        profileList = [];
     } else {
         profileList = JSON.parse(profileList);
         let container = $(".character-container");
@@ -138,45 +136,61 @@ $("#import-helper").on("change", function(event) {  // handls json import files
 $("#new").click(function() {
     $("#profile-screen").data("mode", "new");
 });
-$("#delete").click(function() {
-    // set up
-    $("#profile-save").show();
-    $("#profile-cancel").show();
-    updateMessage("profile", "select profiles to delete");
-    $("#profile-screen").data("mode", "delete");
-});
-$("#export").click(function() {
-    // set up
-    $("#profile-save").show();
-    $("#profile-cancel").show();
-    updateMessage("profile", "select profiles to export");
-    $("#profile-screen").data("mode", "export");
+['delete', 'export'].forEach(mode => {
+    $(`#${mode}`).click(function() {
+        $("#profile-save").show();
+        $("#profile-cancel").show();
+        updateMessage("profile", `select profiles to ${mode}`);
+        $("#profile-screen").data("mode", mode);
+    });
 });
 $("#profile-save").click(function() {
     clearMessage("profile");
     $(this).hide();
     $("#profile-cancel").hide();
     if ($("#profile-screen").data("mode") == "delete") {
-        console.log("delete");
+        // console.log("delete");
         $(".profile.selected").each(function() {
-            console.log($(this), $(this).attr("id"));
             // profileList is parsed in setUpProfiles()
             profileList.splice(profileList.indexOf($(this).attr("id")), 1);
-            console.log(profileList);
-            localStorage.setItem(`${lsTag}_profileList`, JSON.stringify(profileList));
             localStorage.removeItem(`${lsTag}_${$(this).attr("id")}`);
-            $(this).hide();
+            $(this).remove();
         });
+        localStorage.setItem(`${lsTag}_profileList`, JSON.stringify(profileList));
     }
     if ($("#profile-screen").data("mode") == "export") {
-        console.log("export");
+        // console.log("export");
+        let exportJSON = {};
+        let profiles = [];
+        $(".profile.selected").each(function() {
+            exportJSON[$(this).attr("id")] = JSON.parse(localStorage.getItem(`${lsTag}_${$(this).attr("id")}`));
+            profiles.push($(this).text());
+        });
+        profiles = profiles.join('-');
+        if (exportJSON != {}) {
+            const jsonData = JSON.stringify(exportJSON);
+            const blob = new Blob([jsonData], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `GRP_${profiles}.json`;
+            a.click();
+            // Clean up the URL and the element after the download
+            URL.revokeObjectURL(url);
+        } else {
+            updateMessage("profile", "nothing selected to export...");
+        }
     }
+    // unselect selected profiles
+    $(".selected.profile").toggleClass("selected");
 });
 $("#profile-cancel").click(function() {
     clearMessage("profile");
     $(this).hide();
     $("#profile-save").hide();
-    $(".selected").toggleClass("selected");
+    // unselect selected profiles
+    $(".selected.profile").toggleClass("selected");
     $("#profile-screen").data("mode", "");
 });
 // editing page
@@ -212,7 +226,7 @@ function createCharacterButton(source, id, name, pfp, classes="") {
    return div;
 }
 function updateMessage(screen, message) {
-    console.log("update message");
+    // console.log("update message");
     $(`#${screen}-screen-msg`).html(message);
 }
 function clearMessage(screen) {
