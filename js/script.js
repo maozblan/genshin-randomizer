@@ -231,6 +231,7 @@ $("#profile-cancel").click(function() {
 });
 // editing page
 function profileEditMode(profileID) {
+    curretProfile = profileID;  // for saving profile later
     let p = JSON.parse(localStorage.getItem(`${lsTag}_${profileID}`));
     updateCharacterOwnership(p);
     // update character container
@@ -261,7 +262,22 @@ function updateCharacterOwnership(profileJSON) {
 }
 // button functionality 
 $("#edit-profile-save").click(function(){
-    curretProfile.pfp = $("#profile-pfp").attr("alt");
+    let newProfile = {};
+    newProfile["name"] = $("#profile-name").val();
+    if (newProfile.name == "") {
+        newProfile.name = $("#profile-name").attr("placeholder");
+    }
+    newProfile["pfp"] = $("#profile-pfp").attr("alt");
+    newProfile["characters"] = [];
+    $(".character-container .have").each(function() {
+        newProfile.characters.push($(this).attr("id"));
+    });
+    newProfile["bans"] = [];
+    $(".character-container .ban").each(function() {
+        newProfile.bans.push($(this).attr("id"));
+    });
+    localStorage.setItem(`${lsTag}_${curretProfile}`, JSON.stringify(newProfile));
+    $("#edit-profile-cancel").click();  // using the cancel function to swap the screen back
 });
 $("#edit-profile-cancel").click(function(){
     // change back to main profiles page
@@ -285,12 +301,35 @@ $("#edit-profile-change-pfp").click(function(){
     }
 });
 function characterToggle(characterElement) {
+    // make sure only lumine or aether is selected
+    if (characterElement.attr("id") == "aether") {
+        ["have", "ban"].forEach(c => {
+            if ($("#lumine").hasClass(c)){
+                $("#lumine").toggleClass(c);
+            }
+        });
+    } else if (characterElement.attr("id") == "lumine") {
+        ["have", "ban"].forEach(c => {
+            if ($("#aether").hasClass(c)){
+                $("#aether").toggleClass(c);
+            }
+        });
+    }
+    // normal toggle
     if (characterElement.hasClass('have')) {
-        console.log('have');
+        // have >> ban
+        characterElement.toggleClass("have");
+        characterElement.toggleClass("ban");
     } else if (characterElement.hasClass('ban')) {
-        console.log('ban');
+        // ban >> don't have
+        characterElement.toggleClass("ban");
+        // skip from ban to have for lumine and aether
+        if (["lumine", "aether"].includes(characterElement.attr("id"))) {
+            characterToggle(characterElement);
+        }
     } else {
-        console.log('donthave');
+        // don't have >> have
+        characterElement.toggleClass("have");
     }
 }
 
