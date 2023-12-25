@@ -8,7 +8,7 @@ body {
     --bright-highlight : rgba(245, 245, 245, 0.5);
 }
 
-p,h1,h2,h3,label {
+p,h1,h2,h3,a,label {
     color: var(--text);
 }
 
@@ -34,9 +34,16 @@ button:hover,.button:hover,.selected {
     border: 1px solid var(--transparent);
 }
 
+/* input boxes */
+.input {
+    color: var(--text);
+    background-color: var(--transparent);
+    border: 1px solid var(--dim-highlight);
+}
+
 /* screens */
 .screen {
-    background-color: var(--light-background);
+    background-color: var(--dark-background);
 }
 
 /* input boxes */

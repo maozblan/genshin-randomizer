@@ -33,6 +33,7 @@ body {
 .row-div {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .col-div {
@@ -66,6 +67,7 @@ body {
     justify-content: flex-start;
     width: 100%;
     box-sizing: border-box;
+    z-index: 500;
 }
 
 .nb-button {
@@ -96,6 +98,18 @@ button,.button {
 
 .button-container {
     margin: 10px 0;
+}
+
+/* input boxes */
+.input {
+    font-family: "genshinFont";
+    font-size: inherit;
+    margin: 5px;
+    border-radius: 10px;
+    height: 40px;
+    width: 250px;
+    padding: 5px;
+    box-sizing: border-box;
 }
 
 /* input boxes */

@@ -58,6 +58,12 @@ async function fetchBossData() {
     return json;
 }
 
+async function fetchEditLog() {
+    const res = await fetch("js/data/editLog.json");
+    const json = await res.json();
+    return json;
+}
+
 // setup functions /////////////////////////////////////////////////////////////
 function setupProfiles() {
     if (profileList == null || profileList == "[]") {
@@ -78,19 +84,31 @@ function setupProfiles() {
                 });
         });
     }
+    $("#editing-profiles").hide();
 }
 async function setupCharacterButtons() {
     const json = await fetchCharaterData();
     let container = $(".character-container");
     Object.keys(json).forEach(character => {
         createCharacterButton(container,
-            json[character].name,   // id
+            character,              // id
             json[character].name,   // name
             getPFP(character),
             `${json[character].element} ${json[character].star}star character`);
     });
-    $(".character").hide();
+    $(".character-container .character").hide();
 }
+
+async function setupEditLog() {
+    const json = await fetchEditLog();
+    let container = $("#edit-log");
+    console.log(container, json);
+    Object.keys(json).forEach(log => {
+        container.prepend(`<p>${json[log][1]}`);
+        container.prepend(`<p>Version ${log} - ${json[log][0]}`);
+    });
+}
+setupEditLog();
 
 // profile page ////////////////////////////////////////////////////////////////
 // profile page buttons
@@ -148,8 +166,8 @@ $("#profile-save").click(function() {
     clearMessage("profile");
     $(this).hide();
     $("#profile-cancel").hide();
+    // deleting profiles from local storage
     if ($("#profile-screen").data("mode") == "delete") {
-        // console.log("delete");
         $(".profile.selected").each(function() {
             // profileList is parsed in setUpProfiles()
             profileList.splice(profileList.indexOf($(this).attr("id")), 1);
@@ -158,8 +176,8 @@ $("#profile-save").click(function() {
         });
         localStorage.setItem(`${lsTag}_profileList`, JSON.stringify(profileList));
     }
+    // exporting json
     if ($("#profile-screen").data("mode") == "export") {
-        // console.log("export");
         let exportJSON = {};
         let profiles = [];
         $(".profile.selected").each(function() {
@@ -194,12 +212,47 @@ $("#profile-cancel").click(function() {
     $("#profile-screen").data("mode", "");
 });
 // editing page
-function profileEditMode(profile) {
-    updateCharacterOwnership(profile);
+function profileEditMode(profileID) {
+    let p = JSON.parse(localStorage.getItem(`${lsTag}_${profileID}`));
+    updateCharacterOwnership(p);
+    console.log(p, getPFP(p.pfp));
+    // update character container
+    $(".profile").hide();
+    $(".character").show();
+    // update upper page data
+    $("#profile-pfp").attr("src", getPFP(p.pfp));
+    $("#profile-name").attr("placeholder", p.name);
+    // change upper page
+    $("#all-profiles").hide();
+    $("#editing-profiles").show();
 }
-function updateCharacterOwnership(profile) {
-    console.log(profile)
+// updates classes for characters for css styling
+function updateCharacterOwnership(profileJSON) {
+    // change all to default
+    $(".character-container .character.have").toggleClass("have");
+    $(".character-container .character.ban").toggleClass("ban");
+    // update classes
+    profileJSON.characters.forEach(character => {
+        $(`#${character}`).toggleClass("have");
+    });
+    profileJSON.bans.forEach(character => {
+        $(`#${character}`).toggleClass("ban");
+    });
 }
+// button functionality 
+$("#edit-profile-save").click(function(){
+});
+console.log($("#profile-cancel"));
+$("#edit-profile-cancel").click(function(){
+    console.log("click");
+    // change back to main profiles page
+    $("#all-profiles").show();
+    $("#editing-profiles").hide();
+    $(".profile").show();
+    $(".character").hide();
+});
+$("#edit-profile-change-pfp").click(function(){
+});
 
 // helper functions ////////////////////////////////////////////////////////////
 function getPFP(name) {
