@@ -42,8 +42,29 @@
 }
 
 /* profile screen */
+#profile-screen {
+    overflow-y: hidden;
+}
+
+.character-container {
+    overflow-y: scroll;
+}
+
 .card img {
     width: 150px;
+}
+
+.character img {
+    /* default is don't have */
+    filter: opacity(30%);
+}
+
+.have img {
+    filter: opacity(100%);
+}
+
+.ban img {
+    filter: grayscale(100%);
 }
 
 .card {
@@ -55,4 +76,25 @@
 .character-container {
     flex-wrap: wrap;
     height: 100%;
+}
+
+#editing-profiles {
+    margin-top: 25px;
+}
+
+#profile-pfp {
+    height: 200px;
+}
+
+#profile-screen .swap-info {
+    margin-left: 50px;
+    align-items: center;
+}
+
+#profile-screen .swap-info div {
+    align-items: center;
+}
+
+#profile-screen .swap-info img {
+    width: 100px;
 }

@@ -75,7 +75,36 @@
         <button id="profile-cancel">cancel</button>
       </div>
     </div>
-    <div id="editing profiles"></div>
+    <div id="editing-profiles" class="row-div">
+      <img id="profile-pfp" />
+      <div class="col-div">
+        <div class="row-div">
+          <input id="profile-name" type="text" class="input" placeholder="new profile" />
+        </div>
+        <button id="edit-profile-save">save</button>
+        <button id="edit-profile-cancel">cancel</button>
+        <button id="edit-profile-change-pfp">change pfp</button>
+      </div>
+      <div class="swap-info col-div">
+        <p>click to swap >></p>
+        <div class="row-div">
+          <div class="character col-div">
+            <img src="images/pfp/albedo.webp" />
+            <p>don't have</p>
+          </div>
+          <p>></p>
+          <div class="character have col-div">
+            <img src="images/pfp/albedo.webp" />
+            <p>have</p>
+          </div>
+          <p>></p>
+          <div class="character ban col-div">
+            <img src="images/pfp/albedo.webp" />
+            <p>banned</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <p id="profile-screen-msg" class="message"></p>
     <div class="character-container row-div"></div>
   </div>
@@ -85,15 +114,24 @@
     <div class="container">
       <h1>How to Use</h1>
       <p>
-        For boss randomization, just go straight to RANDOMIZE, select the regions you want to include and click "randomize". If the Boss Count is left empty, it defaults to 1.
-        If the boss count is higher than the amount of bosses possible in the current filter(s), it gives you the max number of different bosses. 
-        Use the "prev" and "next" button to go through the randomized boss list. The list does not loop back, when "next" doesn't work anymore, you are at the end of the list.
+        ALL RANDOMIZATION WILL BE DONE IN THE "RANDOMIZE" TAB.
       </p>
       <p>
-        For character randomization first go to CHARACTER PROFILES / PROFILES to import or create profiles. Follow the directions on the profile creation page to indicate which characters are owned, not owned, or banned.
-        Banned characters can be used for an extra layer of fun. The randomizer page allows for bans to be enforced or lifted through "toggle bans". Profiles also default to setting Kaeya, Amber, Lisa, Barbara to owned. Remember to select a Traveler.
-        Then go to RANDOMIZE to randomize 4 characters depending on which profiles are chosen. Different profiles can be selected using the dropdowns for P1 to P4.
+        To randomize bosses: Please select the regions for which bosses you would like to include in the pool.
+        Weekly bosses are their own section and not included in any region. Then select the number of bosses you would like to randomize.
+        If the number selected is larger than the pool, all bosses in the pool will be included in the output and no more. Finally click "randomize".
       </p>
+      <p>
+        To randomize characters: Please go to the "Profiles" tab to either import a profile JSON or make a new profile. Then go to the "Randomize" tab
+        to select P1 to P4 using the dropdown (dropdown options are the profiles in your "profiles" tab). If you would like to include banned characters
+        in the pool, toggle bans to be off (bans default to being on). Then click "randomize".
+      </p>
+      <p>
+        Have fun!
+      </p>
+
+      <br />
+
       <h1>About This Page</h1>
       <p>
           Hello! Welcome to the Genshin Randomizer. This is honestly just a small project
@@ -105,13 +143,18 @@
           And content updates are done manually by me so please give me a couple of days...
       </p>
       <p>
+        If you'd like the view the github repo for this website or submit a pull request,
+        you can click <a href="https://github.com/maozblan/genshin-randomizer">HERE</a>! Thank you!
+      </p>
+      <p>
           ALL IMAGES BELONG TO HOYOVERSE/COGNOSPHERE OR WHATEVER THEY WANT TO CALL THEMSELVES NOW.
           Also special thanks to ChatGPT for carrying me through CSS and the framework xd.
       </p>
 
-      <br>
+      <br />
 
       <h1>Edit Log</h1>
+      <div id="edit-log"></div>
     </div>
   </div>
 

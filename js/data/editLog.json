@@ -13,6 +13,6 @@
     ], 
     "1.1.0" : [
         "",
-        "Redid the whole website with jquery and fixed up janky page refreshing when hopping between subpages"
+        "Redid the whole website with jquery and fixed up janky page refreshing when hopping between subpages. Also reworked the UI to be easier to read. Added characters: Navia"
     ]
 }
