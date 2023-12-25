@@ -82,6 +82,10 @@
     margin-top: 25px;
 }
 
+#profile-name {
+    text-align: center;
+}
+
 #profile-pfp {
     height: 200px;
 }

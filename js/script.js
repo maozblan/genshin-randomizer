@@ -3,6 +3,8 @@
 const lsTag = "genshinRandomizer";
 // list of profiles saved in ids (string version)
 let profileList = localStorage.getItem(`${lsTag}_profileList`);
+// json file of profile currently being edited
+let curretProfile;
 
 // initialize page /////////////////////////////////////////////////////////////
 $(document).ready(function() {
@@ -96,7 +98,17 @@ async function setupCharacterButtons() {
             getPFP(character),
             `${json[character].element} ${json[character].star}star character`);
     });
-    $(".character-container .character").hide();
+    $(".character-container .character").hide()
+        .click(function() {
+            if ($("#profile-screen").data("mode") == "updating-pfp") {
+                $("#profile-pfp").attr({
+                    "src" : getPFP($(this).attr("id")),
+                    "alt" : $(this).attr("id")
+                });
+            } else {
+                characterToggle($(this));
+            }
+        });
 }
 
 async function setupEditLog() {
@@ -111,6 +123,12 @@ async function setupEditLog() {
 setupEditLog();
 
 // profile page ////////////////////////////////////////////////////////////////
+
+/* profile modes (in profile-screen data-mode):
+ * export, delete -> allow select profiles, pause enter edit mode
+ * updating-pfp -> pause character toggle
+**/
+
 // profile page buttons
 $("#import").click(function() {
     console.log("click");
@@ -215,12 +233,14 @@ $("#profile-cancel").click(function() {
 function profileEditMode(profileID) {
     let p = JSON.parse(localStorage.getItem(`${lsTag}_${profileID}`));
     updateCharacterOwnership(p);
-    console.log(p, getPFP(p.pfp));
     // update character container
     $(".profile").hide();
     $(".character").show();
     // update upper page data
-    $("#profile-pfp").attr("src", getPFP(p.pfp));
+    $("#profile-pfp").attr({
+        "src" : getPFP(p.pfp),
+        "alt" : p.pfp  // for changing pfp later
+    });
     $("#profile-name").attr("placeholder", p.name);
     // change upper page
     $("#all-profiles").hide();
@@ -241,18 +261,38 @@ function updateCharacterOwnership(profileJSON) {
 }
 // button functionality 
 $("#edit-profile-save").click(function(){
+    curretProfile.pfp = $("#profile-pfp").attr("alt");
 });
-console.log($("#profile-cancel"));
 $("#edit-profile-cancel").click(function(){
-    console.log("click");
     // change back to main profiles page
     $("#all-profiles").show();
     $("#editing-profiles").hide();
     $(".profile").show();
     $(".character").hide();
+    // in case of extraneous things
+    clearMessage("profile");
+    $("#profile-screen").data("mode", "");
 });
 $("#edit-profile-change-pfp").click(function(){
+    if($("#profile-screen").data("mode") == "updating-pfp") {
+        $("#profile-screen").data("mode", "");
+        clearMessage("profile");
+        $("#edit-profile-change-pfp").text("change pfp");
+    } else {
+        $("#profile-screen").data("mode", "updating-pfp");
+        updateMessage("profile", "select a character from below as the new profile picture, then click \"save pfp\"");
+        $("#edit-profile-change-pfp").text("save pfp");
+    }
 });
+function characterToggle(characterElement) {
+    if (characterElement.hasClass('have')) {
+        console.log('have');
+    } else if (characterElement.hasClass('ban')) {
+        console.log('ban');
+    } else {
+        console.log('donthave');
+    }
+}
 
 // helper functions ////////////////////////////////////////////////////////////
 function getPFP(name) {
