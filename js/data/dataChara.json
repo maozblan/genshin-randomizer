@@ -224,6 +224,11 @@
     "element": "dendro",
     "star": 5
   },
+  "navia" : {
+    "name": "Navia",
+    "element": "geo",
+    "star": 5
+  },
   "neuvillette": {
     "name": "Neuvillette",
     "element": "hydro",
