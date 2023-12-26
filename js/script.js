@@ -3,8 +3,12 @@
 const lsTag = "genshinRandomizer";
 // list of profiles saved in ids (string version)
 let profileList = localStorage.getItem(`${lsTag}_profileList`);
-// json file of profile currently being edited
+// profileID of profile currently being edited
 let currentProfile;
+// json of all randomizing profiles
+let rProfiles = {};
+// boolean on if ban are on or off
+let rBans = true;
 
 // initialize page /////////////////////////////////////////////////////////////
 $(document).ready(function() {
@@ -68,11 +72,13 @@ async function fetchEditLog() {
 
 // setup functions /////////////////////////////////////////////////////////////
 function setupProfiles() {
-    if (profileList == null || profileList == "[]") {
-        updateMessage("profile", "you have no profiles! use new to create a new one or import one from a file.");
+    if (profileList == null || profileList == "[]" || profileList.length == 0) {
+        updateMessage("profile-screen", "you have no profiles! use new to create a new one or import one from a file.");
         profileList = [];
     } else {
-        profileList = JSON.parse(profileList);
+        if (typeof profileList === 'string' || profileList instanceof String) {
+            profileList = JSON.parse(profileList);
+        }
         profileList.forEach(id => {
             const profile = JSON.parse(localStorage.getItem(`${lsTag}_${id}`));
             makeProfileButton(profile, id);
@@ -94,8 +100,8 @@ async function setupCharacterButtons() {
         .click(function() {
             if ($("#profile-screen").data("mode") == "updating-pfp") {
                 $("#profile-pfp").attr({
-                    "src" : getPFP($(this).attr("id")),
-                    "alt" : $(this).attr("id")
+                    src : getPFP($(this).attr("id")),
+                    alt : $(this).attr("id")
                 });
             } else {
                 characterToggle($(this));
@@ -106,7 +112,6 @@ async function setupCharacterButtons() {
 async function setupEditLog() {
     const json = await fetchEditLog();
     let container = $("#edit-log");
-    console.log(container, json);
     Object.keys(json).forEach(log => {
         container.prepend(`<p>${json[log][1]}`);
         container.prepend(`<p>Version ${log} - ${json[log][0]}`);
@@ -133,7 +138,7 @@ $("#import-helper").on("change", function(event) {  // handls json import files
         try {
             json = JSON.parse(json);
             if (Object.keys(json).length > 0) {
-                clearMessage("profile");
+                clearMessage("profile-screen");
                 // write in new profile
                 Object.keys(json).forEach(profileNum => {
                     const id = makeID();
@@ -143,10 +148,10 @@ $("#import-helper").on("change", function(event) {  // handls json import files
                 });
                 localStorage.setItem(`${lsTag}_profileList`, JSON.stringify(profileList));
             } else {
-                updateMessage("profile", "oh no! no profiles found in file :(");
+                updateMessage("profile-screen", "oh no! no profiles found in file :(");
             }
         } catch (error) {
-            updateMessage("profile", "oh no! invalid import file :(");
+            updateMessage("profile-screen", "oh no! invalid import file :(");
             console.error(`caught error: ${error}`);
         }
     }
@@ -159,12 +164,12 @@ $("#new").click(function() {
     $(`#${mode}`).click(function() {
         $("#profile-save").show();
         $("#profile-cancel").show();
-        updateMessage("profile", `select profiles to ${mode}`);
+        updateMessage("profile-screen", `select profiles to ${mode}`);
         $("#profile-screen").data("mode", mode);
     });
 });
 $("#profile-save").click(function() {
-    clearMessage("profile");
+    clearMessage("profile-screen");
     $(this).hide();
     $("#profile-cancel").hide();
     // deleting profiles from local storage
@@ -198,14 +203,14 @@ $("#profile-save").click(function() {
             // Clean up the URL and the element after the download
             URL.revokeObjectURL(url);
         } else {
-            updateMessage("profile", "nothing selected to export...");
+            updateMessage("profile-screen", "nothing selected to export...");
         }
     }
     // unselect selected profiles
     $(".selected.profile").toggleClass("selected");
 });
 $("#profile-cancel").click(function() {
-    clearMessage("profile");
+    clearMessage("profile-screen");
     $(this).hide();
     $("#profile-save").hide();
     // unselect selected profiles
@@ -286,17 +291,17 @@ $("#edit-profile-cancel").click(function(){
     $(".profile").show();
     $(".character").hide();
     // in case of extraneous things
-    clearMessage("profile");
+    clearMessage("profile-screen");
     $("#profile-screen").data("mode", "");
 });
 $("#edit-profile-change-pfp").click(function(){
     if($("#profile-screen").data("mode") == "updating-pfp") {
         $("#profile-screen").data("mode", "");
-        clearMessage("profile");
+        clearMessage("profile-screen");
         $("#edit-profile-change-pfp").text("change pfp");
     } else {
         $("#profile-screen").data("mode", "updating-pfp");
-        updateMessage("profile", "select a character from below as the new profile picture, then click \"save pfp\"");
+        updateMessage("profile-screen", "select a character from below as the new profile picture, then click \"save pfp\"");
         $("#edit-profile-change-pfp").text("save pfp");
     }
 });
@@ -333,6 +338,52 @@ function characterToggle(characterElement) {
     }
 }
 
+// randomizer page /////////////////////////////////////////////////////////////
+
+// update dropdown choices every time user switches to randomizer page
+$(".nb-button").click(function() {
+    if ($(this).data("screen") == "randomize") {
+        // set up null option
+        for (let i = 1; i <= 4; ++i) {
+            $(`#r-p${i}`).empty()   // clear old options
+                .append($("<option>", {
+                    value : "null-profile",
+                    text : "--"
+                }));
+        }
+        if (profileList == null || profileList == "[]" || profileList.length == 0) {
+            updateMessage("randomize-screen-characters", "you have no profiles! go to \"PROFILES\" to make one first.");
+            profileList = [];
+        } else {
+            clearMessage("randomize-screen-characters");
+            if (typeof profileList === 'string' || profileList instanceof String) {
+                profileList = JSON.parse(profileList);
+            }
+            // set up dropdown options
+            profileList.forEach(id => {
+                let profile = JSON.parse(localStorage.getItem(`${lsTag}_${id}`));
+                rProfiles[id] = profile;
+                for (let i = 1; i <= 4; ++i) {
+                    $(`#r-p${i}`).append($("<option>", {
+                        value : id,
+                        text : profile.name
+                    }));
+                }
+            });
+        }
+
+    }
+});
+// toggling bans
+$("#toggle-character-bans").click(function() {
+    rBans = !rBans;
+    if (rBans) {
+        $(this).html("Bans ON");
+    } else {
+        $(this).html("Bans OFF");
+    }
+});
+
 // helper functions ////////////////////////////////////////////////////////////
 function getPFP(name) {
     return `../images/pfp/${name}.webp`;
@@ -368,10 +419,9 @@ function makeProfileButton(profile, id) {
             }
         });
 }
-function updateMessage(screen, message) {
-    // console.log("update message");
-    $(`#${screen}-screen-msg`).html(message);
+function updateMessage(containerID, message) {
+    $(`#${containerID} .message`).html(message);
 }
-function clearMessage(screen) {
-    $(`#${screen}-screen-msg`).html('');
+function clearMessage(containerID) {
+    $(`#${containerID} .message`).html('');
 }
