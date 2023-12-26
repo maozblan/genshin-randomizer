@@ -4,7 +4,7 @@ const lsTag = "genshinRandomizer";
 // list of profiles saved in ids (string version)
 let profileList = localStorage.getItem(`${lsTag}_profileList`);
 // json file of profile currently being edited
-let curretProfile;
+let currentProfile;
 
 // initialize page /////////////////////////////////////////////////////////////
 $(document).ready(function() {
@@ -73,17 +73,9 @@ function setupProfiles() {
         profileList = [];
     } else {
         profileList = JSON.parse(profileList);
-        let container = $(".character-container");
-        profileList.forEach(profile => {
-            const json = JSON.parse(localStorage.getItem(`${lsTag}_${profile}`));
-            createCharacterButton(container, profile, json.name, getPFP(json.pfp), "profile")
-                .click(function() {
-                    if (["delete", "export"].includes($("#profile-screen").data("mode"))) {
-                        $(this).toggleClass("selected");
-                    } else {
-                        profileEditMode(profile);
-                    }
-                });
+        profileList.forEach(id => {
+            const profile = JSON.parse(localStorage.getItem(`${lsTag}_${id}`));
+            makeProfileButton(profile, id);
         });
     }
     $("#editing-profiles").hide();
@@ -131,7 +123,6 @@ setupEditLog();
 
 // profile page buttons
 $("#import").click(function() {
-    console.log("click");
     $("#import-helper").click();
 });
 $("#import-helper").on("change", function(event) {  // handls json import files
@@ -144,21 +135,13 @@ $("#import-helper").on("change", function(event) {  // handls json import files
             if (Object.keys(json).length > 0) {
                 clearMessage("profile");
                 // write in new profile
-                Object.keys(json).forEach(profile => {
+                Object.keys(json).forEach(profileNum => {
                     const id = makeID();
-                    console.log(profile, json[profile], id);
-                    localStorage.setItem(`${lsTag}_${id}`, JSON.stringify(json[profile]));
                     profileList.push(id);
-                    localStorage.setItem(`${lsTag}_profileList`, JSON.stringify(profileList));
-                    createCharacterButton($(".character-container"), id, json[profile].name, getPFP(json[profile].pfp), "profile")
-                        .click(function() {
-                            if (["delete", "export"].includes($("#profile-screen").data("mode"))) {
-                                $(this).toggleClass("selected");
-                            } else {
-                                profileEditMode(profile);
-                            }
-                        });
+                    makeProfileButton(json[profileNum], id);
+                    localStorage.setItem(`${lsTag}_${id}`, JSON.stringify(json[profileNum]));
                 });
+                localStorage.setItem(`${lsTag}_profileList`, JSON.stringify(profileList));
             } else {
                 updateMessage("profile", "oh no! no profiles found in file :(");
             }
@@ -170,7 +153,7 @@ $("#import-helper").on("change", function(event) {  // handls json import files
     reader.readAsText(file);
 });
 $("#new").click(function() {
-    $("#profile-screen").data("mode", "new");
+    profileEditMode("new");
 });
 ['delete', 'export'].forEach(mode => {
     $(`#${mode}`).click(function() {
@@ -231,16 +214,26 @@ $("#profile-cancel").click(function() {
 });
 // editing page
 function profileEditMode(profileID) {
-    curretProfile = profileID;  // for saving profile later
-    let p = JSON.parse(localStorage.getItem(`${lsTag}_${profileID}`));
+    let p;
+    if (profileID == "new") {
+        p = {
+            name : "new profile",
+            pfp : "aether",
+            characters : ["aether", "amber", "kaeya", "lisa", "noelle", "barbara"],
+            bans : []
+        };
+    } else {
+        currentProfile = profileID;  // for saving profile later
+        p = JSON.parse(localStorage.getItem(`${lsTag}_${profileID}`));
+    }
     updateCharacterOwnership(p);
     // update character container
     $(".profile").hide();
     $(".character").show();
     // update upper page data
     $("#profile-pfp").attr({
-        "src" : getPFP(p.pfp),
-        "alt" : p.pfp  // for changing pfp later
+        src : getPFP(p.pfp),
+        alt : p.pfp  // for changing pfp later
     });
     $("#profile-name").attr("placeholder", p.name);
     // change upper page
@@ -276,7 +269,14 @@ $("#edit-profile-save").click(function(){
     $(".character-container .ban").each(function() {
         newProfile.bans.push($(this).attr("id"));
     });
-    localStorage.setItem(`${lsTag}_${curretProfile}`, JSON.stringify(newProfile));
+    if (currentProfile == null) {        // new profile
+        currentProfile = makeID();
+        makeProfileButton(newProfile, currentProfile);
+        profileList.push(currentProfile);
+        localStorage.setItem(`${lsTag}_profileList`, JSON.stringify(profileList));
+    }
+    console.log(newProfile);
+    localStorage.setItem(`${lsTag}_${currentProfile}`, JSON.stringify(newProfile));
     $("#edit-profile-cancel").click();  // using the cancel function to swap the screen back
 });
 $("#edit-profile-cancel").click(function(){
@@ -356,6 +356,17 @@ function createCharacterButton(source, id, name, pfp, classes="") {
     div.append(pic);
     source.append(div);
    return div;
+}
+// DOES NOT save new profile to local storage
+function makeProfileButton(profile, id) {
+    createCharacterButton($(".character-container"), id, profile.name, getPFP(profile.pfp), "profile")
+        .click(function() {
+            if (["delete", "export"].includes($("#profile-screen").data("mode"))) {
+                $(this).toggleClass("selected");
+            } else {
+                profileEditMode(id);
+            }
+        });
 }
 function updateMessage(screen, message) {
     // console.log("update message");
