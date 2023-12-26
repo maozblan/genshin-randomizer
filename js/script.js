@@ -158,6 +158,7 @@ $("#import-helper").on("change", function(event) {  // handls json import files
     reader.readAsText(file);
 });
 $("#new").click(function() {
+    currentProfile = null;
     profileEditMode("new");
 });
 ['delete', 'export'].forEach(mode => {
@@ -208,6 +209,8 @@ $("#profile-save").click(function() {
     }
     // unselect selected profiles
     $(".selected.profile").toggleClass("selected");
+    // clear profile mode
+    $("#profile-screen").data("mode", "");
 });
 $("#profile-cancel").click(function() {
     clearMessage("profile-screen");
@@ -283,6 +286,7 @@ $("#edit-profile-save").click(function(){
     console.log(newProfile);
     localStorage.setItem(`${lsTag}_${currentProfile}`, JSON.stringify(newProfile));
     $("#edit-profile-cancel").click();  // using the cancel function to swap the screen back
+    console.log(profileList);
 });
 $("#edit-profile-cancel").click(function(){
     // change back to main profiles page
@@ -390,6 +394,7 @@ function getPFP(name) {
 }
 function makeID() {
     let profileCount = JSON.parse(localStorage.getItem(`${lsTag}_profileCount`));
+    // hopefully no one makes enough profiles for integer overflow
     localStorage.setItem(`${lsTag}_profileCount`, JSON.stringify(++profileCount));
     let profileID = profileCount.toString();
     return profileID;
