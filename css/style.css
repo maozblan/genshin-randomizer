@@ -41,6 +41,10 @@ body {
     flex-direction: column;
 }
 
+.scroll {
+    overflow-y: scroll;
+}
+
 /* screens */
 .screen {
     display: none;
@@ -49,7 +53,6 @@ body {
     box-sizing: border-box;
     /* to avoid nav bar */
     padding: 20px;
-    overflow-y: scroll;
     padding-top: 80px;
 }
 
@@ -94,10 +97,16 @@ button,.button {
     font-family: inherit;
     font-size: 18px;
     cursor: pointer;
+    width: max-content;
 }
 
 .button-container {
     margin: 10px 0;
+}
+
+.button-container p {
+    display: inline;
+    margin: 0;
 }
 
 /* input boxes */

@@ -1,12 +1,12 @@
 {
   "aether" : {
     "name": "Aether",
-    "element": ["anemo", "geo", "electro", "dendro"],
+    "element": ["anemo", "geo", "electro", "dendro", "hydro"],
     "star": 5
   },
   "lumine" : {
     "name": "Lumine",
-    "element": ["anemo", "geo", "electro", "dendro"],
+    "element": ["anemo", "geo", "electro", "dendro", "hydro"],
     "star": 5
   },
   "albedo" : {
@@ -255,7 +255,7 @@
     "star": 5
   },
   "raiden" : {
-    "name": "Raiden",
+    "name": "Raiden Shogun",
     "element": "electro",
     "star": 5
   },
@@ -270,7 +270,7 @@
     "star": 4
   },
   "sara" : {
-    "name": "Sara",
+    "name": "Kujou Sara",
     "element": "electro",
     "star": 4
   }, 
