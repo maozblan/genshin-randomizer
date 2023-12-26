@@ -38,22 +38,26 @@
 
   <!-- randomizer screen -->
   <div class="screen row-div" id="randomize-screen">
-  <div class="col-div">
+  <div class="col-div" id="randomize-screen-characters">
     <h1>Characters</h1>
     <div class="row-div button-container" id="randomize-profiles">
-      <label for="r-p1">P1 :</label>
+      <label for="r-p1" id="r-p1-label">P1 :</label>
       <select id="r-p1"></select>
-      <label for="r-p2" class="hidden">P2 :</label>
-      <label for="r-p3" class="hidden">P3 :</label>
-      <label for="r-p4" class="hidden">P4 :</label>
+      <label for="r-p2" id="r-p2-label">P2 :</label>
+      <select id="r-p2"></select>
+      <label for="r-p3" id="r-p3-label">P3 :</label>
+      <select id="r-p3"></select>
+      <label for="r-p4" id="r-p4-label">P4 :</label>
+      <select id="r-p4"></select>
     </div>
     <div class="row-div button-container" id="randomize-buttons">
       <button id="r-characters">randomize</button>
       <button id="toggle-character-bans">Bans ON</button>
     </div>
+    <p class="message"></p>
     <div class="row-div" id="pVisuals"></div>
   </div>
-  <div class="col-div">
+  <div class="col-div" id="randomize-screen-bosses">
     <h1>Bosses</h1>
   </div>
   </div>
@@ -105,7 +109,7 @@
         </div>
       </div>
     </div>
-    <p id="profile-screen-msg" class="message"></p>
+    <p class="message"></p>
     <div class="character-container row-div"></div>
   </div>
 

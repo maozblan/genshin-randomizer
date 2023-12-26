@@ -114,15 +114,16 @@ button,.button {
 
 /* input boxes */
 select {
+    font-family: "genshinFont";
     border-radius: 10px;
-    margin-left: 7px;
+    margin-right: 7px;
     min-width: 100px;
     height: 40px;
 }
 
 /* messages */
 .message {
-    margin: 0;
+    margin: 10px 0;
 }
 
 /* other */
@@ -130,6 +131,6 @@ select {
     display: none;
 }
 
-.message {
-    margin: 10px 0;
+label {
+    margin: 0 5px;
 }
