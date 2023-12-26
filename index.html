@@ -37,28 +37,36 @@
   </div>
 
   <!-- randomizer screen -->
-  <div class="screen row-div" id="randomize-screen">
-  <div class="col-div" id="randomize-screen-characters">
-    <h1>Characters</h1>
-    <div class="row-div button-container" id="randomize-profiles">
-      <label for="r-p1" id="r-p1-label">P1 :</label>
-      <select id="r-p1"></select>
-      <label for="r-p2" id="r-p2-label">P2 :</label>
-      <select id="r-p2"></select>
-      <label for="r-p3" id="r-p3-label">P3 :</label>
-      <select id="r-p3"></select>
-      <label for="r-p4" id="r-p4-label">P4 :</label>
-      <select id="r-p4"></select>
-    </div>
-    <div class="row-div button-container" id="randomize-buttons">
-      <button id="r-characters">randomize</button>
-      <button id="toggle-character-bans">Bans ON</button>
-    </div>
-    <p class="message"></p>
-    <div class="row-div" id="pVisuals"></div>
+  <div class="screen col-div" id="randomize-screen">
+  <div class="button-container" id="randomize-nb">
+    <p>RANDOMIZING</p>
+    <button data-screen="characters" class="selected">CHARACTERS</button>
+    <button data-screen="bosses">BOSSES</button>
   </div>
-  <div class="col-div" id="randomize-screen-bosses">
-    <h1>Bosses</h1>
+  <div id="randomize-data" class="scroll">
+    <p class="message"></p>
+    <div class="row-div" id="randomize-screen-characters">
+      <div id="r-cSettingsBar" class="randomize-settings col-div">
+        <button id="r-characters">randomize characters</button>
+        <div id="r-cSettingsBar-main">
+          <div class="col-div button-container" id="randomize-profiles">
+            <p>PLAYERS</p>
+            <!-- dropdowns appended in js -->
+          </div>
+          <button id="toggle-character-bans">Bans ON</button>
+        </div>
+      </div>
+      <div class="row-div" id="pVisuals">
+        <!-- divs appended in js -->
+      </div>
+    </div>
+    <div class="row-div" id="randomize-screen-bosses">
+      <div id="r-bSettingsBar" class="randomize-settings col-div">
+        <!-- <button id="r-bosses">randomize bosses</button> -->
+        <div id="r-bSettingsBar-main">
+        </div>
+      </div>
+    </div>
   </div>
   </div>
 
@@ -110,11 +118,11 @@
       </div>
     </div>
     <p class="message"></p>
-    <div class="character-container row-div"></div>
+    <div class="character-container row-div scroll"></div>
   </div>
 
   <!-- about screen -->
-  <div class="screen" id="about-screen">
+  <div class="screen scroll" id="about-screen">
     <div class="container">
       <h1>How to Use</h1>
       <p>

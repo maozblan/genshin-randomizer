@@ -30,25 +30,73 @@
 }
 
 /* randomizer screen */
-#randomize-screen > div {
-    width: 50%;
-    padding: 15px;
-    box-sizing: border-box;
+#randomize-data {
+    overflow-y: scroll;
 }
 
-#randomize-profiles {
+.randomize-settings {
+    width: 15%;
+    min-width: 175px;
+}
+
+#randomize-profiles > div {
     display: flex;
+    align-items: center;
+    margin: 5px 10px;
+}
+
+#randomize-profiles label {
+    width: 37px;
+}
+
+#pVisuals {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#pVisuals > div {
+    /* each character div */
+    margin: 10px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#pVisuals > div > img {
+    /* player image */
+    width: 200px;
+}
+
+.cDataDiv {
+    /* character info div */
+    margin-left: 5px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-/* profile screen */
-#profile-screen {
-    overflow-y: hidden;
+.cDataDiv-characterName {
+    margin: 0;
+    margin-top: auto;
 }
 
-.character-container {
-    overflow-y: scroll;
+.cDataDiv p:not(.cDataDiv-characterName) {
+    margin: 10px 0;
 }
+
+.cDataDiv p {
+    /* player/character name */
+    font-size: 24px;
+    writing-mode: vertical-rl;
+}
+
+.cDataDiv img {
+    /* character element */
+    width: 40px;
+}
+
+/* profile screen */
 
 .card img {
     width: 150px;
@@ -80,6 +128,10 @@
 
 #editing-profiles {
     margin-top: 25px;
+}
+
+#editing-profiles button {
+    width: auto;
 }
 
 #profile-name {

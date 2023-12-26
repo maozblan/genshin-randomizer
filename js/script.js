@@ -9,6 +9,9 @@ let currentProfile;
 let rProfiles = {};
 // boolean on if ban are on or off
 let rBans = true;
+// so we don't have to fetch it every time for randomization
+let characterDataJSON = null;
+
 
 // initialize page /////////////////////////////////////////////////////////////
 $(document).ready(function() {
@@ -45,11 +48,14 @@ $(document).ready(function() {
     // set up profile screen
     setupCharacterButtons();
     setupProfiles();
+    // set up randomzier screen
+    setupRandomizerDivs();
     // hide the loading page
     setTimeout(() => {
         $("#loading-page").fadeOut(250);
     }, 150);
 });
+
 
 // fetching data ///////////////////////////////////////////////////////////////
 async function fetchCharaterData() {
@@ -86,6 +92,7 @@ function setupProfiles() {
     }
     $("#editing-profiles").hide();
 }
+
 async function setupCharacterButtons() {
     const json = await fetchCharaterData();
     let container = $(".character-container");
@@ -109,6 +116,47 @@ async function setupCharacterButtons() {
         });
 }
 
+function setupRandomizerDivs() {
+    /* player dropdowns 
+    <div id="r-p#Div" class="row-div">
+        <label for="r-p#">P# :</label>
+        <select id="r-p#"></select>
+    </div>
+    */
+
+    /* player visuals
+    <div id="c#-cDiv">
+        <div id="c#-dataDiv" class="cDataDiv col-div">
+            <img id="c#-element" />
+            <p id="c#-pName"></p>
+            <p id="c#-cName" class="cDataDiv-characterName"></p>
+        </div>
+        <img id="c#-cImg" />
+    </div>
+    */
+
+    for (let i = 1; i <= 4; ++i) {
+        // dropdown
+        $("#randomize-profiles").append(
+            $(`<div id="r-p${i}Div" class="row-div">`)
+                .append(`<label for="r-p${i}">P${i} :`)
+                .append(`<select id="r-p${i}">`)
+        );
+        // visuals
+        let dataDiv = $(`<div id="c${i}-dataDiv" class="cDataDiv col-div">`)
+            .append(`<img id="c${i}-element">`)
+            .append(`<p id="c${i}-pName">`)
+            .append(`<p id="c${i}-cName" class="cDataDiv-characterName">`);
+        $("#pVisuals").append(
+            $(`<div id="c${i}-cDiv">`)
+                .append(dataDiv)
+                .append($(`<img id="c${i}-cImg">`))
+        );
+    }
+
+    $("#pVisuals").hide();
+}
+
 async function setupEditLog() {
     const json = await fetchEditLog();
     let container = $("#edit-log");
@@ -118,6 +166,7 @@ async function setupEditLog() {
     });
 }
 setupEditLog();
+
 
 // profile page ////////////////////////////////////////////////////////////////
 
@@ -130,6 +179,7 @@ setupEditLog();
 $("#import").click(function() {
     $("#import-helper").click();
 });
+
 $("#import-helper").on("change", function(event) {  // handls json import files
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -157,10 +207,12 @@ $("#import-helper").on("change", function(event) {  // handls json import files
     }
     reader.readAsText(file);
 });
+
 $("#new").click(function() {
     currentProfile = null;
     profileEditMode("new");
 });
+
 ['delete', 'export'].forEach(mode => {
     $(`#${mode}`).click(function() {
         $("#profile-save").show();
@@ -169,6 +221,7 @@ $("#new").click(function() {
         $("#profile-screen").data("mode", mode);
     });
 });
+
 $("#profile-save").click(function() {
     clearMessage("profile-screen");
     $(this).hide();
@@ -212,6 +265,7 @@ $("#profile-save").click(function() {
     // clear profile mode
     $("#profile-screen").data("mode", "");
 });
+
 $("#profile-cancel").click(function() {
     clearMessage("profile-screen");
     $(this).hide();
@@ -220,6 +274,7 @@ $("#profile-cancel").click(function() {
     $(".selected.profile").toggleClass("selected");
     $("#profile-screen").data("mode", "");
 });
+
 // editing page
 function profileEditMode(profileID) {
     let p;
@@ -248,6 +303,7 @@ function profileEditMode(profileID) {
     $("#all-profiles").hide();
     $("#editing-profiles").show();
 }
+
 // updates classes for characters for css styling
 function updateCharacterOwnership(profileJSON) {
     // change all to default
@@ -261,6 +317,7 @@ function updateCharacterOwnership(profileJSON) {
         $(`#${character}`).toggleClass("ban");
     });
 }
+
 // button functionality 
 $("#edit-profile-save").click(function(){
     let newProfile = {};
@@ -288,6 +345,7 @@ $("#edit-profile-save").click(function(){
     $("#edit-profile-cancel").click();  // using the cancel function to swap the screen back
     console.log(profileList);
 });
+
 $("#edit-profile-cancel").click(function(){
     // change back to main profiles page
     $("#all-profiles").show();
@@ -298,6 +356,7 @@ $("#edit-profile-cancel").click(function(){
     clearMessage("profile-screen");
     $("#profile-screen").data("mode", "");
 });
+
 $("#edit-profile-change-pfp").click(function(){
     if($("#profile-screen").data("mode") == "updating-pfp") {
         $("#profile-screen").data("mode", "");
@@ -309,6 +368,7 @@ $("#edit-profile-change-pfp").click(function(){
         $("#edit-profile-change-pfp").text("save pfp");
     }
 });
+
 function characterToggle(characterElement) {
     // make sure only lumine or aether is selected
     if (characterElement.attr("id") == "aether") {
@@ -342,7 +402,9 @@ function characterToggle(characterElement) {
     }
 }
 
+
 // randomizer page /////////////////////////////////////////////////////////////
+
 
 // update dropdown choices every time user switches to randomizer page
 $(".nb-button").click(function() {
@@ -356,7 +418,7 @@ $(".nb-button").click(function() {
                 }));
         }
         if (profileList == null || profileList == "[]" || profileList.length == 0) {
-            updateMessage("randomize-screen-characters", "you have no profiles! go to \"PROFILES\" to make one first.");
+            updateMessage("randomize-screen", "you have no profiles! go to \"PROFILES\" to make one first.");
             profileList = [];
         } else {
             clearMessage("randomize-screen-characters");
@@ -378,6 +440,79 @@ $(".nb-button").click(function() {
 
     }
 });
+
+// randomize characters
+$("#r-characters").click(function() {
+    // fetch player IDs
+    let players = [];
+    for (let i = 1; i <= 4; ++i) {
+        if ($(`#r-p${i}`).children("option:selected").val() != "null-profile") {
+            players.push($(`#r-p${i}`).children("option:selected").val());
+        }
+    }
+    if (players.length == 0) {
+        updateMessage("randomize-screen", "select at least one player before randomizing.")
+        return;
+    }
+    clearMessage("randomize-screen");
+    // randomize and display players
+    let c; // characters
+    let p; // players
+    if (players.length == 4) {
+        p = [players[0], players[1], players[2], players[3]]
+        // player 1
+        c = randomize(getCharacterPool(players[0]), 1);
+        // player 2-4
+        for (let i = 1; i < 4; ++i) {
+            let t = randomize(getCharacterPool(players[i]).filter(character => !c.includes(character)), 1);
+            c = [...c, ...t];
+        }
+    } else if (players.length == 3) {
+        p = [players[0], players[0], players[1], players[2]]
+        // player 1
+        c = randomize(getCharacterPool(players[0]), 2);
+        // player 2 & 3
+        for (let i = 1; i < 3; ++i) {
+            let t = randomize(getCharacterPool(players[i]).filter(character => !c.includes(character)), 1);
+            c = [...c, ...t];
+        }
+    } else if (players.length == 2) {
+        p = [players[0], players[0], players[1], players[1]]
+        // player 1
+        c = randomize(getCharacterPool(players[0]), 2);
+        // player 2
+        let t = randomize(getCharacterPool(players[1]).filter(character => !c.includes(character)), 2);
+        c = [...c, ...t];
+    } else {
+        p = [players[0], players[0], players[0], players[0]]
+        // player 1
+        c = randomize(getCharacterPool(players[0]), 4);
+    }
+    displayRCharacters(c, p);   // need the async
+});
+
+async function displayRCharacters(characters, players) {
+    $("#pVisuals").show();
+    if (characterDataJSON == null) {
+        characterDataJSON = await fetchCharaterData();
+    }
+    for (let i = 0; i < 4; ++i) {
+        $(`#c${i+1}-cImg`).attr("src", getCard(characters[i]));
+        $(`#c${i+1}-pName`).html(rProfiles[players[i]].name);
+        $(`#c${i+1}-cName`).html(characterDataJSON[characters[i]].name.toUpperCase());
+        // randomize element for traveler
+        if (["aether", "lumine"].includes(characters[i])) {
+            $(`#c${i+1}-element`).attr("src", getElementImg(characterDataJSON[characters[i]].element[Math.floor(Math.random() * characterDataJSON[characters[i]].element.length)]));
+        } else {
+            $(`#c${i+1}-element`).attr("src", getElementImg(characterDataJSON[characters[i]].element));
+        }
+    }
+}
+
+// randomize bosses
+$("#r-bosses").click(function() {
+});
+
 // toggling bans
 $("#toggle-character-bans").click(function() {
     rBans = !rBans;
@@ -388,10 +523,29 @@ $("#toggle-character-bans").click(function() {
     }
 });
 
+$("#randomize-nb button").click(function() {
+    console.log($(this).data("screen"));
+    // change only if it's not the currently selected tab
+    if (!$(this).hasClass("selected")) {
+        $("#randomize-nb .selected").toggleClass("selected");
+        $(this).toggleClass("selected");
+    }
+});
+
+
 // helper functions ////////////////////////////////////////////////////////////
 function getPFP(name) {
     return `../images/pfp/${name}.webp`;
 }
+
+function getCard(name) {
+    return `../images/character/${name}.webp`;
+}
+
+function getElementImg(element) {
+    return `../images/elements/${element}.svg`;
+}
+
 function makeID() {
     let profileCount = JSON.parse(localStorage.getItem(`${lsTag}_profileCount`));
     // hopefully no one makes enough profiles for integer overflow
@@ -399,6 +553,7 @@ function makeID() {
     let profileID = profileCount.toString();
     return profileID;
 }
+
 // create character buttons
 function createCharacterButton(source, id, name, pfp, classes="") {
     let div = $("<div>", {
@@ -413,7 +568,8 @@ function createCharacterButton(source, id, name, pfp, classes="") {
     source.append(div);
    return div;
 }
-// DOES NOT save new profile to local storage
+
+// DOES NOT save new profile to local storage OR update profileList
 function makeProfileButton(profile, id) {
     createCharacterButton($(".character-container"), id, profile.name, getPFP(profile.pfp), "profile")
         .click(function() {
@@ -424,9 +580,34 @@ function makeProfileButton(profile, id) {
             }
         });
 }
+
+function randomize(pool, count) {
+    let selected = [];
+    while (selected.length < count) {
+        let choice = Math.floor(Math.random() * pool.length);
+        if (!selected.includes(pool[choice])) {
+            selected.push(pool[choice]);
+        }
+        // if nothing is in the pool
+        if (pool.length == 0) {
+            selected.push['aether'];
+        }
+    }
+    return selected;
+}
+
+function getCharacterPool(playerID) {
+    let pool = rProfiles[playerID].characters;
+    if (!rBans) {
+        pool = [...pool, ...rProfiles[playerID].bans];
+    }
+    return pool;
+}
+
 function updateMessage(containerID, message) {
     $(`#${containerID} .message`).html(message);
 }
+
 function clearMessage(containerID) {
     $(`#${containerID} .message`).html('');
 }
