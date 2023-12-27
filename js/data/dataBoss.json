@@ -1,102 +1,47 @@
 {
-  "Keys": [
-    {
-      "name": "All",
-      "key": []
-    },
-    {
-      "name": "Weekly", 
-      "key": ["Weekly"]
-    },
-    {
-      "name": "World",
-      "key": ["Mondstadt", "Liyue", "Inazuma", "Sumeru", "Fontaine"]
-    },
-    {
-      "name": "Mondstadt",
-      "key": ["Mondstadt"]
-    },
-    {
-      "name": "Liyue",
-      "key": ["Liyue"]
-    },
-    {
-      "name": "Inazuma",
-      "key": ["Inazuma"]
-    },
-    {
-      "name": "Sumeru",
-      "key": ["Sumeru"]
-    },
-    {
-      "name": "Fontaine",
-      "key": ["Fontaine"]
-    }
+  "Weekly" : [
+    "Andrius", 
+    "Childe", "Azhdaha", 
+    "La Signora", "Mikoto",
+    "Shouki", "Warden",
+    "Narwhal"
   ],
-
-  "Bosses": [
-    {
-      "key": "Weekly",
-      "bosses": [
-        "Andrius", 
-        "Childe", "Azhdaha", 
-        "La Signora", "Mikoto",
-        "Shouki", "Warden",
-        "Narwhal"
-      ]
-    },
-    {
-      "key": "Mondstadt",
-      "bosses": [
-        "Anemo Hypostasis", 
-        "Cryo Hypostasis",
-        "Cryo Regisvine",
-        "Electro Hypostasis",
-        "Oceanid"
-      ]
-    },
-    {
-      "key": "Liyue",
-      "bosses": [
-        "Geo Hypostasis",
-        "Primo Geovishap",
-        "Pyro Regisvine",
-        "Ruin Serpent" 
-      ]
-    },
-    {
-      "key": "Inazuma",
-      "bosses": [
-        "Bathysmal Vishaps",
-        "Golden Wolflord",
-        "Hydro Hypostasis",
-        "Maguu Kenki",
-        "Pyro Hypostasis",
-        "Thunder Manifestation" 
-      ]
-    },
-    {
-      "key": "Sumeru",
-      "bosses": [
-        "Aeonblight Drake",
-        "Algorithm of Semi-Intransient Matrix Of Overseer Network",
-        "Dendro Hypostasis",
-        "Electro Regisvine",
-        "Jadeplume Terrorshroom",
-        "Perpetual Mechanical Array",
-        "Setekh Wenut",
-        "Iniquitous Baptist"
-      ]
-    },
-    {
-      "key": "Fontaine",
-      "bosses": [
-        "Icewind Suite",
-        "Emperor of Fire and Iron",
-        "Hydro Tulpa",
-        "Millennial Pearl Seahorse",
-        "Prototype Cal. Breguet"
-      ]
-    }
+  "Mondstadt" : [
+    "Anemo Hypostasis", 
+    "Cryo Hypostasis",
+    "Cryo Regisvine",
+    "Electro Hypostasis"
+  ],
+  "Liyue" : [
+    "Geo Hypostasis",
+    "Primo Geovishap",
+    "Pyro Regisvine",
+    "Oceanid",
+    "Ruin Serpent" 
+  ],
+  "Inazuma" : [
+    "Bathysmal Vishaps",
+    "Golden Wolflord",
+    "Hydro Hypostasis",
+    "Maguu Kenki",
+    "Pyro Hypostasis",
+    "Perpetual Mechanical Array",
+    "Thunder Manifestation" 
+  ],
+  "Sumeru" : [
+    "Aeonblight Drake",
+    "Algorithm of Semi-Intransient Matrix Of Overseer Network",
+    "Dendro Hypostasis",
+    "Electro Regisvine",
+    "Jadeplume Terrorshroom",
+    "Setekh Wenut",
+    "Iniquitous Baptist"
+  ],
+  "Fontaine" : [
+    "Icewind Suite",
+    "Emperor of Fire and Iron",
+    "Hydro Tulpa",
+    "Millennial Pearl Seahorse",
+    "Prototype Cal Breguet"
   ]
 }

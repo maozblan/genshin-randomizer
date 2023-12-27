@@ -43,9 +43,9 @@
     <button data-screen="characters" class="selected">CHARACTERS</button>
     <button data-screen="bosses">BOSSES</button>
   </div>
-  <div id="randomize-data" class="scroll">
+  <div id="randomize-data">
     <p class="message"></p>
-    <div class="row-div" id="randomize-screen-characters">
+    <div class="subscreen scroll row-div" id="randomize-screen-characters">
       <div id="r-cSettingsBar" class="randomize-settings col-div">
         <button id="r-characters">randomize characters</button>
         <div id="r-cSettingsBar-main">
@@ -60,11 +60,24 @@
         <!-- divs appended in js -->
       </div>
     </div>
-    <div class="row-div" id="randomize-screen-bosses">
+    <div class="subscreen scroll row-div" id="randomize-screen-bosses">
       <div id="r-bSettingsBar" class="randomize-settings col-div">
-        <!-- <button id="r-bosses">randomize bosses</button> -->
+        <button id="r-bosses">randomize bosses</button>
         <div id="r-bSettingsBar-main">
+          <div class="col-div button-container" id="b-count-container">
+            <p>BOSS COUNT</p>
+            <input id="b-count" type="number" min="1" step="1" class="input" placeholder="1">
+          </div>
+          <div id="r-bRegions" class="button-container col-div">
+            <p>REGIONS</p>
+            <!-- buttons appended in js -->
+          </div>
         </div>
+      </div>
+      <div id="bVisuals" class="row-div">
+        <button id="b-prev"><</button>
+        <div id="b-imgs"></div>
+        <button id="b-next">></button>
       </div>
     </div>
   </div>

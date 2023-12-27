@@ -96,6 +96,43 @@
     width: 40px;
 }
 
+#r-bRegions button,#r-bosses,#r-characters {
+    /* stretch buttons to the size of the container */
+    width: auto;
+}
+
+#r-bRegions,#b-count-container {
+    text-align: center;
+}
+
+#bVisuals {
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    overflow-y: hidden;
+}
+
+#b-imgs {
+    width: 600px;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#b-imgs img {
+    width: 600px;
+}
+
+#b-imgs img:not(.current-boss) {
+    display: none;
+}
+
+#b-prev,#b-next {
+    height: 100px;
+}
+
 /* profile screen */
 
 .card img {
