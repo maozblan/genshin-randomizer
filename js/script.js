@@ -11,6 +11,8 @@ let rProfiles = {};
 let rBans = true;
 // so we don't have to fetch it every time for randomization
 let characterDataJSON = null;
+let bossDataJSON = null;
+let bosses;
 
 
 // initialize page /////////////////////////////////////////////////////////////
@@ -116,7 +118,7 @@ async function setupCharacterButtons() {
         });
 }
 
-function setupRandomizerDivs() {
+async function setupRandomizerDivs() {
     /* player dropdowns 
     <div id="r-p#Div" class="row-div">
         <label for="r-p#">P# :</label>
@@ -153,8 +155,24 @@ function setupRandomizerDivs() {
                 .append($(`<img id="c${i}-cImg">`))
         );
     }
-
+    // region buttons
+    bossDataJSON = await fetchBossData();
+    Object.keys(bossDataJSON).forEach(region => {
+        $("#r-bRegions").append($("<button>", {
+            text : region,
+            id : region
+        }).click(function() {
+            $(this).toggleClass("selected");
+        }));
+    });
+    // sourceless images display weird
     $("#pVisuals").hide();
+    $("#bVisuals").hide();
+    // boss slider buttons
+    $("#b-prev").click(prevBoss);
+    $("#b-next").click(nextBoss);
+    // hide boss randomizer first
+    $("#randomize-screen-bosses").hide();
 }
 
 async function setupEditLog() {
@@ -488,7 +506,7 @@ $("#r-characters").click(function() {
         // player 1
         c = randomize(getCharacterPool(players[0]), 4);
     }
-    displayRCharacters(c, p);   // need the async
+    displayRCharacters(c, p);   // need the async in case characterData has not been fetched
 });
 
 async function displayRCharacters(characters, players) {
@@ -509,10 +527,6 @@ async function displayRCharacters(characters, players) {
     }
 }
 
-// randomize bosses
-$("#r-bosses").click(function() {
-});
-
 // toggling bans
 $("#toggle-character-bans").click(function() {
     rBans = !rBans;
@@ -523,12 +537,73 @@ $("#toggle-character-bans").click(function() {
     }
 });
 
+
+
+// randomize bosses
+$("#r-bosses").click(function() {
+    // get boss pool
+    let pool = [];
+    $("#r-bRegions .selected").each(function() {
+        pool = [...pool, ...bossDataJSON[$(this).attr("id")]];
+    });
+    if (pool.length == 0) {
+        updateMessage("randomize-screen", "please select the regions you want to randomize bosses from");
+        return;
+    }
+    clearMessage("randomize-screen");
+    // randomize bosses
+    let count = $("#b-count").val();
+    if (count == "") {
+        count = 1;
+    } else {
+        count = parseInt(count, 10);
+    }
+    if (count > pool.length) {
+        count = pool.length;
+    }
+    bosses = [];  // clear old data
+    bosses = randomize(pool, count);
+    // display bosses
+    $("#b-imgs").empty();
+    bosses.forEach(boss => {
+        $("#b-imgs").append($("<img>", {
+            id : boss.replaceAll(" ", "-"),
+            src : getBossImg(boss)
+        }));
+    });
+    $(`#${bosses[0].replaceAll(" ", "-")}`).toggleClass("current-boss");
+    $("#bVisuals").show();
+});
+
+// helper functions for the boss slider
+function prevBoss() {
+    let cBoss = $("#b-imgs .current-boss").attr("id").replaceAll("-", " ");
+    let index = bosses.indexOf(cBoss);
+    if (index != 0) {
+        $("#b-imgs .current-boss").toggleClass("current-boss");
+        $(`#${bosses[index-1].replaceAll(" ", "-")}`).toggleClass("current-boss");
+    }
+}
+
+function nextBoss() {
+    let cBoss = $("#b-imgs .current-boss").attr("id").replaceAll("-", " ");
+    let index = bosses.indexOf(cBoss);
+    if (index != bosses.length-1) {
+        $("#b-imgs .current-boss").toggleClass("current-boss");
+        $(`#${bosses[index+1].replaceAll(" ", "-")}`).toggleClass("current-boss");
+    }
+}
+
+// swapping between character and boss randomizer
 $("#randomize-nb button").click(function() {
-    console.log($(this).data("screen"));
     // change only if it's not the currently selected tab
     if (!$(this).hasClass("selected")) {
         $("#randomize-nb .selected").toggleClass("selected");
         $(this).toggleClass("selected");
+        $(`#randomize-screen .subscreen`).hide();
+        $(`#randomize-screen-${$(this).data("screen")}`).show();
+        // clear extraneous messages
+        clearMessage("randomize-screen");
     }
 });
 
@@ -544,6 +619,10 @@ function getCard(name) {
 
 function getElementImg(element) {
     return `../images/elements/${element}.svg`;
+}
+
+function getBossImg(boss) {
+    return `../images/bosses/${boss.replaceAll(" ", "_")}.webp`;
 }
 
 function makeID() {
@@ -581,7 +660,7 @@ function makeProfileButton(profile, id) {
         });
 }
 
-function randomize(pool, count) {
+function randomize(pool, count, filler="aether") {
     let selected = [];
     while (selected.length < count) {
         let choice = Math.floor(Math.random() * pool.length);
@@ -590,7 +669,7 @@ function randomize(pool, count) {
         }
         // if nothing is in the pool
         if (pool.length == 0) {
-            selected.push['aether'];
+            selected.push[filler];
         }
     }
     return selected;
