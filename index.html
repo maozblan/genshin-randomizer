@@ -45,25 +45,50 @@
   </div>
   <div id="randomize-data">
     <p class="message"></p>
+    <!-- randomizer characters screen -->
     <div class="subscreen scroll row-div" id="randomize-screen-characters">
       <div id="r-cSettingsBar" class="randomize-settings col-div">
-        <button id="r-characters">randomize characters</button>
-        <div id="r-cSettingsBar-main">
+        <div id="r-cSettingsBar-main" class="col-div">
+          <button id="r-characters">randomize characters</button>
           <div class="col-div button-container" id="randomize-profiles">
             <p>PLAYERS</p>
             <!-- dropdowns appended in js -->
           </div>
           <button id="toggle-character-bans">Bans ON</button>
         </div>
+        <div id="r-cSettingsBar-more" class="button-container col-div">
+          <p class="tip">bright = must have, grey = banned</p>
+          <p>ELEMENT(S)</p>
+          <div id="r-cMandElements" class="button-container row-div">
+            <!-- buttons appended in js -->
+          </div>
+          <!-- <p>WEAPONS(S)</p>
+          <div id="r-cMandWeapons" class="button-container row-div"> -->
+            <!-- buttons appended in js -->
+          <!-- </div> -->
+          <div class="col-div button-container">
+            <p>OR MONO TEAM</p>
+            <div>
+              <div class="button-container row-div" id="r-cMonoElement">
+                <!-- buttons appended in js -->
+              </div>
+              <!-- <div class="button-container row-div" id="r-cMonoWeapon"> -->
+                <!-- buttons appended in js -->
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-div"><button id="r-cMoreSettings">more settings</button></div>
       </div>
       <div class="row-div" id="pVisuals">
         <!-- divs appended in js -->
       </div>
     </div>
+    <!-- randomizer bosses screen -->
     <div class="subscreen scroll row-div" id="randomize-screen-bosses">
       <div id="r-bSettingsBar" class="randomize-settings col-div">
-        <button id="r-bosses">randomize bosses</button>
-        <div id="r-bSettingsBar-main">
+        <div id="r-bSettingsBar-main" class="col-div">
+          <button id="r-bosses">randomize bosses</button>
           <div class="col-div button-container" id="b-count-container">
             <p>BOSS COUNT</p>
             <input id="b-count" type="number" min="1" step="1" class="input" placeholder="1">

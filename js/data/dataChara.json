@@ -2,376 +2,451 @@
   "aether" : {
     "name": "Aether",
     "element": ["anemo", "geo", "electro", "dendro", "hydro"],
+    "weapon": "sword",
     "star": 5
   },
   "lumine" : {
     "name": "Lumine",
     "element": ["anemo", "geo", "electro", "dendro", "hydro"],
+    "weapon": "sword",
     "star": 5
   },
   "albedo" : {
     "name": "Albedo",
     "element": "geo",
+    "weapon": "sword",
     "star": 5
   },
   "alhaitham": {
     "name": "Alhaitham",
     "element": "dendro",
+    "weapon": "sword",
     "star": 5
   },
   "aloy" : {
     "name": "Aloy",
     "element": "cryo",
+    "weapon": "bow",
     "star": 5
   },
   "amber" : {
     "name": "Amber",
     "element": "pyro",
+    "weapon": "bow",
     "star": 4
   },
   "ayaka" : {
     "name": "Ayaka",
     "element": "cryo",
+    "weapon": "sword",
     "star": 5
   },
   "ayato" : {
     "name": "Ayato",
     "element": "hydro",
+    "weapon": "sword",
     "star": 5
   },
   "barbara" : {
     "name": "Barbara",
     "element": "hydro",
+    "weapon": "catalyst",
     "star": 4
   },
   "beidou" : {
     "name": "Beidou",
     "element": "electro",
+    "weapon": "claymore",
     "star": 4
   },
   "bennett" : {
     "name": "Bennett",
     "element": "pyro",
+    "weapon": "sword",
     "star": 4
   },
   "candace" : {
     "name": "Candace",
     "element": "hydro",
+    "weapon": "polearm",
     "star": 4
   },
   "charlotte" : {
     "name": "Charlotte",
     "element": "cryo",
+    "weapon": "catalyst",
     "star": 4
   },
   "chongyun" : {
     "name": "Chongyun",
     "element": "cryo",
+    "weapon": "claymore",
     "star": 4
   },
   "collei" : {
     "name": "Collei",
     "element": "dendro",
+    "weapon": "bow",
     "star": 4
   },
   "cyno" : {
     "name": "Cyno",
     "element": "electro",
+    "weapon": "polearm",
     "star": 5
   },
   "dehya" : {
     "name": "Dehya",
     "element": "pyro",
+    "weapon": "claymore",
     "star": 5
   },
   "diluc" : {
     "name": "Diluc",
     "element": "pyro",
+    "weapon": "claymore",
     "star": 5
   },
   "diona" : {
     "name": "Diona",
     "element": "cryo",
+    "weapon": "bow",
     "star": 4
   },
   "dori" : {
     "name": "Dori",
     "element": "electro",
+    "weapon": "claymore",
     "star": 4
   },
   "eula" : {
     "name": "Eula",
     "element": "cryo",
+    "weapon": "claymore",
     "star": 5
   },
   "faruzan" : {
     "name": "Faruzan",
     "element": "anemo",
+    "weapon": "bow",
     "star": 4
   },
   "fischl" : {
     "name": "Fischl",
     "element": "electro",
+    "weapon": "bow",
     "star": 4
   },
   "freminet": {
     "name": "Freminet",
     "element": "cryo",
+    "weapon": "claymore",
     "star": 4
   },
   "furina" : {
     "name": "Furina",
     "element": "hydro",
+    "weapon": "sword",
     "star": 5
   },
   "ganyu" : {
     "name": "Ganyu",
     "element": "cryo",
+    "weapon": "bow",
     "star": 5
   },
   "gorou" : {
     "name": "Gorou",
     "element": "geo",
+    "weapon": "bow",
     "star": 4
   },
   "heizou" : {
     "name": "Heizou",
     "element": "anemo",
+    "weapon": "catalyst",
     "star": 4
   },
   "hutao" : {
     "name": "Hu Tao",
     "element": "pyro",
+    "weapon": "polearm",
     "star": 5
   },
   "itto" : {
     "name": "Itto",
     "element": "geo",
+    "weapon": "claymore",
     "star": 5
   },
   "jean" : {
     "name": "Jean",
     "element": "anemo",
+    "weapon": "sword",
     "star": 5
   },
   "kaeya" : {
     "name": "Kaeya",
     "element": "cryo",
+    "weapon": "sword",
     "star": 4
   },
   "kazuha" : {
     "name": "Kazuha",
     "element": "anemo",
+    "weapon": "sword",
     "star": 5
   },
   "keqing" : {
     "name": "Keqing",
     "element": "electro",
+    "weapon": "sword",
     "star": 5
   },
   "kirara" : { 
     "name": "Kirara",
     "element": "dendro",
+    "weapon": "sword",
     "star": 4
   },
   "klee" : {
     "name": "Klee",
     "element": "pyro",
+    "weapon": "catalyst",
     "star": 5
   },
   "kokomi": {
     "name": "Kokomi",
     "element": "hydro",
+    "weapon": "catalyst",
     "star": 5
   },
   "kuki" : {
     "name": "Kuki Shinobu",
     "element": "electro",
+    "weapon": "sword",
     "star": 4
   },
   "layla" : {
     "name": "Layla",
     "element": "cryo",
+    "weapon": "sword",
     "star": 4
   },
   "lisa" : {
     "name": "Lisa",
     "element": "electro",
+    "weapon": "catalyst",
     "star": 4
   },
   "lyney" : {
     "name": "Lyney",
     "element": "pyro",
+    "weapon": "bow",
     "star": 5
   },
   "lynette" : {
     "name": "Lynette",
     "element": "anemo",
+    "weapon": "sword",
     "star": 4
   },
   "mika" : {
     "name": "Mika",
     "element": "cryo",
+    "weapon": "sword",
     "star": 4
   },
   "mona" : {
     "name": "Mona",
     "element": "hydro",
+    "weapon": "catalyst",
     "star": 5
   },
   "nahida" : {
     "name": "Nahida",
     "element": "dendro",
+    "weapon": "catalyst",
     "star": 5
   },
   "navia" : {
     "name": "Navia",
     "element": "geo",
+    "weapon": "claymore",
     "star": 5
   },
   "neuvillette": {
     "name": "Neuvillette",
     "element": "hydro",
+    "weapon": "catalyst",
     "star": 5
   },
   "nilou" : {
     "name": "Nilou",
     "element": "hydro",
+    "weapon": "sword",
     "star": 5
   },
   "ningguang" : {
     "name": "Ningguang",
     "element": "geo",
+    "weapon": "catalyst",
     "star": 4
   },
   "noelle" : {
     "name": "Noelle",
     "element": "geo",
+    "weapon": "claymore",
     "star": 4
   },
   "qiqi" : {
     "name": "Qiqi",
     "element": "cryo",
+    "weapon": "sword",
     "star": 5
   },
   "raiden" : {
     "name": "Raiden Shogun",
     "element": "electro",
+    "weapon": "polearm",
     "star": 5
   },
   "razor" : {
     "name": "Razor",
     "element": "electro",
+    "weapon": "claymore",
     "star": 4
   },
   "rosaria" : {
     "name": "Rosaria",
     "element": "cryo",
+    "weapon": "polearm",
     "star": 4
   },
   "sara" : {
     "name": "Kujou Sara",
     "element": "electro",
+    "weapon": "bow",
     "star": 4
   }, 
   "sayu" : {
     "name": "Sayu",
     "element": "anemo",
+    "weapon": "claymore",
     "star": 4
   },
   "shenhe" : {
     "name": "Shenhe",
     "element": "cryo",
+    "weapon": "polearm",
     "star": 5
   },
   "sucrose" : {
     "name": "Sucrose",
     "element": "anemo",
+    "weapon": "catalyst",
     "star": 4
   },
   "tart" : {
     "name": "Tartaglia",
     "element": "hydro",
+    "weapon": "bow",
     "star": 5
   },
   "thoma" : {
     "name": "Thoma",
     "element": "pyro",
+    "weapon": "polearm",
     "star": 4
   },
   "tighnari" : {
     "name": "Tighnari",
     "element": "dendro",
+    "weapon": "bow",
     "star": 5
   },
   "venti" : {
     "name": "Venti",
     "element": "anemo",
+    "weapon": "bow",
     "star": 5
   },
   "scara" : {
     "name": "Wanderer",
     "element": "anemo",
+    "weapon": "catalyst",
     "star": 5
   },
   "wriothesley" : {
     "name": "Wriothesley",
     "element": "cryo",
+    "weapon": "catalyst",
     "star": 5
   },
   "xiangling" : {
     "name": "Xiangling",
     "element": "pyro",
+    "weapon": "polearm",
     "star": 4
   },
   "xiao" : {
     "name": "Xiao",
     "element": "anemo",
+    "weapon": "polearm",
     "star": 5
   },
   "xingqiu" : {
     "name": "Xingqiu",
     "element": "hydro",
+    "weapon": "sword",
     "star": 4
   },
   "xinyan" : {
     "name": "Xinyan",
     "element": "pyro",
+    "weapon": "claymore",
     "star": 4
   },
   "yae" : {
     "name": "Yae Miko",
     "element": "electro",
+    "weapon": "catalyst",
     "star": 5
   },
   "yanfei" : {
     "name": "Yanfei",
     "element": "pyro",
+    "weapon": "catalyst",
     "star": 4
   },
   "yaoyao" : {
     "name": "Yaoyao",
     "element": "dendro",
+    "weapon": "polearm",
     "star": 4
   },
   "yelan" : {
     "name": "Yelan",
     "element": "hydro",
+    "weapon": "bow",
     "star": 5
   },
   "yoimiya" : {
     "name": "Yoimiya",
     "element": "pyro",
+    "weapon": "bow",
     "star": 4
   },
   "yunjin" : {
     "name": "Yun Jin",
     "element": "geo",
+    "weapon": "polearm",
     "star": 4
   },
   "zhongli" : {
     "name": "Zhongli",
     "element": "geo",
+    "weapon": "polearm",
     "star": 5
   }
 }

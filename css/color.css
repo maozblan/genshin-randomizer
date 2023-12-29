@@ -12,6 +12,12 @@ p,h1,h2,h3,a,label {
     color: var(--text);
 }
 
+.tip {
+    font-size: 12px;
+    margin: 10px 0;
+    color: var(--translucent-text);
+}
+
 /* nav bar */
 #nav-bar {
     background-color: var(--dark-background);
