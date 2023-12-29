@@ -35,14 +35,37 @@
 }
 
 .randomize-settings {
-    width: 15%;
-    min-width: 175px;
+    width: 300px;
+    align-items: center;
+}
+
+.randomize-settings p {
+    align-self: center;
+}
+
+.randomize-settings div {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.randomize-settings button,#b-count {
+    /* stretch buttons to the size of the container */
+    width: auto;
+}
+
+.randomize-settings .button-container {
+    justify-content: center;
+}
+
+.weapon-button.have > img {
+    filter: sepia(500) saturate(5);
 }
 
 #randomize-profiles > div {
     display: flex;
     align-items: center;
-    margin: 5px 10px;
+    justify-content: center;
+    margin: 5px 0;
 }
 
 #randomize-profiles label {
@@ -58,6 +81,7 @@
     /* each character div */
     margin: 10px;
     margin-right: 20px;
+    height: fit-content;
     display: flex;
     flex-direction: row-reverse;
 }
@@ -65,6 +89,17 @@
 #pVisuals > div > img {
     /* player image */
     width: 200px;
+    /* height: 640px; */
+}
+
+.element-button img {
+    width: 30px;
+}
+
+.element-button {
+    padding: 5px;
+    height: 41px;
+    border: 1px solid var(--transparent);
 }
 
 .cDataDiv {
@@ -94,15 +129,6 @@
 .cDataDiv img {
     /* character element */
     width: 40px;
-}
-
-#r-bRegions button,#r-bosses,#r-characters {
-    /* stretch buttons to the size of the container */
-    width: auto;
-}
-
-#r-bRegions,#b-count-container {
-    text-align: center;
 }
 
 #bVisuals {
@@ -139,12 +165,12 @@
     width: 150px;
 }
 
-.character img {
+.character img,.weapon-button img,.element-button img {
     /* default is don't have */
     filter: opacity(30%);
 }
 
-.have img {
+.have img,.weapon-button.ban img {
     filter: opacity(100%);
 }
 

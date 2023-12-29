@@ -104,7 +104,7 @@ button,.button {
     margin: 10px 0;
 }
 
-.button-container p {
+.button-container p:not(.tip) {
     display: inline;
     margin: 0;
 }
@@ -126,8 +126,7 @@ button,.button {
 select {
     font-family: "genshinFont";
     border-radius: 10px;
-    margin-right: 7px;
-    min-width: 100px;
+    width: 230px;
     height: 40px;
 }
 

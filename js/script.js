@@ -1,3 +1,18 @@
+// local storage usage //////////////////////////////////////////////////////////
+/*
+
+genshinRandomizer_profileList -> list of profile IDs (list of ints)
+genshinRandomizer_profileCount -> next available profile ID (one int)
+genshinRandomizer_<profileID> -> {
+    "name" : name,
+    "characters" : list of characters owned (list of strings),
+    "bans" : list of characters banned (list of strings)
+    // elements cooresponding to keys in dataChara.json
+}
+
+*/
+
+
 // some global variables ////////////////////////////////////////////////////////
 // tag for local storage so things don't overwrite eachother
 const lsTag = "genshinRandomizer";
@@ -52,6 +67,7 @@ $(document).ready(function() {
     setupProfiles();
     // set up randomzier screen
     setupRandomizerDivs();
+    setupElementSettings();
     // hide the loading page
     setTimeout(() => {
         $("#loading-page").fadeOut(250);
@@ -99,11 +115,18 @@ async function setupCharacterButtons() {
     const json = await fetchCharaterData();
     let container = $(".character-container");
     Object.keys(json).forEach(character => {
+        let element;
+        if (typeof json[character].element === 'string' || json[character].element instanceof String) {
+            element = json[character].element;
+        } else {
+            element = json[character].element.join(" ");
+        }
         createCharacterButton(container,
             character,              // id
             json[character].name,   // name
             getPFP(character),
-            `${json[character].element} ${json[character].star}star character`);
+            // adding in elements and stars for randomization later
+            `${element} ${json[character].star}star character`);
     });
     $(".character-container .character").hide()
         .click(function() {
@@ -173,6 +196,46 @@ async function setupRandomizerDivs() {
     $("#b-next").click(nextBoss);
     // hide boss randomizer first
     $("#randomize-screen-bosses").hide();
+}
+
+function setupElementSettings() {
+    // extra parts in character toggle doesn't bother :>
+    ['anemo', 'geo', 'electro', 'dendro', 'hydro', 'pyro', 'cryo'].forEach(element => {
+        // mandatory element
+        $("#r-cMandElements").append($("<button>", {
+            id : element,
+            class : "element-button"
+        }).append($("<img>", {
+            src : getElementImg(element)
+        })).click(function() {
+            // check if this is the 5th have
+            if (!$(this).hasClass("have") && !$(this).hasClass("ban")
+                && $("#r-cMandElements .element-button.have").length == 4) {
+                $("#r-cMandElements .element-button.have:first").toggleClass("have");
+            }
+            characterToggle($(this));
+            // clear mono-element
+            $("#r-cMonoElement .element-button.have").toggleClass("have");
+        }));
+        // mono element
+        $("#r-cMonoElement").append($("<button>", {
+            id : element,
+            class : "element-button"
+        }).append($("<img>", {
+            src : getElementImg(element)
+        })).click(function() {
+            // clear other mono-element
+            if ($(this).hasClass("have")) {
+                $("#r-cMonoElement .element-button.have").toggleClass("have");
+            } else {
+                $("#r-cMonoElement .element-button.have").toggleClass("have");
+                $(this).toggleClass("have");
+            }
+            // clear non-mono weapon selection
+            $("#r-cMandElements .element-button.have").toggleClass("have");
+            $("#r-cMandElements .element-button.ban").toggleClass("ban");
+        }));
+    });
 }
 
 async function setupEditLog() {
@@ -423,7 +486,6 @@ function characterToggle(characterElement) {
 
 // randomizer page /////////////////////////////////////////////////////////////
 
-
 // update dropdown choices every time user switches to randomizer page
 $(".nb-button").click(function() {
     if ($(this).data("screen") == "randomize") {
@@ -460,7 +522,11 @@ $(".nb-button").click(function() {
 });
 
 // randomize characters
-$("#r-characters").click(function() {
+$("#r-characters").click(async function() {
+    // get data
+    if (characterDataJSON == null) {
+        characterDataJSON = await fetchCharaterData();
+    }
     // fetch player IDs
     let players = [];
     for (let i = 1; i <= 4; ++i) {
@@ -473,54 +539,78 @@ $("#r-characters").click(function() {
         return;
     }
     clearMessage("randomize-screen");
-    // randomize and display players
-    let c; // characters
-    let p; // players
+    // get players
+    let pN; // player number, helper variable
     if (players.length == 4) {
-        p = [players[0], players[1], players[2], players[3]]
-        // player 1
-        c = randomize(getCharacterPool(players[0]), 1);
-        // player 2-4
-        for (let i = 1; i < 4; ++i) {
-            let t = randomize(getCharacterPool(players[i]).filter(character => !c.includes(character)), 1);
-            c = [...c, ...t];
-        }
+        pN = [0, 1, 2, 3];
     } else if (players.length == 3) {
-        p = [players[0], players[0], players[1], players[2]]
-        // player 1
-        c = randomize(getCharacterPool(players[0]), 2);
-        // player 2 & 3
-        for (let i = 1; i < 3; ++i) {
-            let t = randomize(getCharacterPool(players[i]).filter(character => !c.includes(character)), 1);
-            c = [...c, ...t];
-        }
+        pN = [0, 0, 1, 2];
     } else if (players.length == 2) {
-        p = [players[0], players[0], players[1], players[1]]
-        // player 1
-        c = randomize(getCharacterPool(players[0]), 2);
-        // player 2
-        let t = randomize(getCharacterPool(players[1]).filter(character => !c.includes(character)), 2);
-        c = [...c, ...t];
+        pN = [0, 0, 1, 1];
     } else {
-        p = [players[0], players[0], players[0], players[0]]
-        // player 1
-        c = randomize(getCharacterPool(players[0]), 4);
+        pN = [0, 0, 0, 0];
     }
-    displayRCharacters(c, p);   // need the async in case characterData has not been fetched
+    // list of playerIDs
+    let p = [players[pN[0]], players[pN[1]], players[pN[2]], players[pN[3]]];
+    // fetch limitations
+    let mandE = [];
+    let banE = [];
+    // check mono first
+    if ($("#r-cMonoElement .element-button.have").length == 0) {
+        $("#r-cMandElements .element-button.have").each(function() {
+            mandE.push($(this).attr("id"));
+        });
+        while (mandE.length < 4) {
+            mandE.push("");
+        }
+        mandE = shuffle(mandE);
+        // get bans
+        $("#r-cMandElements .element-button.ban").each(function() {
+            banE.push($(this).attr("id"));
+        });
+    } else {
+        // fill up the element with the mono element
+        for (let i = 0; i < 4; ++i) {
+            mandE.push($("#r-cMonoElement .element-button.have").attr("id"));
+        }
+    }
+    // get characters
+    let c = ["", "", "", ""];
+    // go once to randomize the mandatory elements first
+    for (let i = 0; i < 4; ++i) {
+        if (mandE[i] != "") {
+            let pool = getCharacterPool(p[i], e=mandE[i], be=banE);
+            if (pool.length == 0 || (pool.length == 1 && ['aether', 'lumine'].includes(pool[0]))) {
+                updateMessage("randomize-screen", "please have a character of every element for every profile selected that is not traveler.\nif that is true, these settings may not be possible! :(");
+                return;
+            }
+            [c[i]] = [...randomize(pool.filter(character => !c.includes(character)), 1)];
+        }
+    }
+    // go a second time to fill in missing spots
+    for (let i = 0; i < 4; ++i) {
+        if (mandE[i] == "") {
+            let pool = getCharacterPool(p[i], be=banE);
+            [c[i]] = [...randomize(pool.filter(character => !c.includes(character)), 1)];
+        }
+    }
+    displayRCharacters(c, p, mandE=mandE);
 });
 
-async function displayRCharacters(characters, players) {
+function displayRCharacters(characters, players, mandE="") {
     $("#pVisuals").show();
-    if (characterDataJSON == null) {
-        characterDataJSON = await fetchCharaterData();
-    }
+    console.log(characters, mandE);
     for (let i = 0; i < 4; ++i) {
         $(`#c${i+1}-cImg`).attr("src", getCard(characters[i]));
         $(`#c${i+1}-pName`).html(rProfiles[players[i]].name);
         $(`#c${i+1}-cName`).html(characterDataJSON[characters[i]].name.toUpperCase());
         // randomize element for traveler
         if (["aether", "lumine"].includes(characters[i])) {
-            $(`#c${i+1}-element`).attr("src", getElementImg(characterDataJSON[characters[i]].element[Math.floor(Math.random() * characterDataJSON[characters[i]].element.length)]));
+            if (mandE[i] != "") {
+                $(`#c${i+1}-element`).attr("src", getElementImg(mandE[i]));
+            } else {
+                $(`#c${i+1}-element`).attr("src", getElementImg(characterDataJSON[characters[i]].element[Math.floor(Math.random() * characterDataJSON[characters[i]].element.length)]));
+            }
         } else {
             $(`#c${i+1}-element`).attr("src", getElementImg(characterDataJSON[characters[i]].element));
         }
@@ -536,8 +626,6 @@ $("#toggle-character-bans").click(function() {
         $(this).html("Bans OFF");
     }
 });
-
-
 
 // randomize bosses
 $("#r-bosses").click(function() {
@@ -621,6 +709,10 @@ function getElementImg(element) {
     return `../images/elements/${element}.svg`;
 }
 
+function getWeaponImg(weapon) {
+    return `../images/weapons/${weapon}.webp`;
+}
+
 function getBossImg(boss) {
     return `../images/bosses/${boss.replaceAll(" ", "_")}.webp`;
 }
@@ -675,11 +767,24 @@ function randomize(pool, count, filler="aether") {
     return selected;
 }
 
-function getCharacterPool(playerID) {
-    let pool = rProfiles[playerID].characters;
+// playerID, mandatory element, banned element(s)
+function getCharacterPool(playerID, e="", be=[]) {
+    updateCharacterOwnership(rProfiles[playerID]);
+    let selectors = "";
     if (!rBans) {
-        pool = [...pool, ...rProfiles[playerID].bans];
+        selectors += ".ban";
     }
+    be = be.filter(i => i != "");
+    if (e.length != 0) {
+        selectors += `.${e}`;
+    }
+    if (be.length != 0) {
+        selectors += `:not(.${be.join('.')})`;
+    }
+    let pool = [];
+    $(`.character-container .character.have${selectors}`).each(function() {
+        pool.push($(this).attr("id"));
+    });
     return pool;
 }
 
@@ -689,4 +794,12 @@ function updateMessage(containerID, message) {
 
 function clearMessage(containerID) {
     $(`#${containerID} .message`).html('');
+}
+
+function shuffle(array) {
+    for (let i = 0; i < array.length; ++i) {
+        let rand = Math.floor(Math.random() * (array.length - i) + i);
+        [array[i], array[rand]] = [array[rand], array[i]];
+    }
+    return array;
 }
