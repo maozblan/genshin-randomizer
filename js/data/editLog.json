@@ -9,10 +9,14 @@
     ],
     "1.0.2" : [
         "2023.11.28",
-        "Added characters: Freminet, Neuvillette, Furina, Charlotte, Wriothesley. Added Fontaine bosses."
+        "Added characters: Freminet, Neuvillette, Furina, Charlotte, Wriothesley",
+        "Added Fontaine bosses."
     ], 
-    "1.1.0" : [
-        "",
-        "Redid the whole website with jquery and fixed up janky page refreshing when hopping between subpages. Also reworked the UI to be easier to read. Added characters: Navia"
+    "2.0.0" : [
+        "2024.01.03",
+        "Patched bugs: Boss and character rolls now save per session even if you navigate to another part of the website. Player selectors must be done in order, for example user can no longer select players for P1 and P3.",
+        "Added features: Swapping between between bosses and character randomizer screen to maximize screen size, element restrictions on character randomization",
+        "Added characters: Navia",
+        "Other changes: Fixed up the janky page swapping. Reworked the UI to be more like a website and darkned the background to make it easier to read. Moved randomization settings to a settings sidebar"
     ]
 }

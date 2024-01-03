@@ -167,6 +167,11 @@ async function setupRandomizerDivs() {
                 .append(`<label for="r-p${i}">P${i} :`)
                 .append(`<select id="r-p${i}">`)
         );
+        // update options whenever <select> is changed
+        $(`#r-p${i}`).change(function() {
+            updateProfileOptions();
+            // save options to session storage
+        });
         // visuals
         let dataDiv = $(`<div id="c${i}-dataDiv" class="cDataDiv col-div">`)
             .append(`<img id="c${i}-element">`)
@@ -242,8 +247,10 @@ async function setupEditLog() {
     const json = await fetchEditLog();
     let container = $("#edit-log");
     Object.keys(json).forEach(log => {
-        container.prepend(`<p>${json[log][1]}`);
-        container.prepend(`<p>Version ${log} - ${json[log][0]}`);
+        for (let i = json[log].length-1; i >= 1; --i) {
+            container.prepend(`<p>${json[log][i]}`);
+        }
+        container.prepend(`<h2>Version ${log} - ${json[log][0]}`);
     });
 }
 setupEditLog();
@@ -494,7 +501,8 @@ $(".nb-button").click(function() {
             $(`#r-p${i}`).empty()   // clear old options
                 .append($("<option>", {
                     value : "null-profile",
-                    text : "--"
+                    text : "--",
+                    class : "null-profile profile-option"
                 }));
         }
         if (profileList == null || profileList == "[]" || profileList.length == 0) {
@@ -512,14 +520,54 @@ $(".nb-button").click(function() {
                 for (let i = 1; i <= 4; ++i) {
                     $(`#r-p${i}`).append($("<option>", {
                         value : id,
-                        text : profile.name
+                        text : profile.name,
+                        class : `${id} profile-option`
                     }));
                 }
             });
         }
-
+        updateProfileOptions();
     }
 });
+
+// get list of playerIDs from dropdowns
+function fetchProfileChoices() {
+    let players = [];
+    for (let i = 1; i <= 4; ++i) {
+        if ($(`#r-p${i}`).children("option:selected").val() != "null-profile") {
+            players.push($(`#r-p${i}`).children("option:selected").val());
+        }
+    }
+    return players;
+}
+
+// update dropdown style and usability
+function updateProfileOptions() {
+    let players = fetchProfileChoices();
+    for (let i = 1; i <= 4; ++i) {
+        // allow "--" choice in ONLY the last profile
+        // hide all null profiles
+        if (!$(`#r-p${i} .null-profile`).hasClass("hidden")) {
+            $(`#r-p${i} .null-profile`).toggleClass("hidden");
+        }
+        // show the last one
+        if (players.length == i) {
+            $(`#r-p${i} .null-profile`).toggleClass("hidden");
+        }
+        // enable all profiles
+        if ($(`#r-p${i}Div`).hasClass("disabled")) {
+            $(`#r-p${i}Div`).toggleClass("disabled");
+        }
+        $(`#r-p${i}`).attr("disabled", false);
+    }
+    // disable all excess selectors
+    for (let i = players.length+2; i <= 4; ++i) {
+        if (!$(`#r-p${i}Div`).hasClass("disabled")) {
+            $(`#r-p${i}Div`).toggleClass("disabled");
+        }
+        $(`#r-p${i}`).attr("disabled", true);
+    }
+}
 
 // randomize characters
 $("#r-characters").click(async function() {
@@ -528,12 +576,7 @@ $("#r-characters").click(async function() {
         characterDataJSON = await fetchCharaterData();
     }
     // fetch player IDs
-    let players = [];
-    for (let i = 1; i <= 4; ++i) {
-        if ($(`#r-p${i}`).children("option:selected").val() != "null-profile") {
-            players.push($(`#r-p${i}`).children("option:selected").val());
-        }
-    }
+    let players = fetchProfileChoices();
     if (players.length == 0) {
         updateMessage("randomize-screen", "select at least one player before randomizing.")
         return;
