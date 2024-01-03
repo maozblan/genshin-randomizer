@@ -140,6 +140,10 @@ select {
     display: none;
 }
 
+.disabled {
+    opacity: 50%;
+}
+
 label {
     margin: 0 5px;
 }
