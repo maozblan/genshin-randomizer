@@ -28,6 +28,8 @@ let rBans = true;
 let characterDataJSON = null;
 let bossDataJSON = null;
 let bosses;
+// list of profiles in profile selector to help with profile swapping
+let playerList;
 
 
 // initialize page /////////////////////////////////////////////////////////////
@@ -169,8 +171,19 @@ async function setupRandomizerDivs() {
         );
         // update options whenever <select> is changed
         $(`#r-p${i}`).change(function() {
+            // implement swap if profile has been previously selected
+            let temp = [...playerList];
+            temp[i-1] = "--";   // "clear" current profile
+            let index = temp.indexOf($(this).val());
+            if (index >= 0) {
+                // set repeat to the old value of this dropdown
+                $(`#r-p${index+1}`).val(playerList[i-1]);
+                // i-1 = index of old value of this dropdown in playerList
+                // index+1 = index of repeat value in playerList
+            }
             updateProfileOptions();
-            // save options to session storage
+            // so profiles don't clear when switching between tabs
+            sessionStorage.setItem(`${lsTag}_profileChoices`, JSON.stringify(playerList));
         });
         // visuals
         let dataDiv = $(`<div id="c${i}-dataDiv" class="cDataDiv col-div">`)
@@ -526,34 +539,42 @@ $(".nb-button").click(function() {
                 }
             });
         }
+        // reset profiles in selectors if profiles are given
+        let oldData = sessionStorage.getItem(`${lsTag}_profileChoices`);
+        if (oldData != null) {
+            oldData = JSON.parse(oldData);
+            oldData.forEach((profile, index) => {
+                $(`#r-p${index+1}`).val(profile);
+            });
+        }
         updateProfileOptions();
     }
 });
 
-// get list of playerIDs from dropdowns
+// get list of playerIDs from dropdowns, save to global variable
 function fetchProfileChoices() {
-    let players = [];
+    playerList = [];
     for (let i = 1; i <= 4; ++i) {
         if ($(`#r-p${i}`).children("option:selected").val() != "null-profile") {
-            players.push($(`#r-p${i}`).children("option:selected").val());
+            playerList.push($(`#r-p${i}`).children("option:selected").val());
         }
     }
-    return players;
 }
 
 // update dropdown style and usability
 function updateProfileOptions() {
-    let players = fetchProfileChoices();
+    fetchProfileChoices();
+    // show all profile choices
+    $(".profile-option.hidden:not(.null-profile)").toggleClass("hidden");
+    // hide profiles already selected for last player
+    playerList.forEach(profileID => {
+        $(`#r-p${playerList.length+1} .${profileID}.profile-option:not(.null-profile):not(.hidden)`).toggleClass("hidden");
+    });
+    // allow "--" choice in ONLY the last profile
+    $(`.profile-option.null-profile:not(.hidden)`).toggleClass("hidden");
+    $(`#r-p${playerList.length} .profile-option.null-profile.hidden`).toggleClass("hidden")
+    $(`#r-p${playerList.length+1} .profile-option.null-profile.hidden`).toggleClass("hidden")
     for (let i = 1; i <= 4; ++i) {
-        // allow "--" choice in ONLY the last profile
-        // hide all null profiles
-        if (!$(`#r-p${i} .null-profile`).hasClass("hidden")) {
-            $(`#r-p${i} .null-profile`).toggleClass("hidden");
-        }
-        // show the last one
-        if (players.length == i) {
-            $(`#r-p${i} .null-profile`).toggleClass("hidden");
-        }
         // enable all profiles
         if ($(`#r-p${i}Div`).hasClass("disabled")) {
             $(`#r-p${i}Div`).toggleClass("disabled");
@@ -561,10 +582,8 @@ function updateProfileOptions() {
         $(`#r-p${i}`).attr("disabled", false);
     }
     // disable all excess selectors
-    for (let i = players.length+2; i <= 4; ++i) {
-        if (!$(`#r-p${i}Div`).hasClass("disabled")) {
-            $(`#r-p${i}Div`).toggleClass("disabled");
-        }
+    for (let i = playerList.length+2; i <= 4; ++i) {
+        $(`#r-p${i}Div:not(.disabled)`).toggleClass("disabled");
         $(`#r-p${i}`).attr("disabled", true);
     }
 }
@@ -575,26 +594,26 @@ $("#r-characters").click(async function() {
     if (characterDataJSON == null) {
         characterDataJSON = await fetchCharaterData();
     }
-    // fetch player IDs
-    let players = fetchProfileChoices();
-    if (players.length == 0) {
+    // fetch player IDs to global variable
+    fetchProfileChoices();
+    if (playerList.length == 0) {
         updateMessage("randomize-screen", "select at least one player before randomizing.")
         return;
     }
     clearMessage("randomize-screen");
     // get players
     let pN; // player number, helper variable
-    if (players.length == 4) {
+    if (playerList.length == 4) {
         pN = [0, 1, 2, 3];
-    } else if (players.length == 3) {
+    } else if (playerList.length == 3) {
         pN = [0, 0, 1, 2];
-    } else if (players.length == 2) {
+    } else if (playerList.length == 2) {
         pN = [0, 0, 1, 1];
     } else {
         pN = [0, 0, 0, 0];
     }
     // list of playerIDs
-    let p = [players[pN[0]], players[pN[1]], players[pN[2]], players[pN[3]]];
+    let p = [playerList[pN[0]], playerList[pN[1]], playerList[pN[2]], playerList[pN[3]]];
     // fetch limitations
     let mandE = [];
     let banE = [];
@@ -741,23 +760,23 @@ $("#randomize-nb button").click(function() {
 
 // helper functions ////////////////////////////////////////////////////////////
 function getPFP(name) {
-    return `../images/pfp/${name}.webp`;
+    return `images/pfp/${name}.webp`;
 }
 
 function getCard(name) {
-    return `../images/character/${name}.webp`;
+    return `images/character/${name}.webp`;
 }
 
 function getElementImg(element) {
-    return `../images/elements/${element}.svg`;
+    return `images/elements/${element}.svg`;
 }
 
 function getWeaponImg(weapon) {
-    return `../images/weapons/${weapon}.webp`;
+    return `images/weapons/${weapon}.webp`;
 }
 
 function getBossImg(boss) {
-    return `../images/bosses/${boss.replaceAll(" ", "_")}.webp`;
+    return `images/bosses/${boss.replaceAll(" ", "_")}.webp`;
 }
 
 function makeID() {
