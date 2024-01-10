@@ -254,7 +254,19 @@ function setupElementSettings() {
             $("#r-cMandElements .element-button.ban").toggleClass("ban");
         }));
     });
+    // hide extra settings
+    $("#r-cSettingsBar-more:not(.hidden)").toggleClass("hidden");
 }
+
+// toggle more settings
+$("#r-cMoreSettings").click(function() {
+    if ($("#r-cSettingsBar-more").hasClass("hidden")) {
+        $(this).html("less settings");
+    } else {
+        $(this).html("more settings");
+    }
+    $("#r-cSettingsBar-more").toggleClass("hidden");
+});
 
 async function setupEditLog() {
     const json = await fetchEditLog();
