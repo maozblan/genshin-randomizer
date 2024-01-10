@@ -77,6 +77,12 @@
     "weapon": "catalyst",
     "star": 4
   },
+  "chevreuse" : {
+    "name": "Chevreuse",
+    "element": "pyro",
+    "weapon": "polearm",
+    "star": 4
+  },
   "chongyun" : {
     "name": "Chongyun",
     "element": "cryo",
