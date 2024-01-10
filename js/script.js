@@ -630,6 +630,7 @@ $("#r-characters").click(async function() {
         $("#r-cMandElements .element-button.ban").each(function() {
             banE.push($(this).attr("id"));
         });
+        console.log(banE);
     } else {
         // fill up the element with the mono element
         for (let i = 0; i < 4; ++i) {
@@ -641,7 +642,7 @@ $("#r-characters").click(async function() {
     // go once to randomize the mandatory elements first
     for (let i = 0; i < 4; ++i) {
         if (mandE[i] != "") {
-            let pool = getCharacterPool(p[i], e=mandE[i], be=banE);
+            let pool = getCharacterPool(p[i], be=banE, e=mandE[i]);
             if (pool.length == 0 || (pool.length == 1 && ['aether', 'lumine'].includes(pool[0]))) {
                 updateMessage("randomize-screen", "please have a character of every element for every profile selected that is not traveler.\nif that is true, these settings may not be possible! :(");
                 return;
@@ -829,8 +830,8 @@ function randomize(pool, count, filler="aether") {
     return selected;
 }
 
-// playerID, mandatory element, banned element(s)
-function getCharacterPool(playerID, e="", be=[]) {
+// playerID, banned element(s), mandatory element
+function getCharacterPool(playerID, be=[], e="") {
     updateCharacterOwnership(rProfiles[playerID]);
     let selectors = "";
     if (!rBans) {
@@ -840,10 +841,12 @@ function getCharacterPool(playerID, e="", be=[]) {
     if (e.length != 0) {
         selectors += `.${e}`;
     }
-    if (be.length != 0) {
-        selectors += `:not(.${be.join('.')})`;
+    console.log(be);
+    for (let i = 0; i < be.length; ++i) {
+        selectors += `:not(.${be[i]})`;
     }
     let pool = [];
+    console.log($(`.character-container .character.have${selectors}`), `.character-container .character.have${selectors}`);
     $(`.character-container .character.have${selectors}`).each(function() {
         pool.push($(this).attr("id"));
     });
