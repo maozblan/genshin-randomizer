@@ -642,7 +642,6 @@ $("#r-characters").click(async function() {
         $("#r-cMandElements .element-button.ban").each(function() {
             banE.push($(this).attr("id"));
         });
-        console.log(banE);
     } else {
         // fill up the element with the mono element
         for (let i = 0; i < 4; ++i) {
@@ -846,9 +845,6 @@ function randomize(pool, count, filler="aether") {
 function getCharacterPool(playerID, be=[], e="") {
     updateCharacterOwnership(rProfiles[playerID]);
     let selectors = "";
-    if (!rBans) {
-        selectors += ".ban";
-    }
     be = be.filter(i => i != "");
     if (e.length != 0) {
         selectors += `.${e}`;
@@ -862,6 +858,12 @@ function getCharacterPool(playerID, be=[], e="") {
     $(`.character-container .character.have${selectors}`).each(function() {
         pool.push($(this).attr("id"));
     });
+    // if bans lifted add in bans
+    if (!rBans) {
+        $(`.character-container .character.ban${selectors}`).each(function() {
+            pool.push($(this).attr("id"));
+        });
+    }
     return pool;
 }
 
