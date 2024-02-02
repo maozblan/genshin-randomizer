@@ -18,5 +18,10 @@
         "Added features: Swapping between between bosses and character randomizer screen to maximize screen size, element restrictions on character randomization",
         "Added characters: Navia, Chevreuse",
         "Other changes: Fixed up the janky page swapping. Reworked the UI to be more like a website and darkned the background to make it easier to read. Moved randomization settings to a settings sidebar"
+    ],
+    "2.0.1" : [
+        "WIP",
+        "Added characters: Xianyun, Gaming",
+        "Added bosses: Solitary Suanni"
     ]
 }

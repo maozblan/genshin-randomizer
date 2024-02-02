@@ -648,6 +648,8 @@ $("#r-characters").click(async function() {
             mandE.push($("#r-cMonoElement .element-button.have").attr("id"));
         }
     }
+    // jackpot
+
     // get characters
     let c = ["", "", "", ""];
     // go once to randomize the mandatory elements first

@@ -155,6 +155,12 @@
     "weapon": "sword",
     "star": 5
   },
+  "gaming": {
+    "name": "Gaming",
+    "element": "pyro",
+    "weapon": "claymore",
+    "star": 4
+  },
   "ganyu" : {
     "name": "Ganyu",
     "element": "cryo",
@@ -394,6 +400,12 @@
     "element": "pyro",
     "weapon": "polearm",
     "star": 4
+  },
+  "xianyun" : {
+    "name": "Xianyun",
+    "element": "anemo",
+    "weapon": "catalyst",
+    "star": 5
   },
   "xiao" : {
     "name": "Xiao",
