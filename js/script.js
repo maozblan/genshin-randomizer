@@ -36,14 +36,19 @@ let playerList;
 $(document).ready(function () {
 	$("#nav-bar").hide();
 	// page swapping
+	let lc = window.location.hash.slice(1);
+	if (lc.length) {
+		$(".current-screen").toggleClass("current-screen");
+		$(`#${lc}-screen`).toggleClass("current-screen");
+		$("#nav-bar").show();
+	}
 	$(".nb-button").click(function () {
-		// console.log("screen swap");
 		let screen = $(this).data("screen");
 		if (!$(`#${screen}-screen`).hasClass("current-screen")) {
-			// console.log("swapping screen");
 			$(".current-screen").toggleClass("current-screen");
 			$(`#${screen}-screen`).toggleClass("current-screen");
 			if (screen != "home") {
+				window.history.pushState({ screen: screen }, `${screen}`, `#${screen}`);
 				$("#nav-bar").show();
 			} else {
 				$("#nav-bar").hide();
