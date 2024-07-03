@@ -44,7 +44,7 @@ $(document).ready(function () {
 	}
 	$(".nb-button").click(function () {
 		let screen = $(this).data("screen");
-		if (!$(`#${screen}-screen`).hasClass("current-screen")) {
+		if (screen != "logout" && !$(`#${screen}-screen`).hasClass("current-screen")) {
 			$(".current-screen").toggleClass("current-screen");
 			$(`#${screen}-screen`).toggleClass("current-screen");
 			if (screen != "home") {
@@ -69,6 +69,9 @@ $(document).ready(function () {
 	// hide buttons
 	$("#profile-save").hide();
 	$("#profile-cancel").hide();
+	// set up logout
+	$(`button[data-screen="logout"]`).hide();
+	$(`button[data-screen="logout"]`).click(logout);
 	// set up profile screen
 	setupCharacterButtons();
 	setupProfiles();
@@ -100,6 +103,7 @@ async function fetchEditLog() {
 	const json = await res.json();
 	return json;
 }
+
 
 // setup functions /////////////////////////////////////////////////////////////
 function setupProfiles() {
@@ -286,8 +290,53 @@ async function setupEditLog() {
 setupEditLog();
 
 
-// profile page ////////////////////////////////////////////////////////////////
+// user login //////////////////////////////////////////////////////////////////
+function toggleLoginSignup() {
+	let page = '#login-screen';
+	if ($(`${page} h1`).text() == "LOGIN") {
+		$(`${page} h1`).text("SIGNUP");
+		$(`${page}>div>pre`).text("Already have an account? ");
+		$(`${page}>div>p>a`).text("Login");
+		$(`${page}>div>button`).text("Sign Up");
+	} else {
+		$(`${page} h1`).text("LOGIN");
+		$(`${page}>div>pre`).text("Don't have an account? ");
+		$(`${page}>div>p>a`).text("Sign Up");
+		$(`${page}>div>button`).text("Login");
+	}
+}
 
+async function login() {
+	// check if information is correct
+	let page = '#login-screen';
+	let username = $(`${page} #login-username`).val();
+	if (!username.length) {
+		updateMessage("login-screen", "Please enter a username.");
+		return;
+	}
+	let password = $(`${page} #login-password`).val();
+	if (!password.length) {
+		updateMessage("login-screen", "Please enter a password.");
+		return;
+	}
+	clearMessage("login-screen");
+
+	// TODO call server to check login
+
+	$(`button[data-screen="login"]`).hide();
+	$(`button[data-screen="logout"]`).show();
+	$(`button[data-screen="randomize"]`).click();
+}
+
+async function logout() {
+	// TODO call server to log out
+
+	$(`button[data-screen="logout"]`).hide();
+	$(`button[data-screen="login"]`).show();
+}
+
+
+// profile page ////////////////////////////////////////////////////////////////
 /* profile modes (in profile-screen data-mode):
  * export, delete -> allow select profiles, pause enter edit mode
  * updating-pfp -> pause character toggle
@@ -522,7 +571,6 @@ function characterToggle(characterElement) {
 
 
 // randomizer page /////////////////////////////////////////////////////////////
-
 // update dropdown choices every time user switches to randomizer page
 $(".nb-button").click(function () {
 	if ($(this).data("screen") == "randomize") {

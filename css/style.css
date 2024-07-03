@@ -5,11 +5,11 @@
 }
 
 /* main */
-html {
+html,.text {
     font-family: 'genshinFont';
 }
 
-p,label {
+p,label,.text {
     font-size: 18px;
 }
 
@@ -80,7 +80,7 @@ body {
 .nb-primo {
     width: 60px;
     height: auto;
-    opacity: 70%;
+    opacity: 85%;
 }
 
 .nb-title {

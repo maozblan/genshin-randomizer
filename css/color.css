@@ -1,14 +1,14 @@
 body {
-    --text : rgba(245, 245, 245, 0.75);
-    --translucent-text : rgba(245, 245, 245, 0.5);
+    --text : rgba(245, 245, 245, 0.9);
+    --translucent-text : rgba(245, 245, 245, 0.7);
     --transparent : rgba(0, 0, 0, 0);
     --light-background : rgba(0, 0, 0, 0.7);
     --dark-background : rgba(0, 0, 0, 0.8);
     --dim-highlight : rgba(245, 245, 245, 0.2);
-    --bright-highlight : rgba(245, 245, 245, 0.5);
+    --bright-highlight : rgba(245, 245, 245, 0.7);
 }
 
-p,h1,h2,h3,a,label {
+p,h1,h2,h3,a,label,.text {
     color: var(--text);
 }
 
@@ -31,7 +31,7 @@ p,h1,h2,h3,a,label {
 button,.button {
     color: var(--translucent-text);
     background-color: var(--transparent);
-    border: 1px solid var(--dim-highlight);
+    border: 1px solid var(--bright-highlight);
 }
 
 button:hover,.button:hover,.selected {
@@ -44,7 +44,7 @@ button:hover,.button:hover,.selected {
 .input {
     color: var(--text);
     background-color: var(--transparent);
-    border: 1px solid var(--dim-highlight);
+    border: 1px solid var(--bright-highlight);
 }
 
 /* screens */

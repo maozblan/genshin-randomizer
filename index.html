@@ -25,7 +25,8 @@
     <button class="nb-button" data-screen="profile">PROFILES</button>
     <button class="nb-button" data-screen="about">ABOUT</button>
     <button class="nb-button" data-screen="login">LOGIN</button>
-    <p class="nb-title" id="nb-profileName">GENSHIN RANDOMIZER</p>
+    <button class="nb-button" data-screen="logout">LOGOUT</button>
+    <p class="nb-title">GENSHIN RANDOMIZER</p>
   </div>
 
   <!-- main screen -->
@@ -164,8 +165,24 @@
   </div>
 
   <!-- login screen -->
-  <div class="screen" id="login-screen">
-    <p>LOGIN SCREEN</p>
+  <div class="screen col-div" id="login-screen">
+    <h1>LOGIN</h1>
+    <div id="login-container">
+      <div class="row-div">
+        <p>Username</p>
+        <input id="login-username" type="text" class="input">
+      </div>
+      <div class="row-div">
+        <p>Password</p>
+        <input id="login-password" type="password" class="input">
+      </div>
+      <button onclick="login();">Login</button>
+    </div>
+    <div class="row-div">
+      <pre class="text">Don't have an account? </pre>
+      <p><a href="#login" onclick="toggleLoginSignup();">Sign Up</a></p>
+    </div>
+    <p class="message"></p>
   </div>
 
   <!-- about screen -->
