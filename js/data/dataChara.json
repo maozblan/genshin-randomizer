@@ -35,6 +35,12 @@
     "weapon": "bow",
     "star": 4
   },
+  "arle" : {
+    "name": "Arlecchino",
+    "element": "pyro",
+    "weapon": "polearm",
+    "star": 5
+  },
   "ayaka" : {
     "name": "Ayaka",
     "element": "cryo",
@@ -83,11 +89,23 @@
     "weapon": "polearm",
     "star": 4
   },
+  "chiori" : {
+    "name": "Chiori",
+    "element": "geo",
+    "weapon": "sword",
+    "star": 5
+  },
   "chongyun" : {
     "name": "Chongyun",
     "element": "cryo",
     "weapon": "claymore",
     "star": 4
+  },
+  "clorinde" : {
+    "name": "Clorinde",
+    "element": "electro",
+    "weapon": "sword",
+    "star": 5
   },
   "collei" : {
     "name": "Collei",
@@ -347,10 +365,22 @@
     "weapon": "claymore",
     "star": 4
   },
+  "sethos" : {
+    "name": "Sethos",
+    "element": "electro",
+    "weapon": "bow",
+    "star": 4
+  },
   "shenhe" : {
     "name": "Shenhe",
     "element": "cryo",
     "weapon": "polearm",
+    "star": 5
+  },
+  "sigewinne" : {
+    "name": "Sigewinne",
+    "element": "hydro",
+    "weapon": "catalyst",
     "star": 5
   },
   "sucrose" : {
