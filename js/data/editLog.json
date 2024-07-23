@@ -19,8 +19,10 @@
         "Added characters: Navia, Chevreuse",
         "Other changes: Fixed up the janky page swapping. Reworked the UI to be more like a website and darkned the background to make it easier to read. Moved randomization settings to a settings sidebar"
     ],
-    "2.0.1" : [
-        "WIP",
+    "2.1.0" : [
+        "2024.07.22",
+        "Added Features: Jackpot mode",
+        "Quality of Life Upgrades: Page indexing and saving last location, ban mode saving",
         "Added characters: Xianyun, Gaming, Chiori, Arlecchino, Clorinde, Sigewinne, Sethos",
         "Added bosses: Solitary Suanni, Statue of Marble and Brass, The Knave"
     ]
