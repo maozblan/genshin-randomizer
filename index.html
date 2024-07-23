@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>genshin randomizer</title>
-  <link href="css/color.css" rel="stylesheet" type="text/css"> 
-  <link href="css/style.css" rel="stylesheet" type="text/css"> 
-  <link href="css/pages.css" rel="stylesheet" type="text/css"> 
+  <link href="css/color.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="css/pages.css" rel="stylesheet" type="text/css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/script.js" DEFER></script>
 </head>
+
 <body>
 
   <!-- loading page -->
@@ -22,90 +24,92 @@
     <button class="nb-button" data-screen="randomize">RANDOMIZE</button>
     <button class="nb-button" data-screen="profile">PROFILES</button>
     <button class="nb-button" data-screen="about">ABOUT</button>
-    <p class="nb-title">GENSHIN RANDOMIZER</p>
+    <button class="nb-button" data-screen="login">LOGIN</button>
+    <p class="nb-title" id="nb-profileName">GENSHIN RANDOMIZER</p>
   </div>
 
   <!-- main screen -->
   <div class="screen current-screen col-div" id="home-screen">
-  <div class="home-header">
-    <h1 class="title">Genshin Randomizer</h1>
-    <button class="nb-button" data-screen="randomize">randomize</button>
-    <button class="nb-button" data-screen="profile">character profiles</button>
-    <button class="nb-button" data-screen="about">about this site</button>
-  </div>
-  <p class="credits">All images belong to Hoyoverse.</p>
+    <div class="home-header">
+      <h1 class="title">Genshin Randomizer</h1>
+      <button class="nb-button" data-screen="randomize">randomize</button>
+      <button class="nb-button" data-screen="profile">character profiles</button>
+      <button class="nb-button" data-screen="about">about this site</button>
+    </div>
+    <p class="credits">All images belong to Hoyoverse.</p>
   </div>
 
   <!-- randomizer screen -->
   <div class="screen col-div" id="randomize-screen">
-  <div class="button-container" id="randomize-nb">
-    <p>RANDOMIZING</p>
-    <button data-screen="characters" class="selected">CHARACTERS</button>
-    <button data-screen="bosses">BOSSES</button>
-  </div>
-  <div id="randomize-data">
-    <p class="message"></p>
-    <!-- randomizer characters screen -->
-    <div class="subscreen scroll row-div" id="randomize-screen-characters">
-      <div id="r-cSettingsBar" class="randomize-settings col-div">
-        <div id="r-cSettingsBar-main" class="col-div">
-          <button id="r-characters">randomize characters</button>
-          <div class="col-div button-container" id="randomize-profiles">
-            <p>PLAYERS</p>
-            <!-- dropdowns appended in js -->
+    <div class="button-container" id="randomize-nb">
+      <p>RANDOMIZING</p>
+      <button data-screen="characters" class="selected">CHARACTERS</button>
+      <button data-screen="bosses">BOSSES</button>
+    </div>
+    <div id="randomize-data">
+      <p class="message"></p>
+      <!-- randomizer characters screen -->
+      <div class="subscreen scroll row-div" id="randomize-screen-characters">
+        <div id="r-cSettingsBar" class="randomize-settings col-div">
+          <div id="r-cSettingsBar-main" class="col-div">
+            <button id="r-characters">randomize characters</button>
+            <div class="col-div button-container" id="randomize-profiles">
+              <p>PLAYERS</p>
+              <!-- dropdowns appended in js -->
+            </div>
+            <button id="toggle-character-bans">Bans ON</button>
           </div>
-          <button id="toggle-character-bans">Bans ON</button>
-        </div>
-        <div id="r-cSettingsBar-more" class="button-container col-div">
-          <p class="tip">bright = must have, grey = banned</p>
-          <p>ELEMENT(S)</p>
-          <div id="r-cMandElements" class="button-container row-div">
-            <!-- buttons appended in js -->
-          </div>
-          <!-- <p>WEAPONS(S)</p>
+          <div id="r-cSettingsBar-more" class="button-container col-div">
+            <p class="tip">bright = must have, grey = banned</p>
+            <p>ELEMENT(S)</p>
+            <div id="r-cMandElements" class="button-container row-div">
+              <!-- buttons appended in js -->
+            </div>
+            <!-- <p>WEAPONS(S)</p>
           <div id="r-cMandWeapons" class="button-container row-div"> -->
             <!-- buttons appended in js -->
-          <!-- </div> -->
-          <div class="col-div button-container">
-            <p>OR MONO TEAM</p>
-            <div>
-              <div class="button-container row-div" id="r-cMonoElement">
+            <!-- </div> -->
+            <div class="col-div button-container">
+              <p>OR MONO TEAM</p>
+              <div>
+                <div class="button-container row-div" id="r-cMonoElement">
+                  <!-- buttons appended in js -->
+                </div>
+                <!-- <div class="button-container row-div" id="r-cMonoWeapon"> -->
                 <!-- buttons appended in js -->
+                <!-- </div> -->
               </div>
-              <!-- <div class="button-container row-div" id="r-cMonoWeapon"> -->
-                <!-- buttons appended in js -->
-              <!-- </div> -->
+            </div>
+          </div>
+          <div class="col-div"><button id="r-cMoreSettings">more settings</button></div>
+        </div>
+        <div class="row-div" id="pVisuals">
+          <!-- divs appended in js -->
+        </div>
+      </div>
+      <!-- randomizer bosses screen -->
+      <div class="subscreen scroll row-div" id="randomize-screen-bosses">
+        <div id="r-bSettingsBar" class="randomize-settings col-div">
+          <div id="r-bSettingsBar-main" class="col-div">
+            <button id="r-bosses">randomize bosses</button>
+            <div class="col-div button-container" id="b-count-container">
+              <p>BOSS COUNT</p>
+              <input id="b-count" type="number" min="1" step="1" class="input" placeholder="1">
+            </div>
+            <div id="r-bRegions" class="button-container col-div">
+              <p>REGIONS</p>
+              <!-- buttons appended in js -->
             </div>
           </div>
         </div>
-        <div class="col-div"><button id="r-cMoreSettings">more settings</button></div>
-      </div>
-      <div class="row-div" id="pVisuals">
-        <!-- divs appended in js -->
-      </div>
-    </div>
-    <!-- randomizer bosses screen -->
-    <div class="subscreen scroll row-div" id="randomize-screen-bosses">
-      <div id="r-bSettingsBar" class="randomize-settings col-div">
-        <div id="r-bSettingsBar-main" class="col-div">
-          <button id="r-bosses">randomize bosses</button>
-          <div class="col-div button-container" id="b-count-container">
-            <p>BOSS COUNT</p>
-            <input id="b-count" type="number" min="1" step="1" class="input" placeholder="1">
-          </div>
-          <div id="r-bRegions" class="button-container col-div">
-            <p>REGIONS</p>
-            <!-- buttons appended in js -->
-          </div>
+        <div id="bVisuals" class="row-div">
+          <button id="b-prev">
+            << /button>
+              <div id="b-imgs"></div>
+              <button id="b-next">></button>
         </div>
       </div>
-      <div id="bVisuals" class="row-div">
-        <button id="b-prev"><</button>
-        <div id="b-imgs"></div>
-        <button id="b-next">></button>
-      </div>
     </div>
-  </div>
   </div>
 
   <!-- profiles screen -->
@@ -159,6 +163,11 @@
     <div class="character-container row-div scroll"></div>
   </div>
 
+  <!-- login screen -->
+  <div class="screen" id="login-screen">
+    <p>LOGIN SCREEN</p>
+  </div>
+
   <!-- about screen -->
   <div class="screen scroll" id="about-screen">
     <div class="container">
@@ -168,12 +177,16 @@
       </p>
       <p>
         To randomize bosses: Please select the regions for which bosses you would like to include in the pool.
-        Weekly bosses are their own section and not included in any region. Then select the number of bosses you would like to randomize.
-        If the number selected is larger than the pool, all bosses in the pool will be included in the output and no more. Finally click "randomize".
+        Weekly bosses are their own section and not included in any region. Then select the number of bosses you would
+        like to randomize.
+        If the number selected is larger than the pool, all bosses in the pool will be included in the output and no
+        more. Finally click "randomize".
       </p>
       <p>
-        To randomize characters: Please go to the "Profiles" tab to either import a profile JSON or make a new profile. Then go to the "Randomize" tab
-        to select P1 to P4 using the dropdown (dropdown options are the profiles in your "profiles" tab). If you would like to include banned characters
+        To randomize characters: Please go to the "Profiles" tab to either import a profile JSON or make a new profile.
+        Then go to the "Randomize" tab
+        to select P1 to P4 using the dropdown (dropdown options are the profiles in your "profiles" tab). If you would
+        like to include banned characters
         in the pool, toggle bans to be off (bans default to being on). Then click "randomize".
       </p>
       <p>
@@ -187,21 +200,21 @@
 
       <h1>About This Page</h1>
       <p>
-          Hello! Welcome to the Genshin Randomizer. This is honestly just a small project
-          made for my friends' Genshin adventures. However you have come across this page, welcome haha.
-          You are free to use it too.
+        Hello! Welcome to the Genshin Randomizer. This is honestly just a small project
+        made for my friends' Genshin adventures. However you have come across this page, welcome haha.
+        You are free to use it too.
       </p>
       <p>
-          Since this is a small project made for fun, it won't be as fancy as other websites out there.
-          And content updates are done manually by me so please give me a couple of days...
+        Since this is a small project made for fun, it won't be as fancy as other websites out there.
+        And content updates are done manually by me so please give me a couple of days...
       </p>
       <p>
         If you'd like the view the github repo for this website or submit a pull request,
         you can click <a href="https://github.com/maozblan/genshin-randomizer">HERE</a>! Thank you!
       </p>
       <p>
-          ALL IMAGES BELONG TO HOYOVERSE/COGNOSPHERE OR WHATEVER THEY WANT TO CALL THEMSELVES NOW.
-          Also special thanks to ChatGPT for carrying me through CSS and the framework xd.
+        ALL IMAGES BELONG TO HOYOVERSE/COGNOSPHERE OR WHATEVER THEY WANT TO CALL THEMSELVES NOW.
+        Also special thanks to ChatGPT for carrying me through CSS and the framework xd.
       </p>
 
       <br />
