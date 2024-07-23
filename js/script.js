@@ -37,12 +37,6 @@ let playerList;
 $(document).ready(function () {
 	$("#nav-bar").hide();
 	// page swapping
-	let lc = window.location.hash.slice(1);
-	if (lc.length) {
-		$(".current-screen").toggleClass("current-screen");
-		$(`#${lc}-screen`).toggleClass("current-screen");
-		$("#nav-bar").show();
-	}
 	$(".nb-button").click(function () {
 		let screen = $(this).data("screen");
 		if (!$(`#${screen}-screen`).hasClass("current-screen")) {
@@ -84,6 +78,12 @@ $(document).ready(function () {
 	setTimeout(() => {
 		$("#loading-page").fadeOut(250);
 	}, 150);
+
+	// set to right page
+	let lc = window.location.hash.slice(1);
+	if (lc.length) {
+		$(`.nb-button[data-screen=${lc}]`).click();
+	}
 });
 
 
