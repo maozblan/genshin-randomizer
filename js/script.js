@@ -23,7 +23,8 @@ let currentProfile;
 // json of all randomizing profiles
 let rProfiles = {};
 // boolean on if ban are on or off
-let rBans = true;
+let rBans = "ON";
+const banTypes = ["ON", "OFF", "JACKPOT"];
 // so we don't have to fetch it every time for randomization
 let characterDataJSON = null;
 let bossDataJSON = null;
@@ -695,11 +696,13 @@ function displayRCharacters(characters, players, mandE="") {
 
 // toggling bans
 $("#toggle-character-bans").click(function() {
-    rBans = !rBans;
-    if (rBans) {
+    rBans = banTypes[(banTypes.indexOf(rBans)+1) % banTypes.length];
+    if (rBans == "ON") {
         $(this).html("Bans ON");
-    } else {
+    } else if (rBans == "OFF"){
         $(this).html("Bans OFF");
+    } else if (rBans == "JACKPOT") {
+        $(this).html("JACKPOT MODE");
     }
 });
 
@@ -861,7 +864,7 @@ function getCharacterPool(playerID, be=[], e="") {
         pool.push($(this).attr("id"));
     });
     // if bans lifted add in bans
-    if (!rBans) {
+    if (rBans == "OFF" || (rBans == "JACKPOT" && Math.random() < 0.5)){
         $(`.character-container .character.ban${selectors}`).each(function() {
             pool.push($(this).attr("id"));
         });
